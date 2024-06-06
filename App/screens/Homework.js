@@ -6,7 +6,7 @@ const Homework = ({ navigation }) => {
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('VocabMatch')}
+        onPress={() => navigation.navigate('Lessons', { data: 'Lesson 1' })}
       >
         <View style={styles.buttonContainer}>
           <Text style={styles.buttonText}>Lesson 1: Where are you going?</Text>
@@ -14,7 +14,7 @@ const Homework = ({ navigation }) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('VocabMatch')}
+        onPress={() => navigation.navigate('Lessons', { data: 'Lesson 2' })}
       >
         <View style={styles.buttonContainer}>
           <Text style={styles.buttonText}>Lesson 2: Time for School</Text>
@@ -22,7 +22,7 @@ const Homework = ({ navigation }) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('VocabMatch')}
+        onPress={() => navigation.navigate('Lessons', { data: 'Lesson 3' })}
       >
         <View style={styles.buttonContainer}>
           <Text style={styles.buttonText}>Lesson 3: Sports</Text>

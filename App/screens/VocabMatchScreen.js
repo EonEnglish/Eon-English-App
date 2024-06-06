@@ -16,18 +16,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const VocabMatchScreen = () => {
+const VocabMatchScreen = ({ route }) => {
   const [vocabList, setVocabList] = useState([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [userInput, setUserInput] = useState('');
   const [score, setScore] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
+  const { data } = route.params;
 
   useEffect(() => {
     const fetchVocabulary = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, 'vocabSet1'));
+        const querySnapshot = await getDocs(collection(db, data));
         const vocabulary = querySnapshot.docs.map(doc => doc.data());
         setVocabList(vocabulary);
       } catch (error) {
