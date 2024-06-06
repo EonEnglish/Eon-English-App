@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 
 const Homework = ({ navigation }) => {
   return (
@@ -8,7 +8,25 @@ const Homework = ({ navigation }) => {
         style={styles.button}
         onPress={() => navigation.navigate('VocabMatch')}
       >
-        <Text style={styles.buttonText}>Homework</Text>
+        <View style={styles.buttonContainer}>
+          <Text style={styles.buttonText}>Lesson 1: Where are you going?</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('VocabMatch')}
+      >
+        <View style={styles.buttonContainer}>
+          <Text style={styles.buttonText}>Lesson 2: Time for School</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('VocabMatch')}
+      >
+        <View style={styles.buttonContainer}>
+          <Text style={styles.buttonText}>Lesson 3: Sports</Text>
+        </View>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
@@ -30,16 +48,21 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
     },
     button: {
-        backgroundColor: '#0782F9',
-        width: '60%',
-        padding: 15,
-        borderRadius: 10,
-        alignItems: 'center',
-        marginTop: 20,
-      },
+      borderWidth: 2,
+      width: '80%',
+      padding: 15,
+      borderRadius: 10,
+      alignItems: 'center',
+      marginTop: 20,
+    },
+    buttonContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row'
+    },
     buttonText: {
-        color: 'white',
-        fontWeight: '700',
-        fontSize: 16,
+      color: 'black',
+      fontWeight: '700',
+      fontSize: 16,
     },
 });
