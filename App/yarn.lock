@@ -3989,6 +3989,11 @@ expo-keep-awake@~13.0.2:
   resolved "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-13.0.2.tgz"
   integrity sha512-kKiwkVg/bY0AJ5q1Pxnm/GvpeB6hbNJhcFsoOWDh2NlpibhCLaHL826KHUM+WsnJRbVRxJ+K9vbPRHEMvFpVyw==
 
+expo-mail-composer@~13.0.1:
+  version "13.0.1"
+  resolved "https://registry.npmjs.org/expo-mail-composer/-/expo-mail-composer-13.0.1.tgz"
+  integrity sha512-JmlQLS7Bk7vBf+xpdNIcG80/GzwLoFgk7ZmL4qD78CxRuolvb4jwH97nS54l6W/pKBa2TH1eUV1V8ZjKzQLf0A==
+
 expo-modules-autolinking@>=0.8.1, expo-modules-autolinking@1.11.1:
   version "1.11.1"
   resolved "https://registry.npmjs.org/expo-modules-autolinking/-/expo-modules-autolinking-1.11.1.tgz"
@@ -5185,11 +5190,6 @@ lighthouse-logger@^1.0.0:
     debug "^2.6.9"
     marky "^1.2.2"
 
-lightningcss-win32-x64-msvc@1.19.0:
-  version "1.19.0"
-  resolved "https://registry.npmjs.org/lightningcss-win32-x64-msvc/-/lightningcss-win32-x64-msvc-1.19.0.tgz"
-  integrity sha512-C+VuUTeSUOAaBZZOPT7Etn/agx/MatzJzGRkeV+zEABmPuntv1zihncsi+AyGmjkkzq3wVedEy7h0/4S84mUtg==
-
 lightningcss@~1.19.0:
   version "1.19.0"
   resolved "https://registry.npmjs.org/lightningcss/-/lightningcss-1.19.0.tgz"
@@ -6362,6 +6362,11 @@ react-is@^17.0.1:
     invariant "^2.2.4"
     lodash "^4.17.21"
     prop-types "^15.7.2"
+
+react-native-mail@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.npmjs.org/react-native-mail/-/react-native-mail-6.1.1.tgz"
+  integrity sha512-pTs180wwyh7hN/iyTC9SfOX579U4YhDlHOLxi47IGvhPJENqO/QFdBq+wWKxyhNqdQuVSy+LoeIxLreWnIeYmg==
 
 "react-native-reanimated@>= 1.0.0", react-native-reanimated@~3.10.1:
   version "3.10.1"

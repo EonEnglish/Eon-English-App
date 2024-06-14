@@ -3,33 +3,32 @@ import { View, Text, StyleSheet, TextInput, Button, FlatList, Alert } from 'reac
 import { initializeApp } from "firebase/app";
 import { getDocs } from "@firebase/firestore";
 import { getFirestore, collection } from "@firebase/firestore";
+import { db } from "../firebase";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyA2CekCV9iouIPEFpSeCj46ljctTMb3kmQ",
-    authDomain: "eon-english-app.firebaseapp.com",
-    projectId: "eon-english-app",
-    storageBucket: "eon-english-app.appspot.com",
-    messagingSenderId: "894295453065",
-    appId: "1:894295453065:web:4f3045d2716f6894790558"
-};
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
-const VocabMatchScreen = () => {
+const VocabMatchScreen = ({ route }) => {
   const [vocabList, setVocabList] = useState([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [userInput, setUserInput] = useState('');
   const [score, setScore] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
+  const { data } = route.params;
 
   useEffect(() => {
     const fetchVocabulary = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, 'vocabSet1'));
-        const vocabulary = querySnapshot.docs.map(doc => doc.data());
-        setVocabList(vocabulary);
+        const Collection = await getDocs(collection(db, data));
+        Collection.forEach(async (doc) => {
+          // Assuming 'targetDocumentId' is the ID of the document you want to enter
+          if (doc.id === 'Vocab Match') {
+            const subCollection = await getDocs(collection(doc.ref, 'Collection'));
+            const vocabulary = subCollection.docs.map(doc => doc.data());
+            console.log(vocabulary)
+            setVocabList(vocabulary);
+          }
+        });
       } catch (error) {
         console.error("Error fetching vocabulary:", error);
       }
