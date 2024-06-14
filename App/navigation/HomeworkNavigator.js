@@ -3,6 +3,7 @@ import { CommonActions, useFocusEffect } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Homework from '../screens/Homework';
 import VocabMatchScreen from '../screens/VocabMatchScreen';
+import VocabMatchPhotoScreen from '../screens/VocabMatchPhotoScreen';
 import Lessons from '../screens/Lessons';
 
 const Stack = createNativeStackNavigator();
@@ -29,6 +30,7 @@ const HomeworkNavigator = ({ navigation }) => {
       <Stack.Screen options={{ headerShown: false }} name="HomeWork" component={Homework}/>
       <Stack.Screen options={{ headerShown: false }} name="Lessons" component={Lessons}/>
       <Stack.Screen options={{ headerShown: false }} name="VocabMatch" component={VocabMatchScreen}/>
+      <Stack.Screen options={{ headerShown: false }} name="VocabMatchPhoto" component={VocabMatchPhotoScreen}/>
     </Stack.Navigator>
   );
 };
