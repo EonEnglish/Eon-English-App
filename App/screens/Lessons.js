@@ -14,6 +14,14 @@ const Lessons = ({ navigation, route }) => {
                 <Text style={styles.buttonText}>Vocab Match</Text>
                 </View>
             </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate('VocabMatchPhoto', { data })}
+            >
+                <View style={styles.buttonContainer}>
+                <Text style={styles.buttonText}>Vocab Match Photo</Text>
+                </View>
+            </TouchableOpacity>
         </View>
     );
 }
