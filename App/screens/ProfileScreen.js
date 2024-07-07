@@ -15,13 +15,15 @@ const ProfileScreen = ({ navigation }) => {
     }
     return (
         <View style={styles.container}>
-            <Text>Email: {auth.currentUser?.email}</Text>
-            <TouchableOpacity 
-                onPress={handleSignOut}
-                style={styles.button}
-            >
-                <Text style={styles.buttonText}>Sign out</Text>
-            </TouchableOpacity>
+            <View style={styles.signOutContainer}>
+                <Text>Email: {auth.currentUser?.email}</Text>
+                <TouchableOpacity 
+                    onPress={handleSignOut}
+                    style={styles.button}
+                >
+                    <Text style={styles.buttonText}>Sign out</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -31,8 +33,12 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+    },
+    signOutContainer: {
+        flex: 1,
+        justifyContent: "flex-end",
+        alignItems: 'center',
+        marginBottom: 15,
     },
     button: {
         backgroundColor: '#0782F9',

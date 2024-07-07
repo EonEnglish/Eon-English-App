@@ -11,7 +11,7 @@ const Lessons = ({ navigation, route }) => {
                 onPress={() => navigation.navigate('VocabMatch', { data })}
             >
                 <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Vocab Match</Text>
+                <Text style={styles.buttonText}>Match the Vocab</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity
@@ -19,7 +19,15 @@ const Lessons = ({ navigation, route }) => {
                 onPress={() => navigation.navigate('VocabMatchPhoto', { data })}
             >
                 <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Vocab Match Photo</Text>
+                <Text style={styles.buttonText}>Match the Photo</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate('BlankMatch', { data })}
+            >
+                <View style={styles.buttonContainer}>
+                <Text style={styles.buttonText}>Fill in the Blank</Text>
                 </View>
             </TouchableOpacity>
         </View>
