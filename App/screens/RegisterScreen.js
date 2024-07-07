@@ -1,23 +1,42 @@
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { auth } from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, ActivityIndicator } from 'react-native';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 const RegisterScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
-    const handleSignUp = () => {
-        createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log("Registered with: " + user.email);
+    const handleSignUp = async () => {
+        setLoading(true);
+        setError('');
+
+        try {
+            const auth = getAuth();
+            const response = await createUserWithEmailAndPassword(auth, email, password);
+            console.log("Registered with: " + response.user.email);
             navigation.replace("Tab"); 
-        })
-        .catch((error) => {
-            console.log(error.code);
-            console.log(error.message);
-        });
+            console.log(err.code);
+            setError(getCustomErrorMessage(err.code));
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const getCustomErrorMessage = (errorCode) => {
+        switch (errorCode) {
+            case 'auth/email-already-in-use':
+                return 'This email address is already in use.';
+            case 'auth/invalid-email':
+                return 'This email address is invalid.';
+            case 'auth/operation-not-allowed':
+                return 'Email/password accounts are not enabled.';
+            case 'auth/weak-password':
+                return 'The password is too weak. Password should be at least 6 characters.';
+            default:
+                return 'An unknown error occurred. Please try again.';
+        }
     };
 
     return (
@@ -41,12 +60,18 @@ const RegisterScreen = ({ navigation }) => {
                 />
             </View>
 
+            {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
                     onPress={handleSignUp}
                     style={styles.button}
                 >
-                    <Text style={styles.buttonText}>Register</Text>
+                    {loading ? (
+                        <ActivityIndicator color="#fff" />
+                    ) : (
+                        <Text style={styles.buttonText}>Register</Text>
+                    )}
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
@@ -88,5 +113,9 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: '700',
         fontSize: 16,
+    },
+    errorText: {
+        color: 'red',
+        marginTop: 20,
     },
 });

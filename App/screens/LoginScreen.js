@@ -1,38 +1,54 @@
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { auth } from "../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigation } from '@react-navigation/native';
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, ActivityIndicator } from 'react-native';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 const LoginScreen = ({ navigation }) => {
-    const[email, setEmail] = useState('');
-    const[password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     useEffect(() => {
+        const auth = getAuth();
         const unsubscribe = auth.onAuthStateChanged(user => {
-            if(user) {
-                navigation.replace("Tab")
+            if (user) {
+                navigation.replace("Tab");
             }
-        })
+        });
 
         return unsubscribe;
-    }, [])
+    }, []);
 
+    const handleLogIn = async () => {
+        setLoading(true);
+        setError('');
 
-    const handleLogIn = () => {
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed up 
-            const user = userCredential.user;
-            console.log("Logged in with: " + user.email);
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode)
-            console.log(errorMessage);
-        });
-    }
+        try {
+            const auth = getAuth();
+            const response = await signInWithEmailAndPassword(auth, email, password);
+            console.log("Logged in with: " + response.user.email);
+        } catch (err) {
+            console.log(err.code);
+            setError(getCustomErrorMessage(err.code));
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const getCustomErrorMessage = (errorCode) => {
+        switch (errorCode) {
+            case 'auth/user-not-found':
+                return 'No user found with this email address.';
+            case 'auth/wrong-password':
+                return 'Incorrect password. Please try again.';
+            case 'auth/invalid-email':
+                return 'This email address is invalid.';
+            case 'auth/user-disabled':
+                return 'This user has been disabled.';
+            default:
+                return 'An unknown error occurred. Please try again.';
+        }
+    };
 
     return (
         <KeyboardAvoidingView
@@ -40,13 +56,13 @@ const LoginScreen = ({ navigation }) => {
             behavior='padding'
         >
             <View style={styles.inputContainer}>
-                <TextInput 
+                <TextInput
                     placeholder='Email'
                     value={email}
                     onChangeText={text => setEmail(text)}
                     style={styles.input}
                 />
-                <TextInput 
+                <TextInput
                     placeholder='Password'
                     value={password}
                     onChangeText={text => setPassword(text)}
@@ -55,14 +71,20 @@ const LoginScreen = ({ navigation }) => {
                 />
             </View>
 
+            {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
             <View style={styles.buttonContainer}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onPress={handleLogIn}
                     style={styles.button}
                 >
-                    <Text style={styles.buttonText}>Login</Text>
+                    {loading ? (
+                        <ActivityIndicator color="#fff" />
+                    ) : (
+                        <Text style={styles.buttonText}>Login</Text>
+                    )}
                 </TouchableOpacity>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onPress={() => navigation.navigate("Register")}
                     style={[styles.button, styles.buttonOutline]}
                 >
@@ -70,10 +92,10 @@ const LoginScreen = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
-    )
-}
+    );
+};
 
-export default LoginScreen
+export default LoginScreen;
 
 const styles = StyleSheet.create({
     container: {
@@ -120,4 +142,8 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         fontSize: 16,
     },
-})
+    errorText: {
+        color: 'red',
+        marginTop: 20,
+    },
+});
