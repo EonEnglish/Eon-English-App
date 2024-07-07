@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View, TextInput, Button, Linking } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, TextInput, Button, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import { composeAsync } from 'expo-mail-composer';
 
@@ -23,7 +23,7 @@ const ContactUs = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <View style={styles.inputGroup}>
                 <Text style={styles.label}>First Name:</Text>
                 <TextInput 
@@ -77,7 +77,7 @@ const ContactUs = () => {
                 <Text style={styles.buttonText}>Send</Text>
             </TouchableOpacity>
             <View style={{ paddingBottom: 100 }} />
-        </View>
+        </ScrollView>
     );
 }
 
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         height: 100, // adjust height for multiline input
     },
     buttonContainer: {
-        backgroundColor: 'blue', // Change the background color as needed
+        backgroundColor: '#0782F9', // Change the background color as needed
         paddingVertical: 15,
         paddingHorizontal: 30,
         borderRadius: 5,

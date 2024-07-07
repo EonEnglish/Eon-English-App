@@ -5,6 +5,7 @@ import Homework from '../screens/Homework';
 import VocabMatchScreen from '../screens/VocabMatchScreen';
 import VocabMatchPhotoScreen from '../screens/VocabMatchPhotoScreen';
 import Lessons from '../screens/Lessons';
+import FillInTheBlankScreen from '../screens/FillInTheBlankScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,7 @@ const HomeworkNavigator = ({ navigation }) => {
       <Stack.Screen options={{ headerShown: false }} name="Lessons" component={Lessons}/>
       <Stack.Screen options={{ headerShown: false }} name="VocabMatch" component={VocabMatchScreen}/>
       <Stack.Screen options={{ headerShown: false }} name="VocabMatchPhoto" component={VocabMatchPhotoScreen}/>
+      <Stack.Screen options={{ headerShown: false}} name="BlankMatch" component={FillInTheBlankScreen}/>
     </Stack.Navigator>
   );
 };
