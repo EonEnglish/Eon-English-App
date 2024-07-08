@@ -1,33 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, ActivityIndicator } from 'react-native';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
-const LoginScreen = ({ navigation }) => {
+const RegisterScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    useEffect(() => {
-        const auth = getAuth();
-        const unsubscribe = auth.onAuthStateChanged(user => {
-            if (user) {
-                navigation.replace("Tab");
-            }
-        });
-
-        return unsubscribe;
-    }, []);
-
-    const handleLogIn = async () => {
+    const handleSignUp = async () => {
         setLoading(true);
         setError('');
 
         try {
             const auth = getAuth();
-            const response = await signInWithEmailAndPassword(auth, email, password);
-            console.log("Logged in with: " + response.user.email);
-        } catch (err) {
+            const response = await createUserWithEmailAndPassword(auth, email, password);
+            console.log("Registered with: " + response.user.email);
+            navigation.replace("Tab"); 
             console.log(err.code);
             setError(getCustomErrorMessage(err.code));
         } finally {
@@ -37,14 +26,14 @@ const LoginScreen = ({ navigation }) => {
 
     const getCustomErrorMessage = (errorCode) => {
         switch (errorCode) {
-            case 'auth/user-not-found':
-                return 'No user found with this email address.';
-            case 'auth/wrong-password':
-                return 'Incorrect password. Please try again.';
+            case 'auth/email-already-in-use':
+                return 'This email address is already in use.';
             case 'auth/invalid-email':
                 return 'This email address is invalid.';
-            case 'auth/user-disabled':
-                return 'This user has been disabled.';
+            case 'auth/operation-not-allowed':
+                return 'Email/password accounts are not enabled.';
+            case 'auth/weak-password':
+                return 'The password is too weak. Password should be at least 6 characters.';
             default:
                 return 'An unknown error occurred. Please try again.';
         }
@@ -75,27 +64,21 @@ const LoginScreen = ({ navigation }) => {
 
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
-                    onPress={handleLogIn}
+                    onPress={handleSignUp}
                     style={styles.button}
                 >
                     {loading ? (
                         <ActivityIndicator color="#fff" />
                     ) : (
-                        <Text style={styles.buttonText}>Login</Text>
+                        <Text style={styles.buttonText}>Register</Text>
                     )}
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate("Register")}
-                    style={[styles.button, styles.buttonOutline]}
-                >
-                    <Text style={styles.buttonOutlineText}>Register</Text>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
     );
 };
 
-export default LoginScreen;
+export default RegisterScreen;
 
 const styles = StyleSheet.create({
     container: {
@@ -126,19 +109,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         alignItems: 'center',
     },
-    buttonOutline: {
-        backgroundColor: 'white',
-        marginTop: 5,
-        borderColor: '#0782F9',
-        borderWidth: 2,
-    },
     buttonText: {
         color: 'white',
-        fontWeight: '700',
-        fontSize: 16,
-    },
-    buttonOutlineText: {
-        color: '#0782F9',
         fontWeight: '700',
         fontSize: 16,
     },
