@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import { useNavigationState } from '@react-navigation/native'; // Import useNavigationState
+
 
 const Lessons = ({ navigation, route }) => {
     const { data } = route.params;

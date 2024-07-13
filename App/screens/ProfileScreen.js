@@ -5,34 +5,6 @@ import { signOut } from 'firebase/auth';
 import * as ImagePicker from 'expo-image-picker';
 
 const ProfileScreen = ({ navigation }) => {
-    const [image, setImage] = useState();
-
-    const requestPermission = async () => {
-        const { granted } = await ImagePicker.requestCameraPermissionsAsync();
-
-        if (!granted) {
-        alert('You need to enable permissions to access the library');
-        }
-    };
-
-    useEffect(() => {
-        requestPermission();
-    }, []);
-
-    const pickImage = async () => {
-        try {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            quality: 0.5,
-            allowsEditing: true,
-        });
-        if (!result.canceled) {
-            setImage(result.assets[0].uri);
-        }
-        } catch (error) {
-        console.log('Error reading an image');
-        }
-    };
     
     const handleSignOut = () => {
         signOut(auth).then(() => {
@@ -46,17 +18,6 @@ const ProfileScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.profileImageContainer}>
-                <TouchableOpacity onPress={pickImage}>
-                    {image ? (
-                    <Image source={image} style={styles.profileImage} />
-                    ) : (
-                    <View style={styles.profileImagePlaceholder}>
-                        <Text style={styles.profileImageText}>Select a Profile Picture</Text>
-                    </View>
-                    )}
-                </TouchableOpacity>
-            </View>
             <View style={styles.signOutContainer}>
                 <Text>Email: {auth.currentUser?.email}</Text>
                 <TouchableOpacity 

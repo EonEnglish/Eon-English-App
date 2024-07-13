@@ -5,7 +5,6 @@ import { getDocs, collection } from '@firebase/firestore';
 import { getDownloadURL, ref, getStorage } from 'firebase/storage';
 import { db } from "../firebase";
 
-
 const VocabMatchPhotoScreen = ({ route }) => {
   const [vocabList, setVocabList] = useState([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
