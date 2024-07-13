@@ -41,6 +41,10 @@ const LoginScreen = ({ navigation }) => {
                 return 'No user found with this email address.';
             case 'auth/wrong-password':
                 return 'Incorrect password. Please try again.';
+            case 'auth/invalid-credential':
+                return 'Incorrect password or email.';
+            case 'auth/invalid-password':
+                return 'This password is invalid.';
             case 'auth/invalid-email':
                 return 'This email address is invalid.';
             case 'auth/user-disabled':
