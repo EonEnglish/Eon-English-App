@@ -6,33 +6,55 @@ import VocabMatchScreen from '../screens/VocabMatchScreen';
 import VocabMatchPhotoScreen from '../screens/VocabMatchPhotoScreen';
 import Lessons from '../screens/Lessons';
 import FillInTheBlankScreen from '../screens/FillInTheBlankScreen';
+import { Ionicons } from '@expo/vector-icons'; // Example icon library, adjust as needed
+
 
 const Stack = createNativeStackNavigator();
 
 const HomeworkNavigator = ({ navigation }) => {
-  useFocusEffect(
-    React.useCallback(() => {
-      const delay = setTimeout(() => {
-        const resetAction = CommonActions.reset({
-          index: 0,
-          routes: [{ name: 'HomeWork' }],
-        });
-        navigation.dispatch(resetAction);
-      }, 100); // Adjust the delay as needed
-
-      return () => clearTimeout(delay);
-    }, [navigation])
-  );
 
   return (
     <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: false }} name="HomeWork" component={Homework} />
-      <Stack.Screen options={{ headerShown: false }} name="Lessons" component={Lessons} />
-      <Stack.Screen options={{ headerShown: false }} name="VocabMatch" component={VocabMatchScreen} />
-      <Stack.Screen options={{ headerShown: false }} name="VocabMatchPhoto" component={VocabMatchPhotoScreen} />
-      <Stack.Screen options={{ headerShown: false }} name="BlankMatch" component={FillInTheBlankScreen} />
+      <Stack.Screen 
+        options={screenOptionsWithBackButton('Homework')} 
+        name="HomeWork" 
+        component={Homework}
+      />
+      <Stack.Screen 
+        options={screenOptionsWithBackButton('Lessons')}
+        name="Lessons" 
+        component={Lessons}
+      />
+      <Stack.Screen 
+        options={screenOptionsWithBackButton('Vocab Match')}
+        name="VocabMatch" 
+        component={VocabMatchScreen}
+      />
+      <Stack.Screen 
+        options={screenOptionsWithBackButton('Vocab Match Photo')}
+        name="VocabMatchPhoto" 
+        component={VocabMatchPhotoScreen}
+      />
+      <Stack.Screen 
+        options={screenOptionsWithBackButton('Blank Match')}
+        name="BlankMatch" 
+        component={FillInTheBlankScreen}
+      />
     </Stack.Navigator>
   );
 };
+
+const screenOptionsWithBackButton = (title) => ({ navigation }) => ({
+  title: title,
+  headerLeft: () => (
+    <Ionicons.Button
+      name="arrow-back"
+      size={24}
+      color="black"
+      backgroundColor="transparent"
+      onPress={() => navigation.goBack()}
+    />
+  ),
+});
 
 export default HomeworkNavigator;

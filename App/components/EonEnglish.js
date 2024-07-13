@@ -6,7 +6,6 @@ import { getDownloadURL, ref, getStorage } from 'firebase/storage';
 import { db } from "../firebase";
 import { ScrollView } from 'react-native-gesture-handler';
 
-
 const EonEnglish = () => {
   const [imgUrls, setImgUrls] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
@@ -73,6 +72,10 @@ const EonEnglish = () => {
   };
 
   const titleImage = imgUrls[0]
+  
+  if (imgUrls.length === 0 || announcements.length === 0) {
+    return <Text>Loading...</Text>;
+  }
 
   return(
     <ScrollView contentContainerStyle={styles.container}>
