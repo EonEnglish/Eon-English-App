@@ -12,27 +12,25 @@ const Stack = createNativeStackNavigator();
 const HomeworkNavigator = ({ navigation }) => {
   useFocusEffect(
     React.useCallback(() => {
-      // Add a delay before dispatching the reset action
       const delay = setTimeout(() => {
         const resetAction = CommonActions.reset({
           index: 0,
-          routes: [{ name: 'HomeWork' }], // Replace 'Homework' with your first screen's name
+          routes: [{ name: 'HomeWork' }],
         });
         navigation.dispatch(resetAction);
       }, 100); // Adjust the delay as needed
 
-      // Cleanup function to clear the timeout
       return () => clearTimeout(delay);
     }, [navigation])
   );
 
   return (
     <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: false }} name="HomeWork" component={Homework}/>
-      <Stack.Screen options={{ headerShown: false }} name="Lessons" component={Lessons}/>
-      <Stack.Screen options={{ headerShown: false }} name="VocabMatch" component={VocabMatchScreen}/>
-      <Stack.Screen options={{ headerShown: false }} name="VocabMatchPhoto" component={VocabMatchPhotoScreen}/>
-      <Stack.Screen options={{ headerShown: false}} name="BlankMatch" component={FillInTheBlankScreen}/>
+      <Stack.Screen options={{ headerShown: false }} name="HomeWork" component={Homework} />
+      <Stack.Screen options={{ headerShown: false }} name="Lessons" component={Lessons} />
+      <Stack.Screen options={{ headerShown: false }} name="VocabMatch" component={VocabMatchScreen} />
+      <Stack.Screen options={{ headerShown: false }} name="VocabMatchPhoto" component={VocabMatchPhotoScreen} />
+      <Stack.Screen options={{ headerShown: false }} name="BlankMatch" component={FillInTheBlankScreen} />
     </Stack.Navigator>
   );
 };
