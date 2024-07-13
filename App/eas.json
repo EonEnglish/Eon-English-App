@@ -1,0 +1,25 @@
+{
+    "cli": {
+      "version": ">= 10.1.1"
+    },
+    "build": {
+      "development": {
+        "developmentClient": true,
+        "distribution": "internal"
+      },
+      "preview": {
+        "distribution": "internal"
+      },
+      "production": {}
+    },
+    "submit": {
+      "production": {
+        "ios":{
+          "appleId": "eonenglishus@gmail.com",
+          "ascAppId": "6535652983",
+          "appleTeamId": "ZL6V9NB46W"
+        }
+      }
+    }
+  }
+  
