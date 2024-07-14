@@ -1,11 +1,11 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View, Alert } from 'react-native';
+import React, { useState } from 'react';
 import { auth } from '../firebase';
 import { signOut } from 'firebase/auth';
-import * as ImagePicker from 'expo-image-picker';
 
 const ProfileScreen = ({ navigation }) => {
-    
+    const [deletingAccount, setDeletingAccount] = useState(false);
+
     const handleSignOut = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
@@ -14,6 +14,25 @@ const ProfileScreen = ({ navigation }) => {
             // An error happened.
             alert(error.message);
         });
+    }
+
+    const handleDeleteAccount = () => {
+        const user = auth.currentUser;
+        if (user) {
+            setDeletingAccount(true);
+            user.delete()
+                .then(() => {
+                    setDeletingAccount(false);
+                    Alert.alert("Success", "Account successfully deleted");
+                    navigation.replace("Login");
+                })
+                .catch((error) => {
+                    setDeletingAccount(false);
+                    Alert.alert("Error", error.message);
+                });
+        } else {
+            Alert.alert("Error", "No user is currently authenticated");
+        }
     }
 
     return (
@@ -25,6 +44,13 @@ const ProfileScreen = ({ navigation }) => {
                     style={styles.button}
                 >
                     <Text style={styles.buttonText}>Sign out</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                    onPress={handleDeleteAccount}
+                    style={[styles.button, { backgroundColor: 'red' }]}
+                    disabled={deletingAccount}
+                >
+                    <Text style={styles.buttonText}>Delete Account</Text>
                 </TouchableOpacity>
             </View>
         </View>
