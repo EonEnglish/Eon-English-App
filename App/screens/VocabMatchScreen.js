@@ -35,15 +35,19 @@ const VocabMatchScreen = ({ route }) => {
     };
     fetchVocabulary();
   }, []);
-
+  
   const checkAnswer = () => {
     const currentWord = vocabList[currentWordIndex];
     if (!currentWord) {
       console.error("Current word is undefined.");
       return;
     }
-
-    if (userInput.toLowerCase() === currentWord.word.toLowerCase()) {
+  
+    const userInputLowerCase = userInput.toLowerCase();
+    const correctWord1 = currentWord.word ? currentWord.word.toLowerCase() : '';
+    const correctWord2 = currentWord.word1 ? currentWord.word1.toLowerCase() : '';
+  
+    if (userInputLowerCase === correctWord1 || userInputLowerCase === correctWord2) {
       setScore(score + 1);
       setAlertMessage('Your answer is correct!');
     } else {

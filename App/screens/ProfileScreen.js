@@ -16,6 +16,22 @@ const ProfileScreen = ({ navigation }) => {
         });
     }
 
+    const confirmDeleteAccount = () => {
+        Alert.alert(
+            "Confirm Delete",
+            "Are you sure you want to delete your account? This action cannot be undone.",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                { text: "Delete", onPress: handleDeleteAccount }
+            ],
+            { cancelable: false }
+        );
+    };
+
     const handleDeleteAccount = () => {
         const user = auth.currentUser;
         if (user) {
@@ -46,7 +62,7 @@ const ProfileScreen = ({ navigation }) => {
                     <Text style={styles.buttonText}>Sign out</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
-                    onPress={handleDeleteAccount}
+                    onPress={confirmDeleteAccount}
                     style={[styles.button, { backgroundColor: 'red' }]}
                     disabled={deletingAccount}
                 >
@@ -102,4 +118,4 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         fontSize: 16,
     },
-})
+});
