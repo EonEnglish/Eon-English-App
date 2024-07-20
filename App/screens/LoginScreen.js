@@ -26,9 +26,7 @@ const LoginScreen = ({ navigation }) => {
         try {
             const auth = getAuth();
             const response = await signInWithEmailAndPassword(auth, email, password);
-            console.log("Logged in with: " + response.user.email);
         } catch (err) {
-            console.log(err.code);
             setError(getCustomErrorMessage(err.code));
         } finally {
             setLoading(false);
