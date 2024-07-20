@@ -14,13 +14,14 @@ const RegisterScreen = ({ navigation }) => {
 
         try {
             const auth = getAuth();
-            const response = await createUserWithEmailAndPassword(auth, email, password);
-            console.log("Registered with: " + response.user.email);
-            navigation.replace("Tab"); 
-            console.log(err.code);
+            const response = await createUserWithEmailAndPassword(auth, email, password); 
+            navigation.replace("Tab");
+        } catch(err) {
             setError(getCustomErrorMessage(err.code));
-        } finally {
+        }
+        finally {
             setLoading(false);
+            console.log(error);
         }
     };
 
