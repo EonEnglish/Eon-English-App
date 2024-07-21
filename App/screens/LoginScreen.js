@@ -22,7 +22,6 @@ const LoginScreen = ({ navigation }) => {
     const handleLogIn = async () => {
         setLoading(true);
         setError('');
-
         try {
             const auth = getAuth();
             const response = await signInWithEmailAndPassword(auth, email, password);
@@ -88,6 +87,12 @@ const LoginScreen = ({ navigation }) => {
                 >
                     <Text style={styles.buttonOutlineText}>Register</Text>
                 </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("PasswordReset")}
+                >
+                    <Text style={styles.resetText}>Forgot your password? Click here!</Text>
+                </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
     );
@@ -143,5 +148,8 @@ const styles = StyleSheet.create({
     errorText: {
         color: 'red',
         marginTop: 20,
+    },
+    resetText: {
+        marginTop: 30,
     },
 });
