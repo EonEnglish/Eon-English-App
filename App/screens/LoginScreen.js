@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, ActivityIndicator } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import CustomCheckBox from './CustomCheckBox'; // Adjust the import path according to your project structure
 
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
 
     useEffect(() => {
         const auth = getAuth();
@@ -16,6 +19,23 @@ const LoginScreen = ({ navigation }) => {
             }
         });
 
+        // Load saved credentials
+        const loadCredentials = async () => {
+            try {
+                const savedEmail = await AsyncStorage.getItem('email');
+                const savedPassword = await AsyncStorage.getItem('password');
+                if (savedEmail && savedPassword) {
+                    setEmail(savedEmail);
+                    setPassword(savedPassword);
+                    setRememberMe(true);
+                }
+            } catch (error) {
+                console.error('Error loading credentials', error);
+            }
+        };
+
+        loadCredentials();
+
         return unsubscribe;
     }, []);
 
@@ -24,7 +44,14 @@ const LoginScreen = ({ navigation }) => {
         setError('');
         try {
             const auth = getAuth();
-            const response = await signInWithEmailAndPassword(auth, email, password);
+            await signInWithEmailAndPassword(auth, email, password);
+            if (rememberMe) {
+                await AsyncStorage.setItem('email', email);
+                await AsyncStorage.setItem('password', password);
+            } else {
+                await AsyncStorage.removeItem('email');
+                await AsyncStorage.removeItem('password');
+            }
         } catch (err) {
             setError(getCustomErrorMessage(err.code));
         } finally {
@@ -65,6 +92,10 @@ const LoginScreen = ({ navigation }) => {
                     onChangeText={text => setPassword(text)}
                     style={styles.input}
                     secureTextEntry
+                />
+                <CustomCheckBox
+                    value={rememberMe}
+                    onValueChange={setRememberMe}
                 />
             </View>
 
