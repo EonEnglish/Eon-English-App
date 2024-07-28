@@ -8,10 +8,8 @@ const ProfileScreen = ({ navigation }) => {
 
     const handleSignOut = () => {
         signOut(auth).then(() => {
-            // Sign-out successful.
             navigation.replace("Login");
         }).catch((error) => {
-            // An error happened.
             alert(error.message);
         });
     }
@@ -53,17 +51,31 @@ const ProfileScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.signOutContainer}>
-                <Text>Email: {auth.currentUser?.email}</Text>
+            <Text style={styles.header}>Profile</Text>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style={[styles.button, styles.aboutButton]}>
+                    <Text style={styles.buttonText}>About</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.button, styles.getInvolvedButton]}>
+                    <Text style={styles.buttonText}>Get Involved</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.button, styles.findUsButton]}>
+                    <Text style={styles.buttonText}>Find Us</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.button, styles.resetPasswordButton]}     
+                    onPress={() => navigation.navigate('PasswordResetScreen')}
+                    >
+                    <Text style={styles.buttonText}>Reset Password</Text>
+                </TouchableOpacity>
                 <TouchableOpacity 
                     onPress={handleSignOut}
-                    style={styles.button}
+                    style={[styles.button, styles.logOutButton]}
                 >
-                    <Text style={styles.buttonText}>Sign out</Text>
+                    <Text style={styles.buttonText}>Log Out</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                     onPress={confirmDeleteAccount}
-                    style={[styles.button, { backgroundColor: 'red' }]}
+                    style={[styles.button, styles.deleteAccountButton]}
                     disabled={deletingAccount}
                 >
                     <Text style={styles.buttonText}>Delete Account</Text>
@@ -78,44 +90,46 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-    profileImageContainer: {
         alignItems: 'center',
-        top: '10%',
-    },
-    profileImage: {
-        width: 130,
-        height: 130,
-        borderRadius: 75,
-    },
-    profileImagePlaceholder: {
-        width: 130,
-        height: 130,
-        borderRadius: 75,
-        backgroundColor: '#cccccc',
         justifyContent: 'center',
-        alignItems: 'center',
+        backgroundColor: 'white',
     },
-    profileImageText: {
-        textAlign: 'center',
+    header: {
+        fontSize: 50,
+        fontWeight: 'bold',
+        color: '#D3D3D3',
+        marginBottom: 30,
     },
-    signOutContainer: {
-        flex: 1,
-        justifyContent: "flex-end",
-        alignItems: 'center',
-        marginBottom: 15,
+    buttonContainer: {
+        width: '80%',
     },
     button: {
-        backgroundColor: '#0782F9',
-        width: '60%',
         padding: 15,
         borderRadius: 10,
         alignItems: 'center',
-        marginTop: 20,
+        marginVertical: 10,
     },
     buttonText: {
         color: 'white',
         fontWeight: '700',
         fontSize: 16,
+    },
+    aboutButton: {
+        backgroundColor: '#FFC107',
+    },
+    getInvolvedButton: {
+        backgroundColor: '#FFC107',
+    },
+    findUsButton: {
+        backgroundColor: '#FFC107',
+    },
+    resetPasswordButton: {
+        backgroundColor: '#8A2BE2',
+    },
+    logOutButton: {
+        backgroundColor: '#007BFF',
+    },
+    deleteAccountButton: {
+        backgroundColor: 'red',
     },
 });
