@@ -14,10 +14,6 @@ const ProfileScreen = ({ navigation }) => {
         });
     }
 
-    const handlePasswordReset = () => {
-        navigation.navigate("PasswordReset")
-    }
-
     const confirmDeleteAccount = () => {
         Alert.alert(
             "Confirm Delete",
@@ -66,9 +62,9 @@ const ProfileScreen = ({ navigation }) => {
                 <TouchableOpacity style={[styles.button, styles.findUsButton]}>
                     <Text style={styles.buttonText}>Find Us</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.button, styles.resetPasswordButton]}     
-                    onPress={() => navigation.navigate('PasswordResetScreen')}
-                    >
+                <TouchableOpacity style={[styles.button, styles.resetPasswordButton]}                  
+                onPress={() => navigation.navigate('PasswordResetScreen')}
+>
                     <Text style={styles.buttonText}>Reset Password</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
@@ -76,12 +72,6 @@ const ProfileScreen = ({ navigation }) => {
                     style={[styles.button, styles.logOutButton]}
                 >
                     <Text style={styles.buttonText}>Log Out</Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                    onPress={handlePasswordReset}
-                    style={styles.button}
-                >
-                    <Text style={styles.buttonText}>Reset Password</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                     onPress={confirmDeleteAccount}
@@ -105,7 +95,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     header: {
-        fontSize: 50,
+        fontSize: 32,
         fontWeight: 'bold',
         color: '#D3D3D3',
         marginBottom: 30,
