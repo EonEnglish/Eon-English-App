@@ -16,6 +16,10 @@ const ProfileScreen = ({ navigation }) => {
         });
     }
 
+    const handlePasswordReset = () => {
+        navigation.navigate("PasswordReset")
+    }
+
     const confirmDeleteAccount = () => {
         Alert.alert(
             "Confirm Delete",
@@ -60,6 +64,12 @@ const ProfileScreen = ({ navigation }) => {
                     style={styles.button}
                 >
                     <Text style={styles.buttonText}>Sign out</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                    onPress={handlePasswordReset}
+                    style={styles.button}
+                >
+                    <Text style={styles.buttonText}>Reset Password</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                     onPress={confirmDeleteAccount}

@@ -79,6 +79,7 @@ const LoginScreen = ({ navigation }) => {
             style={styles.container}
             behavior='padding'
         >
+            <Text style={styles.title}>Sign In</Text>
             <View style={styles.inputContainer}>
                 <TextInput
                     placeholder='Email'
@@ -140,12 +141,20 @@ const styles = StyleSheet.create({
     inputContainer: {
         width: '80%',
     },
+    title: {
+        fontSize: 40,
+        fontWeight: '800',
+        color: '#CCCCCC',
+        padding: 30,
+    },
     input: {
         backgroundColor: 'white',
         paddingHorizontal: 15,
         paddingVertical: 10,
-        borderRadius: 10,
-        marginTop: 5,
+        borderRadius: 7,
+        marginTop: 10,
+        borderWidth: 3,
+        borderColor: '#CCCCCC',
     },
     buttonContainer: {
         width: '60%',
