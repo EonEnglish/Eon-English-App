@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import HomeScreen from '../screens/HomeScreen';
 import HomeworkNavigator from './HomeworkNavigator';
 import ContactUs from '../screens/ContactUs';
+import ScheduleScreen from '../screens/ScheduleScreen';
 import { Ionicons } from '@expo/vector-icons'; // Example icon library, adjust as needed
 
 const Drawer = createDrawerNavigator();
@@ -28,6 +29,7 @@ const DrawerNavigator = ({ navigation }) => {
         name="Contact Us" 
         component={ContactUs}
       />
+    <Drawer.Screen name="Schedule" component={ScheduleScreen} />
     </Drawer.Navigator>
   );
 };
