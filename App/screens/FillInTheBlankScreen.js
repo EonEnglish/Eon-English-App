@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef, Component } from 'react';
 import { StyleSheet, Text, TextInput, View, Button, Alert, Animated, PanResponder, TouchableOpacity, handleBoxDrop } from 'react-native';
-import { getDocs, collection } from '@firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { getDocs, collection, getDoc, doc, setDoc } from '@firebase/firestore';
 import { db } from '../firebase';
 
-const Fill_In_The_Blank_Screen = ({ route }) => {
+const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
   const [sentenceList, setSentenceList] = useState([]);
   const [options, setOptions] = useState([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const [totalScore, setTotalScore] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [scoreUpdated, setScoreUpdated] = useState(false);
@@ -84,10 +86,12 @@ const Fill_In_The_Blank_Screen = ({ route }) => {
 
               if(options[index] === sentenceList[currentWordIndex].answer){
                 setScore(score + 1);
+                setTotalScore(totalScore + 1);
                 setAlertMessage('Your answer is correct!');
                 setDropAreaEntered(false);
               }
               else{
+                setTotalScore(totalScore + 1);
                 setAlertMessage('Your answer is incorrect!');
                 setDropAreaEntered(false);
               }
@@ -127,6 +131,44 @@ const Fill_In_The_Blank_Screen = ({ route }) => {
     setQuestionContainerLayout({ x, y, width, height });
   };
 
+  const homeworkComplete = async () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (!user) {
+      console.error('No authenticated user found.');
+      return;
+    }
+
+    const userHomeworkRef = doc(db, "Users", user.uid, "Homework", data, "3", "Fill In The blank");
+
+    try {
+      const homeworkDoc = await getDoc(userHomeworkRef);
+      if (homeworkDoc.exists()) {
+        const existingData = homeworkDoc.data();
+        if (score > existingData.score) {
+          await setDoc(userHomeworkRef, {
+            completed_time: new Date(),
+            score: score,
+            total_score: totalScore,
+          });
+          console.log('Homework completion data updated successfully with a higher score.');
+        } else {
+          console.log('Existing score is higher or equal. No update made.');
+        }
+      } else {
+        await setDoc(userHomeworkRef, {
+          completed_time: new Date(),
+          score: score,
+          total_score: totalScore,
+        });
+        console.log('Homework completion data stored successfully.');
+      }
+      navigation.goBack();
+    } catch (error) {
+      console.error('Error storing homework completion data:', error);
+    }
+  };
+
   useEffect(() => {
     if (showAlert) {
       Alert.alert('Result', alertMessage, [
@@ -149,6 +191,7 @@ const Fill_In_The_Blank_Screen = ({ route }) => {
       Alert.alert('Game Over', `You have finished the game! Your final score is ${score}.`, [
         { text: 'OK' },
       ]);
+      homeworkComplete();
     }
   };
 

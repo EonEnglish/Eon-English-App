@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, Button, FlatList, Alert } from 'react-native';
-import { initializeApp } from "firebase/app";
-import { getDocs } from "@firebase/firestore";
-import { getFirestore, collection } from "@firebase/firestore";
+import { getAuth } from 'firebase/auth';
+import { getDocs, collection, getDoc, doc, setDoc } from "@firebase/firestore";
 import { db } from "../firebase";
 
-
-
-const VocabMatchScreen = ({ route }) => {
+const VocabMatchScreen = ({ navigation, route }) => {
   const [vocabList, setVocabList] = useState([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [userInput, setUserInput] = useState('');
   const [score, setScore] = useState(0);
+  const [totalScore, setTotalScore] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const { data } = route.params;
@@ -43,14 +41,16 @@ const VocabMatchScreen = ({ route }) => {
       return;
     }
   
-    const userInputLowerCase = userInput.toLowerCase();
-    const correctWord1 = currentWord.word ? currentWord.word.toLowerCase() : '';
-    const correctWord2 = currentWord.word1 ? currentWord.word1.toLowerCase() : '';
+    const userInputLowerCase = userInput.toLowerCase().trim();
+    const correctWord1 = currentWord.word ? currentWord.word.toLowerCase().trim() : '';
+    const correctWord2 = currentWord.word1 ? currentWord.word1.toLowerCase().trim() : '';
   
     if (userInputLowerCase === correctWord1 || userInputLowerCase === correctWord2) {
       setScore(score + 1);
+      setTotalScore(totalScore + 1);
       setAlertMessage('Your answer is correct!');
     } else {
+      setTotalScore(totalScore + 1);
       setAlertMessage('Your answer is incorrect!');
     }
     setShowAlert(true);
@@ -64,6 +64,45 @@ const VocabMatchScreen = ({ route }) => {
       Alert.alert('Game Over', `You have finished the game! Your final score is ${score}.`, [
         { text: 'OK' },
       ]);
+      homeworkComplete();
+    }
+  };
+
+  const homeworkComplete = async () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (!user) {
+      console.error('No authenticated user found.');
+      return;
+    }
+
+    const userHomeworkRef = doc(db, "Users", user.uid, "Homework", data, "1", "Vocab Match");
+
+    try {
+      const homeworkDoc = await getDoc(userHomeworkRef);
+      if (homeworkDoc.exists()) {
+        const existingData = homeworkDoc.data();
+        if (score > existingData.score) {
+          await setDoc(userHomeworkRef, {
+            completed_time: new Date(),
+            score: score,
+            total_score: totalScore,
+          });
+          console.log('Homework completion data updated successfully with a higher score.');
+        } else {
+          console.log('Existing score is higher or equal. No update made.');
+        }
+      } else {
+        await setDoc(userHomeworkRef, {
+          completed_time: new Date(),
+          score: score,
+          total_score: totalScore,
+        });
+        console.log('Homework completion data stored successfully.');
+      }
+      navigation.goBack();
+    } catch (error) {
+      console.error('Error storing homework completion data:', error);
     }
   };
 
