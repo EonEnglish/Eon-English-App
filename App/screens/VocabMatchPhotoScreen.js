@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { getDocs, collection } from '@firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { getDocs, collection, getDoc, doc, setDoc } from '@firebase/firestore';
 import { getDownloadURL, ref, getStorage } from 'firebase/storage';
 import { db } from "../firebase";
 
-const VocabMatchPhotoScreen = ({ route }) => {
+const VocabMatchPhotoScreen = ({ navigation, route }) => {
   const [vocabList, setVocabList] = useState([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const [totalScore, setTotalScore] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
@@ -25,7 +26,6 @@ const VocabMatchPhotoScreen = ({ route }) => {
           if (doc.id === 'Image Match') {
             const subCollection = await getDocs(collection(doc.ref, 'Collection'));
             const vocabulary = subCollection.docs.map(doc => doc.data());
-            console.log(vocabulary)
             setVocabList(vocabulary);
           }
         });
@@ -92,7 +92,6 @@ const VocabMatchPhotoScreen = ({ route }) => {
       if (!options.includes(randomWord)) {
         options.push(randomWord);
       }
-      console.log(options);
     }
     return options.sort(() => Math.random() - 0.5);
   };
@@ -101,8 +100,10 @@ const VocabMatchPhotoScreen = ({ route }) => {
     const currentWord = vocabList[currentWordIndex];
     if (selectedOption === currentWord.word) {
       setScore(score + 1);
+      setTotalScore(totalScore + 1);
       setAlertMessage('Your answer is correct!');
     } else {
+      setTotalScore(totalScore + 1);
       setAlertMessage('Your answer is incorrect!');
     }
     setShowAlert(true);
@@ -116,6 +117,45 @@ const VocabMatchPhotoScreen = ({ route }) => {
       Alert.alert('Game Over', `You have finished the game! Your final score is ${score}.`, [
         { text: 'OK' },
       ]);
+      homeworkComplete();
+    }
+  };
+
+  const homeworkComplete = async () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (!user) {
+      console.error('No authenticated user found.');
+      return;
+    }
+
+    const userHomeworkRef = doc(db, "Users", user.uid, "Homework", data, "2", "Vocab Match Photo");
+
+    try {
+      const homeworkDoc = await getDoc(userHomeworkRef);
+      if (homeworkDoc.exists()) {
+        const existingData = homeworkDoc.data();
+        if (score > existingData.score) {
+          await setDoc(userHomeworkRef, {
+            completed_time: new Date(),
+            score: score,
+            total_score: totalScore,
+          });
+          console.log('Homework completion data updated successfully with a higher score.');
+        } else {
+          console.log('Existing score is higher or equal. No update made.');
+        }
+      } else {
+        await setDoc(userHomeworkRef, {
+          completed_time: new Date(),
+          score: score,
+          total_score: totalScore,
+        });
+        console.log('Homework completion data stored successfully.');
+      }
+      navigation.goBack();
+    } catch (error) {
+      console.error('Error storing homework completion data:', error);
     }
   };
 
