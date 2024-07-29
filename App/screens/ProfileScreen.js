@@ -95,10 +95,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     header: {
-        fontSize: 32,
         fontWeight: 'bold',
-        color: '#D3D3D3',
         marginBottom: 30,
+        color: '#8E8E8F',
+        fontSize: 42,
     },
     buttonContainer: {
         width: '80%',
