@@ -24,6 +24,9 @@ const ContactUs = () => {
 
     return (
         <ScrollView style={styles.container}>
+            <View>
+                <Text style={styles.title}>Contact Us</Text>
+            </View>
             <View style={styles.inputGroup}>
                 <Text style={styles.label}>First Name:</Text>
                 <TextInput 
@@ -88,19 +91,29 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
     },
+    title: {
+        color: '#8E8E8F',
+        fontSize: 42,
+        fontWeight: '700',
+        marginBottom: 10,
+        alignSelf: 'center',
+    },
     inputGroup: {
+        width: '100%',
         marginBottom: 20,
+        gap: 5,
     },
     label: {
-        marginBottom: 5,
+        color: '#8E8E8F',
+        fontWeight: '700',
         fontWeight: 'bold',
     },
     input: {
-        borderWidth: 1,
-        borderColor: '#ccc',
         borderRadius: 5,
-        padding: 10,
-        fontSize: 16,
+        padding: 13,
+        fontSize: 14,
+        borderWidth: 3,
+        borderColor: '#CCCCCC',
     },
     messageInput: {
         height: 100, // adjust height for multiline input

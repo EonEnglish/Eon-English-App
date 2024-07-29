@@ -100,6 +100,9 @@ const ScheduleScreen = () => {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.containerContent}>
+      <View>
+        <Text style={styles.title}>Schedule</Text>
+      </View>
       <View style={styles.inputGroup}>
         <Text style={styles.label}>Name:</Text>
         <TextInput
@@ -172,7 +175,7 @@ const ScheduleScreen = () => {
           value={userMessage}
         />
       </View>
-      <TouchableOpacity style={[styles.buttonContainer, styles.sendButtonContainer]} onPress={handleSubmit}>
+      <TouchableOpacity style={styles.buttonContainer} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Submit</Text>
       </TouchableOpacity>
     </ScrollView>
@@ -189,6 +192,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  title: {
+    color: '#8E8E8F',
+    fontSize: 42,
+    fontWeight: '700',
+    marginBottom: 10,
+    alignSelf: 'center',
+  },
   inputGroup: {
     width: '100%',
     marginBottom: 20,
@@ -199,15 +209,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   label: {
+    color: '#8E8E8F',
+    fontWeight: '700',
     fontWeight: 'bold',
   },
   input: {
-    color: '#000000',
-    borderWidth: 1,
-    borderColor: '#ccc',
     borderRadius: 5,
     padding: 13,
     fontSize: 14,
+    borderWidth: 3,
+    borderColor: '#CCCCCC',
   },
   dropdownInput: {
     color: '#000000',
@@ -216,13 +227,11 @@ const styles = StyleSheet.create({
     height: 100,
   },
   buttonContainer: {
-    backgroundColor: '#0782f9',
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 5,
+    backgroundColor: '#0782F9',
     width: '100%',
-  },
-  sendButtonContainer: {
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
     marginBottom: 40,
   },
   buttonText: {
