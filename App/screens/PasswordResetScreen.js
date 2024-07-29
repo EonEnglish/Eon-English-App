@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Alert, ActivityIndicator } from 'react-native';
-import { getAuth, sendPasswordResetEmail } from 'firebase/auth'; // Import sendPasswordResetEmail from firebase/auth
+import { sendPasswordResetEmail } from 'firebase/auth'; // Import sendPasswordResetEmail from firebase/auth
 import { auth } from '../firebase';
 
 const PasswordResetScreen = ({ navigation }) => {

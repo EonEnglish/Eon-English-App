@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { getAuth } from 'firebase/auth';
-import { getDocs, collection, getDoc, doc, setDoc } from "@firebase/firestore";
+import { getDoc, doc } from "@firebase/firestore";
 import { Ionicons } from '@expo/vector-icons';
 import { useIsFocused } from '@react-navigation/native';
 import { db } from "../firebase";

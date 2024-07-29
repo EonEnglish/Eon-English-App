@@ -21,7 +21,6 @@ const RegisterScreen = ({ navigation }) => {
         }
         finally {
             setLoading(false);
-            console.log(error);
         }
     };
 
@@ -45,6 +44,7 @@ const RegisterScreen = ({ navigation }) => {
             style={styles.container}
             behavior='padding'
         >
+            <Text style={styles.title}>Register</Text>
             <View style={styles.inputContainer}>
                 <TextInput
                     placeholder='Email'
@@ -82,10 +82,17 @@ const RegisterScreen = ({ navigation }) => {
 export default RegisterScreen;
 
 const styles = StyleSheet.create({
+    title: {
+        fontSize: 40,
+        fontWeight: '800',
+        color: '#CCCCCC',
+        paddingBottom: 30,
+    },
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
+        paddingTop: 200, // Increase this value to move content higher
     },
     inputContainer: {
         width: '80%',
@@ -94,8 +101,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         paddingHorizontal: 15,
         paddingVertical: 10,
-        borderRadius: 10,
-        marginTop: 5,
+        borderRadius: 7,
+        marginTop: 10,
+        borderWidth: 3,
+        borderColor: '#CCCCCC',
     },
     buttonContainer: {
         width: '60%',
