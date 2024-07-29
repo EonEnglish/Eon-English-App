@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { CommonActions, useFocusEffect } from '@react-navigation/native';
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Homework from '../screens/Homework';
 import VocabMatchScreen from '../screens/VocabMatchScreen';
