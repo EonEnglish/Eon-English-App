@@ -197,6 +197,7 @@ const styles = StyleSheet.create({
     fontSize: 42,
     fontWeight: '700',
     marginBottom: 10,
+    marginTop: 40,
     alignSelf: 'center',
   },
   inputGroup: {
