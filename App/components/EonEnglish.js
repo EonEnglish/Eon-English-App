@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Image, Text, TouchableOpacity, View, Dimensions } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native';
 import { getDocs, collection } from '@firebase/firestore';
-import { getDownloadURL, ref, getStorage } from 'firebase/storage';
 import { db } from "../firebase";
-import { ScrollView } from 'react-native-gesture-handler';
 
 const EonEnglish = () => {
-  const [imgUrls, setImgUrls] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
   const [announcementsExist, setAnnouncementsExist] = useState(true);
 
@@ -17,28 +13,13 @@ const EonEnglish = () => {
         const Collection = await getDocs(collection(db, "Home Page"));
         if (!Collection.empty) {
           Collection.forEach(async (doc) => {
-            // Assuming 'targetDocumentId' is the ID of the document you want to enter
-            if (doc.id === 'Title') {
-              const subCollection = await getDocs(collection(doc.ref, 'Collection'));
-              const imageUrls = await Promise.all(
-                subCollection.docs.map(async (doc) => {
-                  const imageUrl = doc.data().image;
-                  return await getImageDownloadUrl(imageUrl);
-                })
-              );
-              setImgUrls(imageUrls);
-            }
             if (doc.id === 'Announcement') {
               const subCollection = await getDocs(collection(doc.ref, 'Collection'));
-              try
-              {
+              try {
                 const announcement = subCollection.docs.map(doc => doc.data());
-                if(announcement.length === 0)
-                {      
+                if (announcement.length === 0) {      
                   setAnnouncementsExist(false);
-                }
-                else
-                {
+                } else {
                   setAnnouncements(announcement);
                   setAnnouncementsExist(true);
                 }
@@ -48,56 +29,44 @@ const EonEnglish = () => {
             }
           });
         } else {
-          console.log('No documents found in the vocabSet1 collection.');
+          console.log('No documents found in the Home Page collection.');
           setAnnouncementsExist(false);
         }
       } catch (error) {
-        console.error('Error fetching images:', error);
+        console.error('Error fetching announcements:', error);
         setAnnouncementsExist(false);
       }
     };
     fetchHome();
   }, []);
 
-  const getImageDownloadUrl = async (imageUrl) => {
-      try {
-        const storage = getStorage();
-        const storageRef = ref(storage, imageUrl);
-        const downloadUrl = await getDownloadURL(storageRef);
-        return downloadUrl;
-      } catch (error) {
-        console.error('Error getting download URL:', error);
-        return '';
-      }
-  };
-
-  const titleImage = imgUrls[0]
-  
-  if (imgUrls.length === 0 || announcements.length === 0) {
+  if (announcements.length === 0 && announcementsExist) {
     return <Text>Loading...</Text>;
   }
 
-  return(
+  return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image source={{ uri: titleImage }} style={styles.image}/>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Eon English</Text>
+        <View style={styles.subtitleContainer}>
+          <Text style={styles.subtitle}>Welcome to Season 16!</Text>
+        </View>
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.announcement}>Announcement:</Text>
-        
-          {announcementsExist ? (
-            announcements.map((announcement, index) => (
-              <View key={index} style={styles.announcementContainer}>
-                <View>
-                  <Text style={styles.announcementTitleText}>{announcement.title}</Text>
-                  <Text style={styles.announcementText}>{announcement.announcement}</Text>
-                  <Text style={styles.announcementDateText}>Date: {announcement.date}</Text>
-                </View>
+        {announcementsExist ? (
+          announcements.map((announcement, index) => (
+            <View key={index} style={styles.announcementContainer}>
+              <View>
+                <Text style={styles.announcementTitleText}>{announcement.title}</Text>
+                <Text style={styles.announcementText}>{announcement.announcement}</Text>
+                <Text style={styles.announcementDateText}>Date: {announcement.date}</Text>
               </View>
-            ))
-          ) : (
-            <Text style={styles.noAnnouncementText}>No announcement for now</Text>
-          )}
+            </View>
+          ))
+        ) : (
+          <Text style={styles.noAnnouncementText}>No announcement for now</Text>
+        )}
         <Text style={styles.mission}>Mission:</Text>
         <Text style={styles.text}>
           Eon English is a student led international 
@@ -113,29 +82,42 @@ const EonEnglish = () => {
 
 export default EonEnglish;
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     alignItems: 'center',
-    justifyContent: 'flex-start', // Aligns contents to the top vertically
+    justifyContent: 'flex-start',
+    paddingTop: 100, // Adds padding to the top to move everything down
   },
-  imageContainer: {
-    padding: 20, // Adjust this padding as needed
+  titleContainer: {
+    alignItems: 'center',
+    marginVertical: 20,
   },
-  image: {
-    width: width - 60, // Adjust width to be slightly smaller than screen width
-    height: 190,
-    resizeMode: 'cover', // Optional: Adjust the image's resizeMode
-    borderRadius: 15, // Set the border radius here
+  title: {
+    fontSize: 40,
+    fontWeight: '800',
+    color: '#CCCCCC',
+  },
+  subtitleContainer: {
+    backgroundColor: '#8D56FF',
+    paddingVertical: 20, // Increase the padding to make the box bigger
+    paddingHorizontal: 50, // Increase the padding to make the box bigger
+    borderRadius: 10,
+    marginTop: 30,
+  },
+  subtitle: {
+    fontSize: 24, // Increase the font size to make the text bigger
+    color: '#FFF',
   },
   textContainer: {
     alignItems: 'center',
     padding: 20,
   },
   announcementContainer: {
-    backgroundColor: '#1787A9', // Very dark blue background color
+    //backgroundColor: '#1787A9', // original teal 
+    backgroundColor: '#0782F9',
     padding: 15,
     borderRadius: 10,
     marginBottom: 20, // Add some bottom margin for separation

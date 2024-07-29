@@ -16,9 +16,9 @@ const ProfileNavigator = () => {
         options={{ headerShown: false }} 
       />
       <Stack.Screen 
-        name="About" 
+        name="AboutScreen" 
         component={AboutScreen} 
-        options={ screenOptionsWithBackButton('AboutScreen') } 
+        options={ screenOptionsWithBackButton('') } 
       />
       <Stack.Screen 
         name="PasswordResetScreen" 
