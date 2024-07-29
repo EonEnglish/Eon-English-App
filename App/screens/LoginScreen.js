@@ -94,18 +94,17 @@ const LoginScreen = ({ navigation }) => {
                     style={styles.input}
                     secureTextEntry
                 />
+                {error ? <Text style={styles.errorText}>{error}</Text> : null}
                 <CustomCheckBox
                     value={rememberMe}
                     onValueChange={setRememberMe}
                 />
             </View>
 
-            {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
                     onPress={handleLogIn}
-                    style={styles.button}
+                    style={styles.loginButton}
                 >
                     {loading ? (
                         <ActivityIndicator color="#fff" />
@@ -114,16 +113,16 @@ const LoginScreen = ({ navigation }) => {
                     )}
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate("Register")}
-                    style={[styles.button, styles.buttonOutline]}
-                >
-                    <Text style={styles.buttonOutlineText}>Register</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
                     onPress={() => navigation.navigate("PasswordReset")}
+                    style={styles.reset}
                 >
-                    <Text style={styles.resetText}>Forgot your password? Click here!</Text>
+                    <Text style={styles.resetText}>Forgot your password?</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("Register")}
+                    style={styles.registerButton}
+                >
+                    <Text style={styles.buttonRegisterText}>Don't have an account? <Text style={styles.signUpText}>Sign Up</Text></Text>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
@@ -157,39 +156,48 @@ const styles = StyleSheet.create({
         borderColor: '#CCCCCC',
     },
     buttonContainer: {
-        width: '60%',
+        width: '80%',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 40,
+        marginTop: 30,
     },
-    button: {
+    loginButton: {
         backgroundColor: '#0782F9',
         width: '100%',
         padding: 15,
         borderRadius: 10,
         alignItems: 'center',
     },
-    buttonOutline: {
-        backgroundColor: 'white',
-        marginTop: 5,
-        borderColor: '#0782F9',
-        borderWidth: 2,
+    registerButton: {
+        alignSelf: 'flex-start',
     },
     buttonText: {
         color: 'white',
         fontWeight: '700',
         fontSize: 16,
     },
-    buttonOutlineText: {
-        color: '#0782F9',
-        fontWeight: '700',
+    buttonRegisterText: {
+        color: '#8E8E8F',
+        fontWeight: '350',
         fontSize: 16,
+        marginTop: 10,
+    },
+    signUpText: {
+        color: '#F9C407',
+        fontWeight: '700',
     },
     errorText: {
         color: 'red',
-        marginTop: 20,
+        marginTop: 5,
+        alignSelf: 'center',
+    },
+    reset: {
+        alignSelf: 'flex-start',
     },
     resetText: {
-        marginTop: 30,
+        color: '#8E8E8F',
+        fontSize: 16,
+        fontWeight: '350',
+        marginTop: 20,
     },
 });
