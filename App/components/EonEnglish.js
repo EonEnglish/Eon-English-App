@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     fontWeight: '800',
-    color: '#CCCCCC',
+    color: '#8E8E8F',
   },
   subtitleContainer: {
     backgroundColor: '#8D56FF',
