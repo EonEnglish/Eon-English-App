@@ -53,7 +53,8 @@ const ProfileScreen = ({ navigation }) => {
         <View style={styles.container}>
             <Text style={styles.header}>Profile</Text>
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={[styles.button, styles.aboutButton]}>
+                <TouchableOpacity style={[styles.button, styles.aboutButton]} 
+                onPress={() => navigation.navigate('AboutScreen')}>
                     <Text style={styles.buttonText}>About</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.button, styles.getInvolvedButton]}>
@@ -63,8 +64,7 @@ const ProfileScreen = ({ navigation }) => {
                     <Text style={styles.buttonText}>Find Us</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.button, styles.resetPasswordButton]}                  
-                onPress={() => navigation.navigate('PasswordResetScreen')}
->
+                onPress={() => navigation.navigate('PasswordResetScreen')}>
                     <Text style={styles.buttonText}>Reset Password</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
