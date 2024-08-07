@@ -94,9 +94,6 @@ const Homework = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.title}>Homework</Text>
-      </View>
       <FlatList
         data={lessonsState.length ? lessonsState : lessons}
         renderItem={renderLessonItem}
@@ -136,20 +133,19 @@ const styles = StyleSheet.create({
   },
   flatListContent: {
     alignItems: 'center',
-    paddingBottom: 20,
+    paddingBottom: 30,
   },
   column: {
     justifyContent: 'space-around',
   },
   button: {
-    margin: 10,
+    top: 30,
+    marginBottom: 15,
+    marginRight: 10,
     padding: 15,
-    borderRadius: 10,
+    borderRadius: 7,
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
+
     elevation: 2,
     width: Dimensions.get('window').width / 2 - 20, // Adjusting for margin
   },

@@ -44,16 +44,7 @@ const HomeworkNavigator = ({ navigation }) => {
 };
 
 const screenOptionsWithBackButton = (title) => ({ navigation }) => ({
-  title: title,
-  headerLeft: () => (
-    <Ionicons.Button
-      name="arrow-back"
-      size={24}
-      color="black"
-      backgroundColor="transparent"
-      onPress={() => navigation.goBack()}
-    />
-  ),
+  title: title
 });
 
 export default HomeworkNavigator;
