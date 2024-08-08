@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { StyleSheet, View, TextInput, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list';
+import Container from '../components/Container';
 
 const ScheduleScreen = () => {
   const [name, setName] = useState('');
@@ -99,82 +100,84 @@ const ScheduleScreen = () => {
 
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.containerContent}>
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>Name:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your first & last name"
-          onChangeText={setName}
-          value={name}
-        />
-      </View>
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>Email:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your email"
-          onChangeText={setEmail}
-          value={email}
-        />
-      </View>
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>WeChat ID:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter WeChat ID"
-          onChangeText={setWeChatID}
-          value={weChatID}
-        />
-      </View>
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>How can we assist you?</Text>
-        <SelectList
-          data={types}
-          setSelected={setUserTypeSelect}
-          placeholder='Select type'
-          boxStyles={styles.input}
-          dropdownStyles={styles.input}
-          dropdownItemStyles={styles.dropdownInput}
-        />
-      </View>
-      {userTypeSelect === types[0].key &&
+    <ScrollView>
+      <Container>
         <View style={styles.inputGroup}>
-          <Text style={styles.label}>Specify which lesson</Text>
+          <Text style={styles.label}>Name:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your first & last name"
+            onChangeText={setName}
+            value={name}
+          />
+        </View>
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>Email:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your email"
+            onChangeText={setEmail}
+            value={email}
+          />
+        </View>
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>WeChat ID:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter WeChat ID"
+            onChangeText={setWeChatID}
+            value={weChatID}
+          />
+        </View>
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>How can we assist you?</Text>
           <SelectList
-            data={lessons}
-            setSelected={setUserLessonSelect}
-            placeholder='Select lesson'
+            data={types}
+            setSelected={setUserTypeSelect}
+            placeholder='Select type'
             boxStyles={styles.input}
             dropdownStyles={styles.input}
             dropdownItemStyles={styles.dropdownInput}
           />
         </View>
-      }
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>Choose a schedule</Text>
-        <SelectList
-          data={schedule}
-          setSelected={setUserScheduleSelect}
-          placeholder='Select available time'
-          boxStyles={styles.input}
-          dropdownStyles={styles.input}
-          dropdownItemStyles={styles.dropdownInput}
-        />
-      </View>
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>Additional Notes</Text>
-        <TextInput
-          style={[styles.input, styles.messageInput]}
-          multiline={true}
-          placeholder="Write any additional information (optional)"
-          onChangeText={setUserMessage}
-          value={userMessage}
-        />
-      </View>
-      <TouchableOpacity style={styles.buttonContainer} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity>
+        {userTypeSelect === types[0].key &&
+          <View style={styles.inputGroup}>
+            <Text style={styles.label}>Specify which lesson</Text>
+            <SelectList
+              data={lessons}
+              setSelected={setUserLessonSelect}
+              placeholder='Select lesson'
+              boxStyles={styles.input}
+              dropdownStyles={styles.input}
+              dropdownItemStyles={styles.dropdownInput}
+            />
+          </View>
+        }
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>Choose a schedule</Text>
+          <SelectList
+            data={schedule}
+            setSelected={setUserScheduleSelect}
+            placeholder='Select available time'
+            boxStyles={styles.input}
+            dropdownStyles={styles.input}
+            dropdownItemStyles={styles.dropdownInput}
+          />
+        </View>
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>Additional Notes</Text>
+          <TextInput
+            style={[styles.input, styles.messageInput]}
+            multiline={true}
+            placeholder="Write any additional information (optional)"
+            onChangeText={setUserMessage}
+            value={userMessage}
+          />
+        </View>
+        <TouchableOpacity style={styles.buttonContainer} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
+      </Container>
     </ScrollView>
   )
 };
@@ -182,13 +185,6 @@ const ScheduleScreen = () => {
 export default ScheduleScreen
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-  },
-  containerContent: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
   title: {
     color: '#8E8E8F',
     fontSize: 42,

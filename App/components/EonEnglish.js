@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingTop: 100, // Adds padding to the top to move everything down
+    backgroundColor: '#fff',
   },
   titleContainer: {
     alignItems: 'center',
