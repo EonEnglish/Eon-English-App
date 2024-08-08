@@ -38,9 +38,6 @@ const ContactUs = () => {
 
     return (
         <ScrollView style={styles.container}>
-            <View>
-                <Text style={styles.title}>Contact Us</Text>
-            </View>
             <View style={styles.inputGroup}>
                 <Text style={styles.label}>First Name:</Text>
                 <TextInput 

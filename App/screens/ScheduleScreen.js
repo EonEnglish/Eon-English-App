@@ -100,9 +100,6 @@ const ScheduleScreen = () => {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.containerContent}>
-      <View>
-        <Text style={styles.title}>Schedule</Text>
-      </View>
       <View style={styles.inputGroup}>
         <Text style={styles.label}>Name:</Text>
         <TextInput

@@ -6,6 +6,7 @@ import VocabMatchPhotoScreen from '../screens/VocabMatchPhotoScreen';
 import Lessons from '../screens/Lessons';
 import FillInTheBlankScreen from '../screens/FillInTheBlankScreen';
 import { Ionicons } from '@expo/vector-icons'; // Example icon library, adjust as needed
+import ContactUs from '../screens/ContactUs';
 
 
 const Stack = createNativeStackNavigator();

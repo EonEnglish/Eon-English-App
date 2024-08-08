@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';import EonEnglish from '../components/EonEnglish';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import EonEnglish from '../components/EonEnglish';
 
 const HomeScreen = ({ navigation }) => {
   return (
