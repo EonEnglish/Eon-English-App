@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import ProfileNavigator from './ProfileNavigator';
 import HomeworkNavigator from './HomeworkNavigator';
 import ContactUsNavigator from './ContactUsNavigator'
+import HomeNavigator from './HomeNavigator';
 import HomeScreen from '../screens/HomeScreen';
 import ScheduleNavigator from './ScheduleNavigator';
 
@@ -80,7 +81,7 @@ const BottomTabNavigator = () => {
         },
       })}
     >
-      <Tab.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
+      <Tab.Screen options={{ headerShown: false }} name="Home" component={HomeNavigator} />
       <Tab.Screen options={{ headerShown: false }} name="Homework" component={HomeworkNavigator} />
       <Tab.Screen options={{ headerShown: false }} name="ContactUs" component={ContactUsNavigator} />
       <Tab.Screen options={{ headerShown: false }} name="Schedule" component={ScheduleNavigator} />
