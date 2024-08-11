@@ -75,13 +75,6 @@ const HomeScreen = ({ navigation }) => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    paddingTop: 100, // Adds padding to the top to move everything down
-    backgroundColor: '#fff',
-  },
   titleContainer: {
     alignItems: 'center',
     marginVertical: 20,
@@ -93,14 +86,20 @@ const styles = StyleSheet.create({
   },
   subtitleContainer: {
     backgroundColor: '#8D56FF',
-    paddingVertical: 20, // Increase the padding to make the box bigger
-    paddingHorizontal: 100, // Increase the padding to make the box bigger
+    width: '100%', 
+    paddingVertical: 30,
+    paddingHorizontal: 20, 
     borderRadius: 10,
-    marginTop: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    marginBottom: 40,
+
   },
   subtitle: {
-    fontSize: 24, // Increase the font size to make the text bigger
+    fontSize: 24,
     color: '#FFF',
+    textAlign: 'center',
   },
   textContainer: {
     alignItems: 'center',
@@ -141,12 +140,6 @@ const styles = StyleSheet.create({
   },
   noAnnouncementText: {
     fontSize: 20,
-  },
-  mission: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    marginTop: 40,
-    marginBottom: 10,
   },
   text: {
     fontSize: 15,
