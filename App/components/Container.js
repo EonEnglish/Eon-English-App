@@ -7,11 +7,9 @@ const Container = ({ children, style }) => {
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: 'white',
         flex: 1,
         padding: 20,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: '#fff',
     },
 });
 
