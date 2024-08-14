@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
-const InfoCard = ({ title, text, footer }) => {
+const InfoCard = ({ title, text, footer, containerStyle, titleStyle, textStyle, footerStyle }) => {
     return (
-        <View style={styles.infoCardContainer}>
-            <Text style={styles.infoCardTitle}>{title}</Text>
-            <Text style={styles.infoCardBody}>{text}</Text>
-            <Text style={styles.infoCardFooter}>{footer}</Text>
+        <View style={[styles.infoCardContainer, containerStyle]}>
+            <Text style={[styles.infoCardTitle, titleStyle]}>{title}</Text>
+            <Text style={[styles.infoCardBody, textStyle]}>{text}</Text>
+            <Text style={[styles.infoCardFooter, footerStyle]}>{footer}</Text>
         </View>
     );
 };
