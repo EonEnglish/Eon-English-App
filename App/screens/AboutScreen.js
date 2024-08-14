@@ -11,13 +11,12 @@ const AboutScreen = () => {
     "culture.";
 
   return (
-    <Container style={styles.container}>
+    <Container style={styles.aboutContainer}>
       <InfoCard
         title="About"
-        titleStyle={styles.title}
+        titleStyle={styles.aboutTitle}
         text={aboutText}
-        textStyle={styles.text}
-        footerStyle={styles.footer}
+        textStyle={styles.aboutText}
       />
     </Container>
   );
@@ -26,20 +25,17 @@ const AboutScreen = () => {
 export default AboutScreen;
 
 const styles = StyleSheet.create({
-  container: {
+  aboutContainer: {
     justifyContent: 'center',
   },
-  title: {
-    textAlign: 'center',
+  aboutTitle: {
     fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 15,
-  },
-  text: {
     textAlign: 'center',
-    fontWeight: 500,
   },
-  footer: {
-    marginTop: 0,
+  aboutText: {
+    fontWeight: 500,
+    textAlign: 'center',
   },
 });

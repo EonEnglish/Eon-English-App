@@ -18,12 +18,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#0782F9',
         borderRadius: 10,
         marginBottom: 20,
-        padding: 15,
+        padding: 20,
     },
     infoCardTitle: {
         color: 'white',
         fontSize: 17,
-        marginBottom: 5,
     },
     infoCardBody: {
         color: 'white',
@@ -35,7 +34,6 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 15,
         fontStyle: 'italic',
-        marginTop: 10,
         textAlign: "right",
     }
 });

@@ -49,17 +49,21 @@ const HomeScreen = ({ navigation }) => {
   return (
     <ScrollView>
       <Container>
-          <View style={styles.subtitleContainer}>
-            <Text style={styles.subtitle}>Welcome to Season 16!</Text>
-          </View>
+          <InfoCard
+              title='Welcome to Season 16!'
+              titleStyle={styles.subtitle}
+              containerStyle={styles.subtitleContainer}
+            />
         <View>
           {announcementsExist ? (
             announcements.map((announcement, index) => (
               <InfoCard
                 key={index}
                 title={announcement.title}
+                titleStyle={styles.announcementTitle}
                 text={announcement.announcement}
                 footer={announcement.date}
+                footerStyle={styles.announcementFooter}
               />
             ))
           ) : (
@@ -75,22 +79,22 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   subtitleContainer: {
+    alignItems: 'center',
     backgroundColor: '#8D56FF',
-    paddingVertical: 30,
-    borderRadius: 10,
-    marginTop: 20,
-    marginBottom: 40,
+    marginBottom: 30,
   },
   subtitle: {
-    fontSize: 24,
-    color: '#FFF',
-    textAlign: 'center',
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginBottom: -20,
   },
   noAnnouncementText: {
     fontSize: 20,
   },
-  text: {
-    fontSize: 15,
-    textAlign: 'center',
+  announcementFooter: {
+    marginTop: 10,
+  },
+  announcementTitle: {
+    marginBottom: 10,
   },
 });
