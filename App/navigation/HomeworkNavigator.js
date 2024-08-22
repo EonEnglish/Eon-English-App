@@ -6,6 +6,7 @@ import VocabMatchPhotoScreen from '../screens/VocabMatchPhotoScreen';
 import Lessons from '../screens/Lessons';
 import FillInTheBlankScreen from '../screens/FillInTheBlankScreen';
 import { Ionicons } from '@expo/vector-icons'; // Example icon library, adjust as needed
+import ContactUs from '../screens/ContactUs';
 
 
 const Stack = createNativeStackNavigator();
@@ -44,16 +45,7 @@ const HomeworkNavigator = ({ navigation }) => {
 };
 
 const screenOptionsWithBackButton = (title) => ({ navigation }) => ({
-  title: title,
-  headerLeft: () => (
-    <Ionicons.Button
-      name="arrow-back"
-      size={24}
-      color="black"
-      backgroundColor="transparent"
-      onPress={() => navigation.goBack()}
-    />
-  ),
+  title: title
 });
 
 export default HomeworkNavigator;
