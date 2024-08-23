@@ -16,7 +16,8 @@ const ScheduleNavigator = ({ navigation }) => {
 };
 
 const screenOptionsWithBackButton = (title) => ({ navigation }) => ({
-  title: title
+  title: title,
+  headerTitleAlign: 'center'
 });
 
 export default ScheduleNavigator;
