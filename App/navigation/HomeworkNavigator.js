@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 const HomeworkNavigator = ({ navigation }) => {
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{contentStyle: {backgroundColor: '#F5F5F5'}}}>
       <Stack.Screen 
         options={screenOptionsWithBackButton('Homework')} 
         name="HomeWork" 

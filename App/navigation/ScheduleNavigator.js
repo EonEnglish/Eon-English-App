@@ -5,7 +5,7 @@ import ScheduleScreen from '../screens/ScheduleScreen';
 const Stack = createNativeStackNavigator();
 const ScheduleNavigator = ({ navigation }) => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{contentStyle: {backgroundColor: '#F5F5F5'}}}>
       <Stack.Screen 
         options={screenOptionsWithBackButton('Schedule')} 
         name="Schedule" 
