@@ -5,7 +5,7 @@ import ContactUs from '../screens/ContactUs';
 const Stack = createNativeStackNavigator();
 const ContactUsNavigator = ({ navigation }) => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{contentStyle: {backgroundColor: '#F5F5F5'}}}>
       <Stack.Screen 
         options={screenOptionsWithBackButton('Contact Us')} 
         name="ContactUs" 

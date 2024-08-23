@@ -5,7 +5,7 @@ import HomeScreen from '../screens/HomeScreen';
 const Stack = createNativeStackNavigator();
 const HomeNavigator = ({ navigation }) => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{contentStyle: {backgroundColor: '#F5F5F5'}}}>
       <Stack.Screen 
         options={screenOptionsWithBackButton('Eon English')} 
         name="Home" 
