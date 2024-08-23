@@ -5,8 +5,6 @@ import VocabMatchScreen from '../screens/VocabMatchScreen';
 import VocabMatchPhotoScreen from '../screens/VocabMatchPhotoScreen';
 import Lessons from '../screens/Lessons';
 import FillInTheBlankScreen from '../screens/FillInTheBlankScreen';
-import { Ionicons } from '@expo/vector-icons'; // Example icon library, adjust as needed
-import ContactUs from '../screens/ContactUs';
 
 
 const Stack = createNativeStackNavigator();
@@ -45,7 +43,8 @@ const HomeworkNavigator = ({ navigation }) => {
 };
 
 const screenOptionsWithBackButton = (title) => ({ navigation }) => ({
-  title: title
+  title: title,
+  headerTitleAlign: 'center'
 });
 
 export default HomeworkNavigator;

@@ -6,7 +6,6 @@ import ProfileNavigator from './ProfileNavigator';
 import HomeworkNavigator from './HomeworkNavigator';
 import ContactUsNavigator from './ContactUsNavigator'
 import HomeNavigator from './HomeNavigator';
-import HomeScreen from '../screens/HomeScreen';
 import ScheduleNavigator from './ScheduleNavigator';
 
 
