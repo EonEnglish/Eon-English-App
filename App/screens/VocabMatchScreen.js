@@ -43,12 +43,16 @@ const VocabMatchScreen = ({ navigation, route }) => {
   
     const userInputLowerCase = userInput.toLowerCase().trim();
     const correctWord1 = currentWord.word ? currentWord.word.toLowerCase().trim() : '';
-    const correctWord2 = currentWord.word1 ? currentWord.word1.toLowerCase().trim() : '';
-  
-    if (userInputLowerCase === correctWord1 || userInputLowerCase === correctWord2) {
-      setScore(score + 1);
-      setTotalScore(totalScore + 1);
-      setAlertMessage('Your answer is correct!');
+    const correctWord2 = currentWord.word2 ? currentWord.word2.toLowerCase().trim() : '';
+    if(userInputLowerCase !== "") { 
+      if (userInputLowerCase === correctWord1 || userInputLowerCase === correctWord2) {
+        setScore(score + 1);
+        setTotalScore(totalScore + 1);
+        setAlertMessage('Your answer is correct!');
+      } else {
+        setTotalScore(totalScore + 1);
+        setAlertMessage('Your answer is incorrect!');
+      }
     } else {
       setTotalScore(totalScore + 1);
       setAlertMessage('Your answer is incorrect!');
@@ -133,7 +137,10 @@ const VocabMatchScreen = ({ navigation, route }) => {
         value={userInput}
         onChangeText={setUserInput}
       />
-      <Button title="Submit" onPress={checkAnswer} />
+      <Button 
+        title="Submit" 
+        onPress={checkAnswer} 
+      />
       <Text style={styles.score}>Score: {score}</Text>
     </View>
   );
