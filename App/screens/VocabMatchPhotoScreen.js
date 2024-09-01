@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { View, Image, Text, StyleSheet, Alert, TouchableOpacity, Button } from 'react-native';
 import { getAuth } from 'firebase/auth';
 import { getDocs, collection, getDoc, doc, setDoc } from '@firebase/firestore';
 import { getDownloadURL, ref, getStorage } from 'firebase/storage';
 import { db } from "../firebase";
+import Container from '../components/Container';
+import ScoreCounter from '../components/ScoreCounter';
 
 const VocabMatchPhotoScreen = ({ navigation, route }) => {
   const [vocabList, setVocabList] = useState([]);
@@ -35,7 +37,7 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
     };
     fetchVocabulary();
   }, []);
-  
+
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -181,7 +183,8 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
   const currentImageUrl = imgUrls[currentWordIndex];
 
   return (
-    <View style={styles.container}>
+    <Container style={styles.centerContainer}>
+      <ScoreCounter>Score: {score}</ScoreCounter>
       {currentImageUrl ? (
         <Image source={{ uri: currentImageUrl }} style={styles.image} />
       ) : (
@@ -199,20 +202,15 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
           <Text style={styles.optionText}>{option}</Text>
         </TouchableOpacity>
       ))}
-      <TouchableOpacity style={styles.submitButton} onPress={checkAnswer}>
-        <Text style={styles.submitButtonText}>Submit</Text>
-      </TouchableOpacity>
-      <Text style={styles.score}>Score: {score}</Text>
-    </View>
+      <Button title="Submit" onPress={checkAnswer} />
+    </Container>
   );
 };
-    
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  centerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 16,
   },
   image: {
     width: 200,
@@ -248,21 +246,6 @@ const styles = StyleSheet.create({
   optionText: {
     fontSize: 16,
   },
-  submitButton: {
-    marginTop: 20,
-    padding: 10,
-    backgroundColor: 'blue',
-    borderRadius: 5,
-  },
-  submitButtonText: {
-    color: 'white',
-    fontSize: 18,
-  },
-  score: {
-    fontSize: 24,
-    marginTop: 20,
-  },
 });
-    
 
 export default VocabMatchPhotoScreen;
