@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Button, FlatList, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, Dimensions } from 'react-native';
 import { getAuth } from 'firebase/auth';
-import { getDocs, collection, getDoc, doc, setDoc } from "@firebase/firestore";
+import { getDoc, doc } from "@firebase/firestore";
 import { useIsFocused } from '@react-navigation/native';
 import { db } from "../firebase";
+
 
 const Homework = ({ navigation }) => {
   const [lessonsState, setLessonsState] = useState([]);
@@ -92,7 +93,7 @@ const Homework = ({ navigation }) => {
   const dimensions = Dimensions.get('window');
   const itemWidth = (dimensions.width / numColumns) - 20; // Adjusting for margin
 
-  if(lessonsState < 14) {
+  if(lessonsState < lessons.length) {
     return <Text>Loading...</Text>;
   }
   
@@ -106,13 +107,6 @@ const Homework = ({ navigation }) => {
         columnWrapperStyle={styles.column}
         contentContainerStyle={styles.flatListContent}
       />
-      
-        {/* <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('Lessons')}
-        >
-          <Text style={styles.buttonText}>Study Materials</Text>
-        </TouchableOpacity> */}
     </View>
   );
 };

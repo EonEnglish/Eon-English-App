@@ -100,12 +100,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    borderWidth: 2,
-    width: '80%',
+    borderWidth: 3,
+    borderColor: "#CCCCCC",
+    width: '90%',
     padding: 15,
     borderRadius: 10,
-    alignItems: 'center',
-    marginTop: 20,
+    marginTop: 15,
   },
   buttonContainer: {
     flexDirection: 'row',

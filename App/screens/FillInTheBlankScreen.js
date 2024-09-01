@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 50,
     padding: 20, // Change isPointInDropArea padding if editing this value
-    borderWidth: 1,
+    borderWidth: 3,
     borderColor: '#ccc',
     borderRadius: 10,
   },
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     paddingHorizontal: 10,
     paddingVertical: 8,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: '#ccc',
     borderRadius: 5,
   },
