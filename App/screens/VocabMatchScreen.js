@@ -163,10 +163,9 @@ const styles = StyleSheet.create({
     borderRadius: 7, 
     borderWidth: 3,
     fontSize: 14,
-    height: 40,
     marginBottom: 20,
-    padding: 20,
-    width: '80%',
+    padding: 15,
+    width: '90%',
   },
 });
 
