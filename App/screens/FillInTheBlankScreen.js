@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef, Component } from 'react';
-import { StyleSheet, Text, TextInput, View, Button, Alert, Animated, PanResponder, TouchableOpacity, handleBoxDrop } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { StyleSheet, Text, View, Alert, Animated, PanResponder } from 'react-native';
 import { getAuth } from 'firebase/auth';
 import { getDocs, collection, getDoc, doc, setDoc } from '@firebase/firestore';
 import { db } from '../firebase';
+import Container from '../components/Container';
+import ScoreCounter from '../components/ScoreCounter';
 
 const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
   const [sentenceList, setSentenceList] = useState([]);
@@ -80,17 +82,17 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
             const isOverDropArea = isPointInDropArea(gestureState.moveX, gestureState.moveY);
             setDropAreaEntered(isOverDropArea);
 
-            if(isOverDropArea && !scoreUpdated){
+            if (isOverDropArea && !scoreUpdated) {
 
               setScoreUpdated(true);
 
-              if(options[index] === sentenceList[currentWordIndex].answer){
+              if (options[index] === sentenceList[currentWordIndex].answer) {
                 setScore(score + 1);
                 setTotalScore(totalScore + 1);
                 setAlertMessage('Your answer is correct!');
                 setDropAreaEntered(false);
               }
-              else{
+              else {
                 setTotalScore(totalScore + 1);
                 setAlertMessage('Your answer is incorrect!');
                 setDropAreaEntered(false);
@@ -100,7 +102,7 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
           },
           onPanResponderRelease: () => {
             // Handle release logic here if needed
-            if(!dropAreaEntered){
+            if (!dropAreaEntered) {
               Animated.spring(itemPans.current[index], {
                 toValue: { x: 0, y: 0 },
                 useNativeDriver: false,
@@ -111,7 +113,7 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
       );
     }
   }
-  
+
   initializePanResponders();
 
   const isPointInDropArea = (x, y) => {
@@ -198,9 +200,10 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
   if (sentenceList.length === 0) {
     return <Text>Loading...</Text>;
   }
-  
+
   return (
-    <View style={styles.container}>
+    <Container style={styles.centerContainer}>
+      <ScoreCounter>Score: {score}</ScoreCounter>
       <View onLayout={handleQuestionContainerLayout}>
         <View style={styles.questionContainer}>
           <Text style={styles.questionText}>{sentenceList[currentWordIndex].question}</Text>
@@ -209,7 +212,7 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
       <View style={styles.optionContainer}>
         {options.map((option, index) => (
           <View key={index} style={styles.optionText}>
-            {panResponders.current&& 
+            {panResponders.current &&
               <Animated.View
                 style={{
                   transform: [{ translateX: itemPans.current[index]?.x }, { translateY: itemPans.current[index]?.y }],
@@ -222,25 +225,20 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
           </View>
         ))}
       </View>
-      <Text style={styles.score}>Score: {score}</Text>
-    </View>
+    </Container>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  centerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    paddingHorizontal: 20,
   },
   questionContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 50,
-    //Remeber to change the padding in isPointInDropArea if change this
-    padding: 20,
+    padding: 20, // Change isPointInDropArea padding if editing this value
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 10,
