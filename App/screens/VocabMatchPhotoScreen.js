@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Text, StyleSheet, Alert, TouchableOpacity, Button } from 'react-native';
+import { View, Image, Text, StyleSheet, Alert, TouchableOpacity, Button, ScrollView } from 'react-native';
 import { getAuth } from 'firebase/auth';
 import { getDocs, collection, getDoc, doc, setDoc } from '@firebase/firestore';
 import { getDownloadURL, ref, getStorage } from 'firebase/storage';
@@ -183,27 +183,29 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
   const currentImageUrl = imgUrls[currentWordIndex];
 
   return (
-    <Container style={styles.centerContainer}>
-      <ScoreCounter>Score: {score}</ScoreCounter>
-      {currentImageUrl ? (
-        <Image source={{ uri: currentImageUrl }} style={styles.image} />
-      ) : (
-        <Text>No image available</Text>
-      )}
-      {options.map((option, index) => (
-        <TouchableOpacity
-          key={index}
-          style={styles.optionContainer}
-          onPress={() => setSelectedOption(option)}
-        >
-          <View style={styles.radioButton}>
-            {selectedOption === option && <View style={styles.radioButtonSelected} />}
-          </View>
-          <Text style={styles.optionText}>{option}</Text>
-        </TouchableOpacity>
-      ))}
-      <Button title="Submit" onPress={checkAnswer} />
-    </Container>
+    <ScrollView>
+      <Container style={styles.centerContainer}>
+        <ScoreCounter>Score: {score}</ScoreCounter>
+        {currentImageUrl ? (
+          <Image source={{ uri: currentImageUrl }} style={styles.image} />
+        ) : (
+          <Text>No image available</Text>
+        )}
+        {options.map((option, index) => (
+          <TouchableOpacity
+            key={index}
+            style={styles.optionContainer}
+            onPress={() => setSelectedOption(option)}
+          >
+            <View style={styles.radioButton}>
+              {selectedOption === option && <View style={styles.radioButtonSelected} />}
+            </View>
+            <Text style={styles.optionText}>{option}</Text>
+          </TouchableOpacity>
+        ))}
+        <Button title="Submit" onPress={checkAnswer} />
+      </Container>
+    </ScrollView>
   );
 };
 
@@ -211,6 +213,7 @@ const styles = StyleSheet.create({
   centerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 20,
   },
   image: {
     width: 200,

@@ -14,7 +14,8 @@ export default ScoreCounter;
 const styles = StyleSheet.create({
   container: {
     borderColor: '#D9D9D9',
-    color: '#D9D9D9',
+    color: '#CCCCCC',
+    fontWeight: '900',
     borderRadius: 20, 
     borderWidth: 2,
     fontSize: 14,
