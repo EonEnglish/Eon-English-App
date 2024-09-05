@@ -78,8 +78,9 @@ const ContactUs = () => {
                     placeholderText={"Enter Message"}
                     value={message}
                     onChangeText={setMessage}
-                    style={errors.message && styles.errorInput}
+                    style={[styles.messageInput, errors.message && styles.errorInput]}
                     error={errors.message}
+                    multiline={true}
                 />
                 <TouchableOpacity
                     style={styles.buttonContainer}
@@ -103,11 +104,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginTop: 40,
         alignSelf: 'center',
-    },
-    inputGroup: {
-        width: '100%',
-        marginBottom: 20,
-        gap: 5,
     },
     messageInput: {
         height: 100, // adjust height for multiline input
