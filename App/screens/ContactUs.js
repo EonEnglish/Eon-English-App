@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View, TextInput, Button, ScrollView
 import React, { useState } from 'react';
 import { composeAsync } from 'expo-mail-composer';
 import Container from '../components/Container';
+import InputField from '../components/inputField';
 
 const ContactUs = () => {
     const [firstName, setFirstName] = useState('');
@@ -40,57 +41,46 @@ const ContactUs = () => {
     return (
         <ScrollView>
             <Container>
-                <View style={styles.inputGroup}>
-                    <Text style={styles.label}>First Name:</Text>
-                    <TextInput
-                        style={[styles.input, errors.firstName && styles.errorInput]}
-                        placeholder="Enter First Name"
-                        onChangeText={setFirstName}
-                        value={firstName}
-                    />
-                    {errors.firstName && <Text style={styles.errorText}>{errors.firstName}</Text>}
-                </View>
-                <View style={styles.inputGroup}>
-                    <Text style={styles.label}>Last Name:</Text>
-                    <TextInput
-                        style={[styles.input, errors.lastName && styles.errorInput]}
-                        placeholder="Enter Last Name"
-                        onChangeText={setLastName}
-                        value={lastName}
-                    />
-                    {errors.lastName && <Text style={styles.errorText}>{errors.lastName}</Text>}
-                </View>
-                <View style={styles.inputGroup}>
-                    <Text style={styles.label}>WeChat ID:</Text>
-                    <TextInput
-                        style={[styles.input, errors.weChatID && styles.errorInput]}
-                        placeholder="Enter WeChat ID"
-                        onChangeText={setWeChatID}
-                        value={weChatID}
-                    />
-                    {errors.weChatID && <Text style={styles.errorText}>{errors.weChatID}</Text>}
-                </View>
-                <View style={styles.inputGroup}>
-                    <Text style={styles.label}>Subject:</Text>
-                    <TextInput
-                        style={[styles.input, errors.subject && styles.errorInput]}
-                        placeholder="Enter Subject"
-                        onChangeText={setSubject}
-                        value={subject}
-                    />
-                    {errors.subject && <Text style={styles.errorText}>{errors.subject}</Text>}
-                </View>
-                <View style={styles.inputGroup}>
-                    <Text style={styles.label}>Message:</Text>
-                    <TextInput
-                        style={[styles.input, styles.messageInput, errors.subject && styles.errorInput]}
-                        multiline={true}
-                        placeholder="Enter Message"
-                        onChangeText={setMessage}
-                        value={message}
-                    />
-                    {errors.message && <Text style={styles.errorText}>{errors.message}</Text>}
-                </View>
+                <InputField
+                    title={"First Name: "}
+                    placeholderText={"Enter First Name"}
+                    value={firstName}
+                    onChangeText={setFirstName}
+                    style={errors.firstName && styles.errorInput}
+                    error={errors.firstName}
+                />
+                <InputField
+                    title={"Last Name: "}
+                    placeholderText={"Enter Last Name"}
+                    value={lastName}
+                    onChangeText={setLastName}
+                    style={errors.lastName && styles.errorInput}
+                    error={errors.lastName}
+                />
+                <InputField
+                    title={"WeChat ID: "}
+                    placeholderText={"Enter WeChat ID"}
+                    value={weChatID}
+                    onChangeText={setWeChatID}
+                    style={errors.weChatID && styles.errorInput}
+                    error={errors.weChatID}
+                />
+                <InputField
+                    title={"Subject: "}
+                    placeholderText={"Enter Subject"}
+                    value={subject}
+                    onChangeText={setSubject}
+                    style={errors.subject && styles.errorInput}
+                    error={errors.subject}
+                />
+                <InputField
+                    title={"Message: "}
+                    placeholderText={"Enter Message"}
+                    value={message}
+                    onChangeText={setMessage}
+                    style={errors.message && styles.errorInput}
+                    error={errors.message}
+                />
                 <TouchableOpacity
                     style={styles.buttonContainer}
                     onPress={sendEmail}
@@ -119,28 +109,11 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         gap: 5,
     },
-    label: {
-        color: '#8E8E8F',
-        fontWeight: '700',
-        fontWeight: 'bold',
-    },
-    input: {
-        borderRadius: 5,
-        padding: 13,
-        fontSize: 14,
-        borderWidth: 3,
-        borderColor: '#CCCCCC',
-    },
     messageInput: {
         height: 100, // adjust height for multiline input
     },
     errorInput: {
         borderColor: '#FF0000',
-    },
-    errorText: {
-        color: '#FF0000',
-        fontSize: 12,
-        marginTop: 5,
     },
     buttonContainer: {
         backgroundColor: '#0782F9',

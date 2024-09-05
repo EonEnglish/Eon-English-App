@@ -2,6 +2,8 @@ import { React, useState, useEffect } from 'react';
 import { StyleSheet, View, TextInput, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list';
 import Container from '../components/Container';
+import InputField from '../components/inputField';
+import Dropdown from '../components/dropdown';
 
 const ScheduleScreen = () => {
   const [name, setName] = useState('');
@@ -102,78 +104,54 @@ const ScheduleScreen = () => {
   return (
     <ScrollView>
       <Container>
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Name:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your first & last name"
-            onChangeText={setName}
-            value={name}
-          />
-        </View>
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Email:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your email"
-            onChangeText={setEmail}
-            value={email}
-          />
-        </View>
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>WeChat ID:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter WeChat ID"
-            onChangeText={setWeChatID}
-            value={weChatID}
-          />
-        </View>
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>How can we assist you?</Text>
-          <SelectList
-            data={types}
-            setSelected={setUserTypeSelect}
-            placeholder='Select type'
-            boxStyles={styles.input}
-            dropdownStyles={styles.input}
-            dropdownItemStyles={styles.dropdownInput}
-          />
-        </View>
+        <InputField
+          title={"Name:"}
+          placeholderText={"Enter your first & last name"}
+          value={name}
+          onChangeText={setName}
+          style={styles.input}
+        />
+        <InputField
+          title={"Email:"}
+          placeholderText={"Enter your email"}
+          value={email}
+          onChangeText={setEmail}
+          style={styles.input}
+        />
+        <InputField
+          title={"WeChat ID:"}
+          placeholderText={"Enter WeChat ID"}
+          value={weChatID}
+          onChangeText={setWeChatID}
+          style={styles.input}
+        />
+        <Dropdown
+          title={"How can we assist you?"}
+          placeholderText={"Select type"}
+          setSelected={setUserTypeSelect}
+          data={types}
+        />
         {userTypeSelect === types[0].key &&
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>Specify which lesson</Text>
-            <SelectList
-              data={lessons}
-              setSelected={setUserLessonSelect}
-              placeholder='Select lesson'
-              boxStyles={styles.input}
-              dropdownStyles={styles.input}
-              dropdownItemStyles={styles.dropdownInput}
-            />
-          </View>
+          <Dropdown
+            title={"Specify which lesson"}
+            placeholderText={"Select lesson"}
+            setSelected={setUserLessonSelect}
+            data={lessons}
+          />
         }
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Choose a schedule</Text>
-          <SelectList
-            data={schedule}
-            setSelected={setUserScheduleSelect}
-            placeholder='Select available time'
-            boxStyles={styles.input}
-            dropdownStyles={styles.input}
-            dropdownItemStyles={styles.dropdownInput}
-          />
-        </View>
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Additional Notes</Text>
-          <TextInput
-            style={[styles.input, styles.messageInput]}
-            multiline={true}
-            placeholder="Write any additional information (optional)"
-            onChangeText={setUserMessage}
-            value={userMessage}
-          />
-        </View>
+        <Dropdown
+          title={"Choose a schedule"}
+          placeholderText={"Select available time"}
+          setSelected={setUserScheduleSelect}
+          data={schedule}
+        />
+        <InputField
+          title={"Additional Notes"}
+          placeholderText={"Write any additional information (optional)"}
+          value={userMessage}
+          onChangeText={setUserMessage}
+          style={[styles.input, styles.messageInput]}
+        />
         <TouchableOpacity style={styles.buttonContainer} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
