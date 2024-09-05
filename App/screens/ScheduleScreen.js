@@ -109,21 +109,18 @@ const ScheduleScreen = () => {
           placeholderText={"Enter your first & last name"}
           value={name}
           onChangeText={setName}
-          style={styles.input}
         />
         <InputField
           title={"Email:"}
           placeholderText={"Enter your email"}
           value={email}
           onChangeText={setEmail}
-          style={styles.input}
         />
         <InputField
           title={"WeChat ID:"}
           placeholderText={"Enter WeChat ID"}
           value={weChatID}
           onChangeText={setWeChatID}
-          style={styles.input}
         />
         <Dropdown
           title={"How can we assist you?"}
@@ -150,7 +147,7 @@ const ScheduleScreen = () => {
           placeholderText={"Write any additional information (optional)"}
           value={userMessage}
           onChangeText={setUserMessage}
-          style={[styles.input, styles.messageInput]}
+          style={styles.messageInput}
         />
         <TouchableOpacity style={styles.buttonContainer} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Submit</Text>
@@ -179,21 +176,6 @@ const styles = StyleSheet.create({
   timeInputGroup: {
     marginBottom: 20,
     flexDirection: 'row',
-  },
-  label: {
-    color: '#8E8E8F',
-    fontWeight: '700',
-    fontWeight: 'bold',
-  },
-  input: {
-    borderRadius: 5,
-    padding: 13,
-    fontSize: 14,
-    borderWidth: 3,
-    borderColor: '#CCCCCC',
-  },
-  dropdownInput: {
-    color: '#000000',
   },
   messageInput: {
     height: 100,
