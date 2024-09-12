@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { StyleSheet, View, TextInput, Text, TouchableOpacity, ScrollView } from 'react-native';
-import { SelectList } from 'react-native-dropdown-select-list';
+import { StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
 import Container from '../components/Container';
 import InputField from '../components/inputField';
 import Dropdown from '../components/dropdown';
@@ -77,7 +76,7 @@ const ScheduleScreen = () => {
 
 
   const handleSubmit = () => {
-    const appScriptCode = 'https://script.google.com/home/projects/13zUV6K4gwUteE-Sx5sElf9af0yxVWFgCkOyZLZ7WjVAWcy3UBr-FQslA/edit'; // source code URL
+    // source code URL: 'https://script.google.com/home/projects/13zUV6K4gwUteE-Sx5sElf9af0yxVWFgCkOyZLZ7WjVAWcy3UBr-FQslA/edit';
     const appScriptURL = "https://script.google.com/macros/s/AKfycbztbgwE-w-2IkH-zj1jzAYckwnHmcQNMVdtnd9Ds65aoaUXFukq2xkqe8zBtiyshGRu/exec";
 
     const formScheduleData = {
@@ -160,23 +159,6 @@ const ScheduleScreen = () => {
 export default ScheduleScreen
 
 const styles = StyleSheet.create({
-  title: {
-    color: '#8E8E8F',
-    fontSize: 42,
-    fontWeight: '700',
-    marginBottom: 10,
-    marginTop: 40,
-    alignSelf: 'center',
-  },
-  inputGroup: {
-    width: '100%',
-    marginBottom: 20,
-    gap: 5,
-  },
-  timeInputGroup: {
-    marginBottom: 20,
-    flexDirection: 'row',
-  },
   messageInput: {
     height: 100,
   },
