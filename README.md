@@ -61,10 +61,10 @@ In addition, we recommend using Microsoft's Visual Studio Code editor with some 
 
 Contributions are what make this community such an amazing place to learn, inspire, and create! There are a many ways you can help
 
-- [Did you spot any errors?](https://github.com/STEM-E-Youth-Career-Development-Program/app-7/issues/new)
-- [What features could we add?](https://github.com/STEM-E-Youth-Career-Development-Program/app-7/issues/new)
-- [What would improve the app?](https://github.com/STEM-E-Youth-Career-Development-Program/app-7/issues/new) 
-- [How can we work better as a team?](https://github.com/STEM-E-Youth-Career-Development-Program/app-7/issues/new)
+- [Did you spot any errors?](https://github.com/EonEnglish/Eon-English-App/issues/new)
+- [What features could we add?](https://github.com/EonEnglish/Eon-English-App/issues/new)
+- [What would improve the app?](https://github.com/EonEnglish/Eon-English-App/issues/new) 
+- [How can we work better as a team?](https://github.com/EonEnglish/Eon-English-App/issues/new)
 
 Any contributions you make are **greatly appreciated**! 
 
