@@ -31,6 +31,7 @@ const ProfileNavigator = () => {
 
 const screenOptionsWithBackButton = (title) => ({ navigation }) => ({
   title: title,
+  headerTitleAlign: 'center',
   headerLeft: () => (
     <Ionicons.Button
       name="arrow-back"

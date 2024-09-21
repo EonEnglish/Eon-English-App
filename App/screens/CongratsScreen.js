@@ -5,14 +5,7 @@ const CongratsScreen = ({ completedParts }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Congratulations!</Text>
-
       <Text style={styles.subtitle}>You have completed the following parts of your homework:</Text>
-
-      {/* <View style={styles.completedParts}>
-        {completedParts.map((part, index) => (
-          <Text key={index} style={styles.part}>{part}</Text>
-        ))}
-      </View> */}
 
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Close</Text>

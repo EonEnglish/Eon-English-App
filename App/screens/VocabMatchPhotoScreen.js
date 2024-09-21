@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { View, Image, Text, StyleSheet, Alert, TouchableOpacity, Button, ScrollView } from 'react-native';
 import { getAuth } from 'firebase/auth';
 import { getDocs, collection, getDoc, doc, setDoc } from '@firebase/firestore';
 import { getDownloadURL, ref, getStorage } from 'firebase/storage';
 import { db } from "../firebase";
+import Container from '../components/Container';
+import ScoreCounter from '../components/ScoreCounter';
 
 const VocabMatchPhotoScreen = ({ navigation, route }) => {
   const [vocabList, setVocabList] = useState([]);
@@ -35,7 +37,7 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
     };
     fetchVocabulary();
   }, []);
-  
+
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -181,38 +183,37 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
   const currentImageUrl = imgUrls[currentWordIndex];
 
   return (
-    <View style={styles.container}>
-      {currentImageUrl ? (
-        <Image source={{ uri: currentImageUrl }} style={styles.image} />
-      ) : (
-        <Text>No image available</Text>
-      )}
-      {options.map((option, index) => (
-        <TouchableOpacity
-          key={index}
-          style={styles.optionContainer}
-          onPress={() => setSelectedOption(option)}
-        >
-          <View style={styles.radioButton}>
-            {selectedOption === option && <View style={styles.radioButtonSelected} />}
-          </View>
-          <Text style={styles.optionText}>{option}</Text>
-        </TouchableOpacity>
-      ))}
-      <TouchableOpacity style={styles.submitButton} onPress={checkAnswer}>
-        <Text style={styles.submitButtonText}>Submit</Text>
-      </TouchableOpacity>
-      <Text style={styles.score}>Score: {score}</Text>
-    </View>
+    <ScrollView>
+      <Container style={styles.centerContainer}>
+        <ScoreCounter>Score: {score}</ScoreCounter>
+        {currentImageUrl ? (
+          <Image source={{ uri: currentImageUrl }} style={styles.image} />
+        ) : (
+          <Text>No image available</Text>
+        )}
+        {options.map((option, index) => (
+          <TouchableOpacity
+            key={index}
+            style={styles.optionContainer}
+            onPress={() => setSelectedOption(option)}
+          >
+            <View style={styles.radioButton}>
+              {selectedOption === option && <View style={styles.radioButtonSelected} />}
+            </View>
+            <Text style={styles.optionText}>{option}</Text>
+          </TouchableOpacity>
+        ))}
+        <Button title="Submit" onPress={checkAnswer} />
+      </Container>
+    </ScrollView>
   );
 };
-    
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  centerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 16,
+    marginTop: 20,
   },
   image: {
     width: 200,
@@ -223,18 +224,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
-    width: '80%',
+    width: '90%',
     padding: 10,
     borderRadius: 5,
-    borderWidth: 1,
-    borderColor: 'gray',
+    borderWidth: 3,
+    borderColor: '#CCCCCC',
   },
   radioButton: {
     height: 20,
     width: 20,
     borderRadius: 10,
-    borderWidth: 2,
-    borderColor: 'gray',
+    borderWidth: 1,
+    borderColor: '#CCCCCC',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 10,
@@ -248,21 +249,6 @@ const styles = StyleSheet.create({
   optionText: {
     fontSize: 16,
   },
-  submitButton: {
-    marginTop: 20,
-    padding: 10,
-    backgroundColor: 'blue',
-    borderRadius: 5,
-  },
-  submitButtonText: {
-    color: 'white',
-    fontSize: 18,
-  },
-  score: {
-    fontSize: 24,
-    marginTop: 20,
-  },
 });
-    
 
 export default VocabMatchPhotoScreen;

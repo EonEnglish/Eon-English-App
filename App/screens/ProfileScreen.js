@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View, Alert } from 'react-native';
 import React, { useState } from 'react';
 import { auth } from '../firebase';
 import { signOut } from 'firebase/auth';
+import ProfileButton from '../components/profileButton';
 
 const ProfileScreen = ({ navigation }) => {
     const [deletingAccount, setDeletingAccount] = useState(false);
@@ -53,33 +54,34 @@ const ProfileScreen = ({ navigation }) => {
         <View style={styles.container}>
             <Text style={styles.header}>Profile</Text>
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={[styles.button, styles.aboutButton]} 
-                onPress={() => navigation.navigate('AboutScreen')}>
-                    <Text style={styles.buttonText}>About</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.button, styles.getInvolvedButton]}>
-                    <Text style={styles.buttonText}>Get Involved</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.button, styles.findUsButton]}>
-                    <Text style={styles.buttonText}>Find Us</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.button, styles.resetPasswordButton]}                  
-                onPress={() => navigation.navigate('PasswordResetScreen')}>
-                    <Text style={styles.buttonText}>Reset Password</Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
+                <ProfileButton
+                    text={"About"}
+                    onPress={() => navigation.navigate('AboutScreen')}
+                    style={styles.aboutButton}
+                />
+                <ProfileButton
+                    text={"Get Involved"}
+                    style={styles.getInvolvedButton}
+                />
+                <ProfileButton
+                    text={"Find Us"}
+                    style={styles.findUsButton}
+                />
+                <ProfileButton
+                    text={"Reset Password"}
+                    onPress={() => navigation.navigate('PasswordResetScreen')}
+                    style={styles.resetPasswordButton}
+                />
+                <ProfileButton
+                    text={"Log Out"}
                     onPress={handleSignOut}
-                    style={[styles.button, styles.logOutButton]}
-                >
-                    <Text style={styles.buttonText}>Log Out</Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
+                    style={styles.logOutButton}
+                />
+                <ProfileButton
+                    text={"Delete Account"}
                     onPress={confirmDeleteAccount}
-                    style={[styles.button, styles.deleteAccountButton]}
-                    disabled={deletingAccount}
-                >
-                    <Text style={styles.buttonText}>Delete Account</Text>
-                </TouchableOpacity>
+                    style={styles.deleteAccountButton}
+                />
             </View>
         </View>
     );
@@ -102,17 +104,6 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         width: '80%',
-    },
-    button: {
-        padding: 15,
-        borderRadius: 10,
-        alignItems: 'center',
-        marginVertical: 10,
-    },
-    buttonText: {
-        color: 'white',
-        fontWeight: '700',
-        fontSize: 16,
     },
     aboutButton: {
         backgroundColor: '#FFC107',

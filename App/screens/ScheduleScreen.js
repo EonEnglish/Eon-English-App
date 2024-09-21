@@ -1,6 +1,8 @@
 import { React, useState, useEffect } from 'react';
-import { StyleSheet, View, TextInput, Text, TouchableOpacity, ScrollView } from 'react-native';
-import { SelectList } from 'react-native-dropdown-select-list';
+import { StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
+import Container from '../components/Container';
+import InputField from '../components/inputField';
+import Dropdown from '../components/dropdown';
 
 const ScheduleScreen = () => {
   const [name, setName] = useState('');
@@ -74,7 +76,7 @@ const ScheduleScreen = () => {
 
 
   const handleSubmit = () => {
-    const appScriptCode = 'https://script.google.com/home/projects/13zUV6K4gwUteE-Sx5sElf9af0yxVWFgCkOyZLZ7WjVAWcy3UBr-FQslA/edit'; // source code URL
+    // source code URL: 'https://script.google.com/home/projects/13zUV6K4gwUteE-Sx5sElf9af0yxVWFgCkOyZLZ7WjVAWcy3UBr-FQslA/edit';
     const appScriptURL = "https://script.google.com/macros/s/AKfycbztbgwE-w-2IkH-zj1jzAYckwnHmcQNMVdtnd9Ds65aoaUXFukq2xkqe8zBtiyshGRu/exec";
 
     const formScheduleData = {
@@ -99,85 +101,57 @@ const ScheduleScreen = () => {
 
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.containerContent}>
-      <View>
-        <Text style={styles.title}>Schedule</Text>
-      </View>
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>Name:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your first & last name"
-          onChangeText={setName}
+    <ScrollView>
+      <Container>
+        <InputField
+          title={"Name:"}
+          placeholderText={"Enter your first & last name"}
           value={name}
+          onChangeText={setName}
         />
-      </View>
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>Email:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your email"
-          onChangeText={setEmail}
+        <InputField
+          title={"Email:"}
+          placeholderText={"Enter your email"}
           value={email}
+          onChangeText={setEmail}
         />
-      </View>
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>WeChat ID:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter WeChat ID"
-          onChangeText={setWeChatID}
+        <InputField
+          title={"WeChat ID:"}
+          placeholderText={"Enter WeChat ID"}
           value={weChatID}
+          onChangeText={setWeChatID}
         />
-      </View>
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>How can we assist you?</Text>
-        <SelectList
-          data={types}
+        <Dropdown
+          title={"How can we assist you?"}
+          placeholderText={"Select type"}
           setSelected={setUserTypeSelect}
-          placeholder='Select type'
-          boxStyles={styles.input}
-          dropdownStyles={styles.input}
-          dropdownItemStyles={styles.dropdownInput}
+          data={types}
         />
-      </View>
-      {userTypeSelect === types[0].key &&
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Specify which lesson</Text>
-          <SelectList
-            data={lessons}
+        {userTypeSelect === types[0].key &&
+          <Dropdown
+            title={"Specify which lesson"}
+            placeholderText={"Select lesson"}
             setSelected={setUserLessonSelect}
-            placeholder='Select lesson'
-            boxStyles={styles.input}
-            dropdownStyles={styles.input}
-            dropdownItemStyles={styles.dropdownInput}
+            data={lessons}
           />
-        </View>
-      }
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>Choose a schedule</Text>
-        <SelectList
-          data={schedule}
+        }
+        <Dropdown
+          title={"Choose a schedule"}
+          placeholderText={"Select available time"}
           setSelected={setUserScheduleSelect}
-          placeholder='Select available time'
-          boxStyles={styles.input}
-          dropdownStyles={styles.input}
-          dropdownItemStyles={styles.dropdownInput}
+          data={schedule}
         />
-      </View>
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>Additional Notes</Text>
-        <TextInput
-          style={[styles.input, styles.messageInput]}
-          multiline={true}
-          placeholder="Write any additional information (optional)"
-          onChangeText={setUserMessage}
+        <InputField
+          title={"Additional Notes"}
+          placeholderText={"Write any additional information (optional)"}
           value={userMessage}
+          onChangeText={setUserMessage}
+          style={styles.messageInput}
         />
-      </View>
-      <TouchableOpacity style={styles.buttonContainer} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonContainer} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
+      </Container>
     </ScrollView>
   )
 };
@@ -185,45 +159,6 @@ const ScheduleScreen = () => {
 export default ScheduleScreen
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-  },
-  containerContent: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  title: {
-    color: '#8E8E8F',
-    fontSize: 42,
-    fontWeight: '700',
-    marginBottom: 10,
-    marginTop: 40,
-    alignSelf: 'center',
-  },
-  inputGroup: {
-    width: '100%',
-    marginBottom: 20,
-    gap: 5,
-  },
-  timeInputGroup: {
-    marginBottom: 20,
-    flexDirection: 'row',
-  },
-  label: {
-    color: '#8E8E8F',
-    fontWeight: '700',
-    fontWeight: 'bold',
-  },
-  input: {
-    borderRadius: 5,
-    padding: 13,
-    fontSize: 14,
-    borderWidth: 3,
-    borderColor: '#CCCCCC',
-  },
-  dropdownInput: {
-    color: '#000000',
-  },
   messageInput: {
     height: 100,
   },

@@ -3,10 +3,10 @@ import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import ProfileNavigator from './ProfileNavigator';
-import ScheduleScreen from '../screens/ScheduleScreen';
 import HomeworkNavigator from './HomeworkNavigator';
-import ContactUs from '../screens/ContactUs';
-import HomeScreen from '../screens/HomeScreen';
+import ContactUsNavigator from './ContactUsNavigator'
+import HomeNavigator from './HomeNavigator';
+import ScheduleNavigator from './ScheduleNavigator';
 
 
 const Tab = createBottomTabNavigator();
@@ -80,10 +80,10 @@ const BottomTabNavigator = () => {
         },
       })}
     >
-      <Tab.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
+      <Tab.Screen options={{ headerShown: false }} name="Home" component={HomeNavigator} />
       <Tab.Screen options={{ headerShown: false }} name="Homework" component={HomeworkNavigator} />
-      <Tab.Screen options={{ headerShown: false }} name="ContactUs" component={ContactUs} />
-      <Tab.Screen options={{ headerShown: false }} name="Schedule" component={ScheduleScreen} />
+      <Tab.Screen options={{ headerShown: false }} name="ContactUs" component={ContactUsNavigator} />
+      <Tab.Screen options={{ headerShown: false }} name="Schedule" component={ScheduleNavigator} />
       <Tab.Screen options={{ headerShown: false }} name="Profile" component={ProfileNavigator} />
     </Tab.Navigator>
   );

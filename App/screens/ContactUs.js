@@ -1,6 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity, View, TextInput, Button, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import { composeAsync } from 'expo-mail-composer';
+import Container from '../components/Container';
+import InputField from '../components/inputField';
 
 const ContactUs = () => {
     const [firstName, setFirstName] = useState('');
@@ -37,68 +39,57 @@ const ContactUs = () => {
     }
 
     return (
-        <ScrollView style={styles.container}>
-            <View>
-                <Text style={styles.title}>Contact Us</Text>
-            </View>
-            <View style={styles.inputGroup}>
-                <Text style={styles.label}>First Name:</Text>
-                <TextInput 
-                    style={[styles.input, errors.firstName && styles.errorInput]}
-                    placeholder="Enter First Name"
-                    onChangeText={setFirstName}
+        <ScrollView>
+            <Container>
+                <InputField
+                    title={"First Name: "}
+                    placeholderText={"Enter First Name"}
                     value={firstName}
+                    onChangeText={setFirstName}
+                    style={errors.firstName && styles.errorInput}
+                    error={errors.firstName}
                 />
-                {errors.firstName && <Text style={styles.errorText}>{errors.firstName}</Text>}
-            </View>
-            <View style={styles.inputGroup}>
-                <Text style={styles.label}>Last Name:</Text>
-                <TextInput 
-                    style={[styles.input, errors.lastName && styles.errorInput]}
-                    placeholder="Enter Last Name"
-                    onChangeText={setLastName}
+                <InputField
+                    title={"Last Name: "}
+                    placeholderText={"Enter Last Name"}
                     value={lastName}
-                /> 
-                {errors.lastName && <Text style={styles.errorText}>{errors.lastName}</Text>}
-            </View>
-            <View style={styles.inputGroup}>
-                <Text style={styles.label}>WeChat ID:</Text>
-                <TextInput 
-                    style={[styles.input, errors.weChatID && styles.errorInput]}
-                    placeholder="Enter WeChat ID"
-                    onChangeText={setWeChatID}
+                    onChangeText={setLastName}
+                    style={errors.lastName && styles.errorInput}
+                    error={errors.lastName}
+                />
+                <InputField
+                    title={"WeChat ID: "}
+                    placeholderText={"Enter WeChat ID"}
                     value={weChatID}
-                /> 
-                {errors.weChatID && <Text style={styles.errorText}>{errors.weChatID}</Text>}
-            </View>
-            <View style={styles.inputGroup}>
-                <Text style={styles.label}>Subject:</Text>
-                <TextInput 
-                    style={[styles.input, errors.subject && styles.errorInput]}
-                    placeholder="Enter Subject"
-                    onChangeText={setSubject}
+                    onChangeText={setWeChatID}
+                    style={errors.weChatID && styles.errorInput}
+                    error={errors.weChatID}
+                />
+                <InputField
+                    title={"Subject: "}
+                    placeholderText={"Enter Subject"}
                     value={subject}
+                    onChangeText={setSubject}
+                    style={errors.subject && styles.errorInput}
+                    error={errors.subject}
                 />
-                {errors.subject && <Text style={styles.errorText}>{errors.subject}</Text>}
-            </View>
-            <View style={styles.inputGroup}>
-                <Text style={styles.label}>Message:</Text>
-                <TextInput 
-                    style={[styles.input, styles.messageInput, errors.subject && styles.errorInput]}
-                    multiline={true}
-                    placeholder="Enter Message"
-                    onChangeText={setMessage}
+                <InputField
+                    title={"Message: "}
+                    placeholderText={"Enter Message"}
                     value={message}
+                    onChangeText={setMessage}
+                    style={[styles.messageInput, errors.message && styles.errorInput]}
+                    error={errors.message}
+                    multiline={true}
                 />
-                {errors.message && <Text style={styles.errorText}>{errors.message}</Text>}
-            </View>
-            <TouchableOpacity
-                style={styles.buttonContainer}
-                onPress={sendEmail}
-            >
-                <Text style={styles.buttonText}>Send</Text>
-            </TouchableOpacity>
-            <View style={{ paddingBottom: 40 }} />
+                <TouchableOpacity
+                    style={styles.buttonContainer}
+                    onPress={sendEmail}
+                >
+                    <Text style={styles.buttonText}>Send</Text>
+                </TouchableOpacity>
+                <View style={{ paddingBottom: 40 }} />
+            </Container>
         </ScrollView>
     );
 }
@@ -106,10 +97,6 @@ const ContactUs = () => {
 export default ContactUs;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-    },
     title: {
         color: '#8E8E8F',
         fontSize: 42,
@@ -118,33 +105,11 @@ const styles = StyleSheet.create({
         marginTop: 40,
         alignSelf: 'center',
     },
-    inputGroup: {
-        width: '100%',
-        marginBottom: 20,
-        gap: 5,
-    },
-    label: {
-        color: '#8E8E8F',
-        fontWeight: '700',
-        fontWeight: 'bold',
-    },
-    input: {
-        borderRadius: 5,
-        padding: 13,
-        fontSize: 14,
-        borderWidth: 3,
-        borderColor: '#CCCCCC',
-    },
     messageInput: {
         height: 100, // adjust height for multiline input
     },
     errorInput: {
         borderColor: '#FF0000',
-    },
-    errorText: {
-        color: '#FF0000',
-        fontSize: 12,
-        marginTop: 5,
     },
     buttonContainer: {
         backgroundColor: '#0782F9',

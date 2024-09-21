@@ -1,36 +1,98 @@
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';import EonEnglish from '../components/EonEnglish';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, ScrollView, View } from 'react-native';
+import { getDocs, collection } from '@firebase/firestore';
+import { db } from "../firebase";
+import Container from '../components/Container';
+import InfoCard from '../components/InfoCard';
 
 const HomeScreen = ({ navigation }) => {
+  const [announcements, setAnnouncements] = useState([]);
+  const [announcementsExist, setAnnouncementsExist] = useState(true);
+
+  useEffect(() => {
+    const fetchHome = async () => {
+      try {
+        const Collection = await getDocs(collection(db, "Home Page"));
+        if (!Collection.empty) {
+          Collection.forEach(async (doc) => {
+            if (doc.id === 'Announcement') {
+              const subCollection = await getDocs(collection(doc.ref, 'Collection'));
+              try {
+                const announcement = subCollection.docs.map(doc => doc.data());
+                if (announcement.length === 0) {
+                  setAnnouncementsExist(false);
+                } else {
+                  setAnnouncements(announcement);
+                  setAnnouncementsExist(true);
+                }
+              } catch (error) {
+                setAnnouncementsExist(false);
+              }
+            }
+          });
+        } else {
+          console.log('No documents found in the Home Page collection.');
+          setAnnouncementsExist(false);
+        }
+      } catch (error) {
+        console.error('Error fetching announcements:', error);
+        setAnnouncementsExist(false);
+      }
+    };
+    fetchHome();
+  }, []);
+
+  if (announcements.length === 0 && announcementsExist) {
+    return <Text>Loading...</Text>;
+  }
+
   return (
-    <EonEnglish />
+    <ScrollView>
+      <Container>
+        <InfoCard
+          title='Welcome to Season 16!'
+          titleStyle={styles.subtitle}
+          containerStyle={styles.subtitleContainer}
+        />
+        {announcementsExist ? (
+          announcements.map((announcement, index) => (
+            <InfoCard
+              key={index}
+              title={announcement.title}
+              titleStyle={styles.announcementTitle}
+              text={announcement.announcement}
+              footer={announcement.date}
+              footerStyle={styles.announcementFooter}
+            />
+          ))
+        ) : (
+          <Text style={styles.noAnnouncementText}>No announcement for now</Text>
+        )}
+      </Container>
+    </ScrollView>
   )
 }
 
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    bottom: '25%',
-  },
-  button: {
-    backgroundColor: '#0782F9',
-    width: '60%',
-    padding: 15,
-    borderRadius: 10,
+  subtitleContainer: {
     alignItems: 'center',
-    marginTop: 20,
+    backgroundColor: '#8D56FF',
+    marginBottom: 30,
   },
-  buttonText: {
-    color: 'white',
-    fontWeight: '700',
-    fontSize: 16,
+  subtitle: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginBottom: -30,
   },
-})
+  noAnnouncementText: {
+    fontSize: 20,
+  },
+  announcementFooter: {
+    marginTop: 10,
+  },
+  announcementTitle: {
+    marginBottom: 10,
+  },
+});

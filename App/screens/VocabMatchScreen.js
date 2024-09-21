@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, Button, FlatList, Alert } from 'react-native';
+import { Text, StyleSheet, TextInput, Button, Alert } from 'react-native';
 import { getAuth } from 'firebase/auth';
 import { getDocs, collection, getDoc, doc, setDoc } from "@firebase/firestore";
 import { db } from "../firebase";
+import Container from '../components/Container';
+import ScoreCounter from '../components/ScoreCounter';
 
 const VocabMatchScreen = ({ navigation, route }) => {
   const [vocabList, setVocabList] = useState([]);
@@ -43,12 +45,16 @@ const VocabMatchScreen = ({ navigation, route }) => {
   
     const userInputLowerCase = userInput.toLowerCase().trim();
     const correctWord1 = currentWord.word ? currentWord.word.toLowerCase().trim() : '';
-    const correctWord2 = currentWord.word1 ? currentWord.word1.toLowerCase().trim() : '';
-  
-    if (userInputLowerCase === correctWord1 || userInputLowerCase === correctWord2) {
-      setScore(score + 1);
-      setTotalScore(totalScore + 1);
-      setAlertMessage('Your answer is correct!');
+    const correctWord2 = currentWord.word2 ? currentWord.word2.toLowerCase().trim() : '';
+    if(userInputLowerCase !== "") { 
+      if (userInputLowerCase === correctWord1 || userInputLowerCase === correctWord2) {
+        setScore(score + 1);
+        setTotalScore(totalScore + 1);
+        setAlertMessage('Your answer is correct!');
+      } else {
+        setTotalScore(totalScore + 1);
+        setAlertMessage('Your answer is incorrect!');
+      }
     } else {
       setTotalScore(totalScore + 1);
       setAlertMessage('Your answer is incorrect!');
@@ -125,7 +131,8 @@ const VocabMatchScreen = ({ navigation, route }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <Container style={styles.centerContainer}>
+      <ScoreCounter>Score: {score}</ScoreCounter>
       <Text style={styles.translation}>{vocabList[currentWordIndex].translation}</Text>
       <TextInput
         style={styles.input}
@@ -133,35 +140,32 @@ const VocabMatchScreen = ({ navigation, route }) => {
         value={userInput}
         onChangeText={setUserInput}
       />
-      <Button title="Submit" onPress={checkAnswer} />
-      <Text style={styles.score}>Score: {score}</Text>
-    </View>
+      <Button 
+        title="Submit" 
+        onPress={checkAnswer} 
+      />
+    </Container>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
+  centerContainer: {
     alignItems: 'center',
-    padding: 16,
+    justifyContent: 'center',
   },
   translation: {
-    fontSize: 18,
+    color: '#8E8E8F',
+    fontSize: 35,
     marginBottom: 20,
-    textAlign: 'center', // Center the text horizontally
   },
   input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
+    borderColor: '#CCCCCC',
+    borderRadius: 7, 
+    borderWidth: 3,
+    fontSize: 14,
     marginBottom: 20,
-    paddingLeft: 8,
-    width: '80%',
-  },
-  score: {
-    fontSize: 24,
-    marginTop: 20,
+    padding: 15,
+    width: '90%',
   },
 });
 
