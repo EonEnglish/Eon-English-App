@@ -23,7 +23,6 @@ const Homework = ({ navigation }) => {
     { id: '12', title: 'Birthdays', status: 'NOT STARTED', color: '#F9C407' },
     { id: '13', title: 'Holidays', status: 'NOT STARTED', color: '#F9C407' },
     { id: '14', title: 'Review', status: 'NOT STARTED', color: '#F9C407' },
-    // Add more lessons as needed
   ];
 
   const isFocused = useIsFocused(); // Hook to check if the screen is focused
@@ -39,11 +38,11 @@ const Homework = ({ navigation }) => {
 
       const newLessonsState = [...lessons];
 
-      for (let i = 1; i <= 14; i++) {
-        let lessonId = `Lesson ${i}`;
+      for (const element of lessons) {
+        let lessonId = `Lesson ${lessons[element]}`;
         let Vocab_Match = doc(db, "Users", user.uid, "Homework", lessonId, "1", "Vocab Match");
         let Vocab_Match_Photo = doc(db, "Users", user.uid, "Homework", lessonId, "2", "Vocab Match Photo");
-        let Fill_In_The_blank = doc(db, "Users", user.uid, "Homework", lessonId, "3", "Fill In The blank");
+        let Fill_In_The_blank = doc(db, "Users", user.uid, "Homework", lessonId, "3", "Fill In The blank"); 
 
         try {
           let vocabMatchDoc = await getDoc(Vocab_Match);
@@ -67,8 +66,9 @@ const Homework = ({ navigation }) => {
           consol
           e.error('Error fetching homework data:', error);
         }
+
+        setLessonsState(newLessonsState); // keeping inside of loop boosts render from 22s to 2s
       }
-      setLessonsState(newLessonsState);
     };
 
     if (isFocused) {
