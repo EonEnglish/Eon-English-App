@@ -145,31 +145,36 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
 
     try {
       const homeworkDoc = await getDoc(userHomeworkRef);
+  
       if (homeworkDoc.exists()) {
-        const existingData = homeworkDoc.data();
-        if (score > existingData.score) {
+          const existingData = homeworkDoc.data();
+  
+          if (score <= existingData.score) {
+              console.log('Existing score is higher or equal. No update made.');
+              return;  // Early return if no update is needed
+          }
+  
+          // Update the document with the higher score
           await setDoc(userHomeworkRef, {
-            completed_time: new Date(),
-            score: score,
-            total_score: totalScore,
+              completed_time: new Date(),
+              score: score,
+              total_score: totalScore
           });
           console.log('Homework completion data updated successfully with a higher score.');
-        } else {
-          console.log('Existing score is higher or equal. No update made.');
-        }
-      } else {
-        await setDoc(userHomeworkRef, {
+          return;
+      }
+  
+      // Document doesn't exist, so create a new one
+      await setDoc(userHomeworkRef, {
           completed_time: new Date(),
           score: score,
-          total_score: totalScore,
-        });
-        console.log('Homework completion data stored successfully.');
-      }
+          total_score: totalScore
+      });
+      console.log('Homework completion data stored successfully.');
       navigation.goBack();
-    } catch (error) {
+  } catch (error) {
       console.error('Error storing homework completion data:', error);
-    }
-  };
+  } 
 
   useEffect(() => {
     if (showAlert) {
