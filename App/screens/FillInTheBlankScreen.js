@@ -136,6 +136,7 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
   const homeworkComplete = async () => {
     const auth = getAuth();
     const user = auth.currentUser;
+
     if (!user) {
       console.error('No authenticated user found.');
       return;
@@ -145,36 +146,37 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
 
     try {
       const homeworkDoc = await getDoc(userHomeworkRef);
-  
+
       if (homeworkDoc.exists()) {
-          const existingData = homeworkDoc.data();
-  
-          if (score <= existingData.score) {
-              console.log('Existing score is higher or equal. No update made.');
-              return;  // Early return if no update is needed
-          }
-  
-          // Update the document with the higher score
-          await setDoc(userHomeworkRef, {
-              completed_time: new Date(),
-              score: score,
-              total_score: totalScore
-          });
-          console.log('Homework completion data updated successfully with a higher score.');
-          return;
-      }
-  
-      // Document doesn't exist, so create a new one
-      await setDoc(userHomeworkRef, {
+        const existingData = homeworkDoc.data();
+
+        if (score <= existingData.score)
+          return; // Early return if no update is needed
+
+        // Update the document with the higher score
+        await setDoc(userHomeworkRef, {
           completed_time: new Date(),
           score: score,
-          total_score: totalScore
-      });
-      console.log('Homework completion data stored successfully.');
-      navigation.goBack();
-  } catch (error) {
+          total_score: totalScore,
+        });
+
+        console.log('Homework completion data updated successfully with a higher score.');
+        return;
+
+      } else {
+        // Document doesn't exist, so create a new one
+        await setDoc(userHomeworkRef, {
+          completed_time: new Date(),
+          score: score,
+          total_score: totalScore,
+        });
+
+        console.log('Homework completion data stored successfully.');
+      }
+    } catch (error) {
       console.error('Error storing homework completion data:', error);
-  } 
+    }
+  };
 
   useEffect(() => {
     if (showAlert) {
@@ -199,6 +201,7 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
         { text: 'OK' },
       ]);
       homeworkComplete();
+      navigation.goBack();
     }
   };
 
