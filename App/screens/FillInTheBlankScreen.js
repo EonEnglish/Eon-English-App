@@ -123,7 +123,7 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
     const dropAreaLeft = containerX; // Left edge of the questionContainer
     const dropAreaRight = containerX + width; // Right edge of the questionContainer
     const dropAreaTop = containerY; // Top edge of the questionContainer
-    const dropAreaBottom = containerY + height; // Bottom edge of the questionContainer
+    const dropAreaBottom = containerY + height + 55; // Bottom edge of the questionContainer
 
     return x > dropAreaLeft && x < dropAreaRight && y > dropAreaTop && y < dropAreaBottom;
   };
