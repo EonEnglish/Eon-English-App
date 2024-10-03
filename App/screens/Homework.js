@@ -63,12 +63,12 @@ const Homework = ({ navigation }) => {
             newLessonsState[i].color = '#8D56FF';
           }
 
+          setLessonsState([...newLessonsState]); // continues to updates after loading :)
+
         } catch (error) {
           consol
           e.error('Error fetching homework data:', error);
         }
-
-        setLessonsState([...newLessonsState]); // continues to updates after loading :)
       }
     };
 
