@@ -1,8 +1,9 @@
-import { StyleSheet, Text, TouchableOpacity, View, TextInput, Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ScrollView, Alert } from 'react-native';
 import React, { useState } from 'react';
 import { composeAsync } from 'expo-mail-composer';
 import Container from '../components/Container';
 import InputField from '../components/inputField';
+import { useNavigation } from '@react-navigation/native';
 
 const ContactUs = () => {
     const [firstName, setFirstName] = useState('');
@@ -12,29 +13,56 @@ const ContactUs = () => {
     const [message, setMessage] = useState('');
     const [errors, setErrors] = useState({});
 
+    const navigation = useNavigation();
+
     const sendEmail = async () => {
         const newErrors = {};
 
-        if (!firstName) newErrors.firstName = 'First Name is required';
-        if (!lastName) newErrors.lastName = 'Last Name is required';
-        if (!weChatID) newErrors.weChatID = 'WeChat ID is required';
-        if (!subject) newErrors.subject = 'Subject is required';
-        if (!message) newErrors.message = 'Message is required';
+        // Define errors
+        newErrors.firstName = [
+            {condition: firstName.length == 0, result: 'First Name is required'},
+            {condition: firstName.length > 50, result: 'Field cannot be longer than 50 characters'}
+        ];
+        newErrors.lastName = [
+            {condition: lastName.length == 0, result: 'Last Name is required'},
+            {condition: lastName.length > 50, result: 'Field cannot be longer than 50 characters'}
+        ];
+        newErrors.weChatID = [
+            {condition: weChatID.length == 0, result: 'WeChat ID is required'},
+            {condition: weChatID.length < 3, result: 'WeChat ID must be longer than 3 characters'},
+            {condition: weChatID.length > 20, result: 'WeChat ID cannot be longer than 20 characters'}
+        ];
+        newErrors.subject = [
+            {condition: subject.length == 0, result: 'Subject is required'},
+            {condition: subject.length > 50, result: 'Field cannot be longer than 50 characters'}
+        ];
+        newErrors.message = [
+            {condition: message.length == 0, result: 'Message is required'}
+        ];
 
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors);
-            return;
-        }
+        for (const field in newErrors) {
+            for (const error in newErrors[field]) {
+                if (newErrors[field][error].condition) {
+                    setErrors(newErrors);
+                    return;
+                }
+            };
+        };
 
         try {
             await composeAsync({
                 recipients: ['eonenglishus@gmail.com'],
                 subject: subject,
                 body: `Dear Eon English,\n\n${message}\n\nBest\n\n${firstName} ${lastName}.\n\nWeChat ID: ${weChatID}`,
+            }).then(() => {
+                Alert.alert('Sent!', 'The form has been sent.', [
+                    {text: 'OK', onPress: () => {
+                        navigation.navigate('Home');
+                    }}
+                ]);
             });
-            setAlertMessage('Email Sent!');
         } catch (error) {
-            setAlertMessage('Email Failed to Send.');
+            Alert.alert('Failed', 'The form has not been sent.', {text: 'OK'});
         }
     }
 
@@ -46,40 +74,36 @@ const ContactUs = () => {
                     placeholderText={"Enter First Name"}
                     value={firstName}
                     onChangeText={setFirstName}
-                    style={errors.firstName && styles.errorInput}
-                    error={errors.firstName}
+                    conditions={errors.firstName}
                 />
                 <InputField
                     title={"Last Name: "}
                     placeholderText={"Enter Last Name"}
                     value={lastName}
                     onChangeText={setLastName}
-                    style={errors.lastName && styles.errorInput}
-                    error={errors.lastName}
+                    conditions={errors.lastName}
                 />
                 <InputField
                     title={"WeChat ID: "}
                     placeholderText={"Enter WeChat ID"}
                     value={weChatID}
                     onChangeText={setWeChatID}
-                    style={errors.weChatID && styles.errorInput}
-                    error={errors.weChatID}
+                    conditions={errors.weChatID}
                 />
                 <InputField
                     title={"Subject: "}
                     placeholderText={"Enter Subject"}
                     value={subject}
                     onChangeText={setSubject}
-                    style={errors.subject && styles.errorInput}
-                    error={errors.subject}
+                    conditions={errors.subject}
                 />
                 <InputField
                     title={"Message: "}
                     placeholderText={"Enter Message"}
                     value={message}
                     onChangeText={setMessage}
-                    style={[styles.messageInput, errors.message && styles.errorInput]}
-                    error={errors.message}
+                    style={styles.messageInput}
+                    conditions={errors.message}
                     multiline={true}
                 />
                 <TouchableOpacity
@@ -107,9 +131,6 @@ const styles = StyleSheet.create({
     },
     messageInput: {
         height: 100, // adjust height for multiline input
-    },
-    errorInput: {
-        borderColor: '#FF0000',
     },
     buttonContainer: {
         backgroundColor: '#0782F9',

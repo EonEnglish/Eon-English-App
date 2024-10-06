@@ -1,8 +1,14 @@
 import { React, useState, useEffect } from 'react';
-import { StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import Container from '../components/Container';
 import InputField from '../components/inputField';
 import Dropdown from '../components/dropdown';
+import { useNavigation } from '@react-navigation/native';
+
+function countOccurrences(str, char) {
+    return [...str].reduce((count, currentChar) =>
+        currentChar === char ? count + 1 : count, 0);
+}
 
 const ScheduleScreen = () => {
   const [name, setName] = useState('');
@@ -14,6 +20,9 @@ const ScheduleScreen = () => {
   const [userScheduleSelect, setUserScheduleSelect] = useState('');
   const [schedule, setSchedule] = useState([]);
   const types = [{ key: '1', value: 'Homework Help' }, { key: '2', value: 'Interview' }];
+  const [errors, setErrors] = useState({});
+
+  const navigation = useNavigation();
 
   const lessons = [
     { key: '1', value: 'Lesson 1: Where are you going?' },
@@ -79,6 +88,45 @@ const ScheduleScreen = () => {
     // source code URL: 'https://script.google.com/home/projects/13zUV6K4gwUteE-Sx5sElf9af0yxVWFgCkOyZLZ7WjVAWcy3UBr-FQslA/edit';
     const appScriptURL = "https://script.google.com/macros/s/AKfycbztbgwE-w-2IkH-zj1jzAYckwnHmcQNMVdtnd9Ds65aoaUXFukq2xkqe8zBtiyshGRu/exec";
 
+    const newErrors = {};
+
+    // Define errors
+    newErrors.name = [
+        {condition: name.length == 0, result: 'Name is required'},
+        {condition: name.length > 50, result: 'Field cannot be longer than 50 characters'}
+    ];
+    newErrors.email = [
+        {condition: email.length == 0, result: 'Email is required'},
+        {condition: email.length > 50, result: 'Field cannot be longer than 50 characters'},
+        {condition: !(email.includes('@') && email.includes('.', email.indexOf('@'))), result: 'Email must be in the following format: example@mail.com'},
+        {condition: countOccurrences(email, '@') > 1, result: 'Email cannot contain more than one @'},
+        {condition: email[email.length-1] == '.', result: 'Email cannot end in a .'},
+        {condition: email.indexOf('.', email.indexOf('@')) == email.indexOf('@') + 1, result: 'There must be at least one character between @ and .'}
+    ];
+    newErrors.weChatID = [
+        {condition: weChatID.length == 0, result: 'WeChat ID is required'},
+        {condition: weChatID.length < 3, result: 'WeChat ID must be longer than 3 characters'},
+        {condition: weChatID.length > 20, result: 'WeChat ID cannot be longer than 20 characters'}
+    ];
+    newErrors.types = [
+        {condition: !userTypeSelect, result: 'This field is required'}
+    ];
+    newErrors.schedule = [
+        {condition: !userScheduleSelect, result: 'This field is required'}
+    ];
+    newErrors.lessons = [
+        {condition: !userLessonSelect && userTypeSelect == types[0].key, result: 'This field is required'}
+    ];
+
+    for (const field in newErrors) {
+        for (const error in newErrors[field]) {
+            if (newErrors[field][error].condition) {
+                setErrors(newErrors);
+                return;
+            }
+        };
+    };
+
     const formScheduleData = {
       Name: name,
       Email: email,
@@ -95,8 +143,14 @@ const ScheduleScreen = () => {
       },
       body: new URLSearchParams(formScheduleData).toString()
     })
-      .then((response) => console.log('Submission complete!'))
-      .catch((error) => console.error(error));
+      .then((response) => {
+        Alert.alert('Sent!', 'The form has been sent.', [
+            {text: 'OK', onPress: () => {
+                navigation.navigate('Home');
+            }}
+        ]);
+      })
+      .catch((error) => Alert.alert('Failed', 'The form has not been sent.', {text: 'OK'}));
   };
 
 
@@ -107,24 +161,28 @@ const ScheduleScreen = () => {
           title={"Name:"}
           placeholderText={"Enter your first & last name"}
           value={name}
+          conditions={errors.name}
           onChangeText={setName}
         />
         <InputField
           title={"Email:"}
           placeholderText={"Enter your email"}
           value={email}
+          conditions={errors.email}
           onChangeText={setEmail}
         />
         <InputField
           title={"WeChat ID:"}
           placeholderText={"Enter WeChat ID"}
           value={weChatID}
+          conditions={errors.weChatID}
           onChangeText={setWeChatID}
         />
         <Dropdown
           title={"How can we assist you?"}
           placeholderText={"Select type"}
           setSelected={setUserTypeSelect}
+          conditions={errors.types}
           data={types}
         />
         {userTypeSelect === types[0].key &&
@@ -132,6 +190,7 @@ const ScheduleScreen = () => {
             title={"Specify which lesson"}
             placeholderText={"Select lesson"}
             setSelected={setUserLessonSelect}
+            conditions={errors.lessons}
             data={lessons}
           />
         }
@@ -139,6 +198,7 @@ const ScheduleScreen = () => {
           title={"Choose a schedule"}
           placeholderText={"Select available time"}
           setSelected={setUserScheduleSelect}
+          conditions={errors.schedule}
           data={schedule}
         />
         <InputField
