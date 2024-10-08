@@ -1,18 +1,21 @@
 import React from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
+import checkInput from './inputChecker';
 
-const InputField = ({ title, placeholderText, value, onChangeText, style, error, multiline }) => {
+const InputField = ({ title, placeholderText, value, onChangeText, style, multiline, conditions }) => {
+    error = conditions && checkInput(conditions);
+
     return (
         <View style={styles.inputGroup}>
             <Text style={styles.label}>{title}</Text>
             <TextInput
-                style={[styles.input, style]}
+                style={[styles.input, style, error && styles.errorInput]}
                 placeholder={placeholderText}
                 onChangeText={onChangeText}
                 value={value}
                 multiline={multiline}
             />
-            {error && <Text style={styles.errorText}>{error}</Text>}
+            {error && <Text style={styles.errorText}>{error[0]}</Text>}
         </View>
     );
 };
@@ -26,6 +29,9 @@ const styles = StyleSheet.create({
         fontSize: 14,
         borderWidth: 3,
         borderColor: '#CCCCCC',
+    },
+    errorInput: {
+        borderColor: '#FF0000',
     },
     inputGroup: {
         width: '100%',
