@@ -48,6 +48,7 @@ const VocabMatchScreen = ({ navigation, route }) => {
       setCurrentWordIndex(prev => prev + 1);
       setUserInput('');
     } else {
+      navigation.goBack();
       Alert.alert('Game Over', `You finished! Final score: ${score}`, [{ text: 'OK', onPress: homeworkComplete }]);
     }
   };
@@ -63,7 +64,7 @@ const VocabMatchScreen = ({ navigation, route }) => {
       if (!homeworkDoc.exists() || score > homeworkDoc.data().score) {
         await setDoc(userHomeworkRef, docData);
       }
-      navigation.goBack();
+
     } catch (error) {
       console.error('Error updating homework:', error);
     }
