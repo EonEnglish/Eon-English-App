@@ -12,123 +12,65 @@ const VocabMatchScreen = ({ navigation, route }) => {
   const [userInput, setUserInput] = useState('');
   const [score, setScore] = useState(0);
   const [totalScore, setTotalScore] = useState(0);
-  const [showAlert, setShowAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
   const { data } = route.params;
 
   useEffect(() => {
     const fetchVocabulary = async () => {
       try {
-        const Collection = await getDocs(collection(db, data));
-        Collection.forEach(async (doc) => {
-          // Assuming 'targetDocumentId' is the ID of the document you want to enter
-          if (doc.id === 'Vocab Match') {
-            const subCollection = await getDocs(collection(doc.ref, 'Collection'));
-            const vocabulary = subCollection.docs.map(doc => doc.data());
-            console.log(vocabulary)
-            setVocabList(vocabulary);
-          }
-        });
+        const vocabCollection = await getDocs(collection(db, data));
+        const vocabMatchDoc = vocabCollection.docs.find(doc => doc.id === 'Vocab Match');
+        if (vocabMatchDoc) {
+          const subCollection = await getDocs(collection(vocabMatchDoc.ref, 'Collection'));
+          setVocabList(subCollection.docs.map(doc => doc.data()));
+        }
       } catch (error) {
         console.error("Error fetching vocabulary:", error);
       }
     };
     fetchVocabulary();
-  }, []);
-  
+  }, [data]);
+
   const checkAnswer = () => {
     const currentWord = vocabList[currentWordIndex];
-    if (!currentWord) {
-      console.error("Current word is undefined.");
-      return;
-    }
-  
-    const userInputLowerCase = userInput.toLowerCase().trim();
-    const correctWord1 = currentWord.word ? currentWord.word.toLowerCase().trim() : '';
-    const correctWord2 = currentWord.word2 ? currentWord.word2.toLowerCase().trim() : '';
-    if(userInputLowerCase !== "") { 
-      if (userInputLowerCase === correctWord1 || userInputLowerCase === correctWord2) {
-        setScore(score + 1);
-        setTotalScore(totalScore + 1);
-        setAlertMessage('Your answer is correct!');
-      } else {
-        setTotalScore(totalScore + 1);
-        setAlertMessage('Your answer is incorrect!');
-      }
-    } else {
-      setTotalScore(totalScore + 1);
-      setAlertMessage('Your answer is incorrect!');
-    }
-    setShowAlert(true);
+    if (!currentWord) return;
+
+    const userInputTrimmed = userInput.toLowerCase().trim();
+    const correctAnswers = [currentWord.word, currentWord.word2].map(w => w?.toLowerCase().trim());
+
+    const isCorrect = correctAnswers.includes(userInputTrimmed);
+    setScore(prev => isCorrect ? prev + 1 : prev);
+    setTotalScore(prev => prev + 1);
+    Alert.alert('Result', isCorrect ? 'Your answer is correct!' : 'Your answer is incorrect!', [{ text: 'OK', onPress: nextWord }]);
   };
 
   const nextWord = () => {
     if (currentWordIndex < vocabList.length - 1) {
-      setCurrentWordIndex(currentWordIndex + 1);
+      setCurrentWordIndex(prev => prev + 1);
       setUserInput('');
     } else {
-      Alert.alert('Game Over', `You have finished the game! Your final score is ${score}.`, [
-        { text: 'OK' },
-      ]);
-      homeworkComplete();
+      navigation.goBack();
+      Alert.alert('Game Over', `You finished! Final score: ${score}`, [{ text: 'OK', onPress: homeworkComplete }]);
     }
   };
 
   const homeworkComplete = async () => {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    if (!user) {
-      console.error('No authenticated user found.');
-      return;
-    }
+    const user = getAuth().currentUser;
+    if (!user) return;
 
     const userHomeworkRef = doc(db, "Users", user.uid, "Homework", data, "1", "Vocab Match");
-
     try {
       const homeworkDoc = await getDoc(userHomeworkRef);
-      if (homeworkDoc.exists()) {
-        const existingData = homeworkDoc.data();
-        if (score > existingData.score) {
-          await setDoc(userHomeworkRef, {
-            completed_time: new Date(),
-            score: score,
-            total_score: totalScore,
-          });
-          console.log('Homework completion data updated successfully with a higher score.');
-        } else {
-          console.log('Existing score is higher or equal. No update made.');
-        }
-      } else {
-        await setDoc(userHomeworkRef, {
-          completed_time: new Date(),
-          score: score,
-          total_score: totalScore,
-        });
-        console.log('Homework completion data stored successfully.');
+      const docData = { completed_time: new Date(), score, total_score: totalScore };
+      if (!homeworkDoc.exists() || score > homeworkDoc.data().score) {
+        await setDoc(userHomeworkRef, docData);
       }
-      navigation.goBack();
+
     } catch (error) {
-      console.error('Error storing homework completion data:', error);
+      console.error('Error updating homework:', error);
     }
   };
 
-  useEffect(() => {
-    if (showAlert) {
-      Alert.alert('Result', alertMessage, [
-        {
-          text: 'OK',
-          onPress: () => {
-            setShowAlert(false);
-            nextWord();
-          },
-        },
-      ]);
-    }
-  }, [showAlert]);
-
-  if (vocabList.length === 0) {
-    return <Text>Loading...</Text>;
-  }
+  if (vocabList.length === 0) return <Text>Loading...</Text>;
 
   return (
     <Container style={styles.centerContainer}>
@@ -140,10 +82,7 @@ const VocabMatchScreen = ({ navigation, route }) => {
         value={userInput}
         onChangeText={setUserInput}
       />
-      <Button 
-        title="Submit" 
-        onPress={checkAnswer} 
-      />
+      <Button title="Submit" onPress={checkAnswer} />
     </Container>
   );
 };
@@ -154,18 +93,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   translation: {
-    color: '#8E8E8F',
     fontSize: 35,
     marginBottom: 20,
+    color: '#8E8E8F',
   },
   input: {
-    borderColor: '#CCCCCC',
-    borderRadius: 7, 
+    width: '90%',
     borderWidth: 3,
+    borderColor: '#CCCCCC',
+    borderRadius: 7,
+    padding: 15,
     fontSize: 14,
     marginBottom: 20,
-    padding: 15,
-    width: '90%',
   },
 });
 
