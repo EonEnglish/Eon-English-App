@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import CustomCheckBox from './CustomCheckBox'; // Adjust the import path according to your project structure
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ route, navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ const LoginScreen = ({ navigation }) => {
         });
 
         // Load saved credentials
-        const loadCredentials = async () => {
+        const loadCredentialsAndLogIn = async () => {
             try {
                 const savedEmail = await AsyncStorage.getItem('email');
                 const savedPassword = await AsyncStorage.getItem('password');
@@ -28,13 +28,21 @@ const LoginScreen = ({ navigation }) => {
                     setEmail(savedEmail);
                     setPassword(savedPassword);
                     setRememberMe(true);
+
+                    if (route.params?.manualLogOut) return;
+
+                    try {
+                        await signInWithEmailAndPassword(auth, savedEmail, savedPassword);
+                    } catch (signInError) {
+                        setError(getCustomErrorMessage(signInError.code));
+                    }
                 }
             } catch (error) {
                 console.error('Error loading credentials', error);
             }
         };
 
-        loadCredentials();
+        loadCredentialsAndLogIn();
 
         return unsubscribe;
     }, []);
