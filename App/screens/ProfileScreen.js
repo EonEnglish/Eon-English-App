@@ -9,7 +9,7 @@ const ProfileScreen = ({ navigation }) => {
 
     const handleSignOut = () => {
         signOut(auth).then(() => {
-            navigation.replace("Login");
+            navigation.replace("Login", {manualLogOut: true});
         }).catch((error) => {
             alert(error.message);
         });
