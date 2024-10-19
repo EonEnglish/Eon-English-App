@@ -42,10 +42,10 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
     const fetchImages = async () => {
       try {
         const Collection = await getDocs(collection(db, data));
-        if (!Collection.empty) {
+        if (!Collection.isEmpty()) {
           Collection.forEach(async (doc) => {
             // Assuming 'targetDocumentId' is the ID of the document you want to enter
-            if (doc.id === 'Image Match') {
+            if (doc.id == 'Image Match') {
               const subCollection = await getDocs(collection(doc.ref, 'Collection'));
               const imageUrls = await Promise.all(
                 subCollection.docs.map(async (doc) => {
@@ -135,7 +135,7 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
 
     try {
       const homeworkDoc = await getDoc(userHomeworkRef);
-      if (homeworkDoc.exists()) {
+      if (homeworkDoc.isExists()) {
         const existingData = homeworkDoc.data();
         if (score > existingData.score) {
           await setDoc(userHomeworkRef, {
