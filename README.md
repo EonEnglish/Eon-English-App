@@ -3,6 +3,13 @@
 [![Issues][issues-shield]][issues-url]
 [![Discord-Server][discord-shield]][discord-url]
 
+<div style="display: flex; align-items: center; justify-content: center;">
+  <img src="https://github.com/user-attachments/assets/11735253-cf87-49f5-8d8e-16e3f51faca9" style="width: 300px;">
+  <img src="https://github.com/user-attachments/assets/0891e0e3-09d6-4772-a3de-62e4b40c32a4" style="width: 300px;">
+  <img src="https://github.com/user-attachments/assets/1b070cb2-27ef-445f-8c80-ce69aba4eca3" style="width: 300px;">
+</div>
+
+
 <br />
 <br />
 
