@@ -1,11 +1,11 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProfileScreen from '../screens/ProfileScreen';
 import AboutScreen from '../screens/AboutScreen';
 import PasswordResetScreen from '../screens/PasswordResetScreen';
 import { Ionicons } from '@expo/vector-icons'; // Example icon library, adjust as needed
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const ProfileNavigator = () => {
   return (
