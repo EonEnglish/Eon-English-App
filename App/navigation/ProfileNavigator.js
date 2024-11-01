@@ -10,24 +10,29 @@ const Stack = createStackNavigator();
 const ProfileNavigator = () => {
   return (
     <Stack.Navigator initialRouteName="ProfileScreen">
-      <Stack.Screen 
-        name="ProfileScreen" 
-        component={ProfileScreen} 
-        options={{ headerShown: false }} 
+      <Stack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={screenOptions('Profile')}
       />
-      <Stack.Screen 
-        name="AboutScreen" 
-        component={AboutScreen} 
-        options={ screenOptionsWithBackButton('') } 
+      <Stack.Screen
+        name="AboutScreen"
+        component={AboutScreen}
+        options={screenOptionsWithBackButton('Who We Are')}
       />
-      <Stack.Screen 
-        name="PasswordResetScreen" 
-        component={PasswordResetScreen} 
-        options={{ title: 'Reset Password' }} 
+      <Stack.Screen
+        name="PasswordResetScreen"
+        component={PasswordResetScreen}
+        options={{ title: 'Reset Password' }}
       />
     </Stack.Navigator>
   );
 };
+
+const screenOptions = (title) => ({ navigation }) => ({
+  title: title,
+  headerTitleAlign: 'center'
+});
 
 const screenOptionsWithBackButton = (title) => ({ navigation }) => ({
   title: title,
