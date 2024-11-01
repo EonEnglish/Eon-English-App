@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { getAuth } from 'firebase/auth';
 import { getDoc, doc } from "@firebase/firestore";
 import { useIsFocused } from '@react-navigation/native';
 import { db } from "../firebase";
+import Container from '../components/Container';
 
 
 const Homework = ({ navigation }) => {
@@ -73,7 +74,7 @@ const Homework = ({ navigation }) => {
     };
 
     if (isFocused) {
-      fetchData(); // Fetch data when the screen is focused
+      fetchData(); 
     }
   }, [navigation]);
 
@@ -90,25 +91,21 @@ const Homework = ({ navigation }) => {
     </TouchableOpacity>
   );
 
-  const numColumns = 2;
-  const dimensions = Dimensions.get('window');
-  const itemWidth = (dimensions.width / numColumns) - 20; // Adjusting for margin
-
   if(lessonsState < lessons.length) {
     return <Text>Loading...</Text>;
   }
 
   return (
-    <View style={styles.container}>
+    <Container style={styles.container}>
       <FlatList
         data={lessonsState.length ? lessonsState : lessons}
         renderItem={renderLessonItem}
         keyExtractor={item => item.id}
-        numColumns={numColumns}
+        numColumns={2}
         columnWrapperStyle={styles.column}
         contentContainerStyle={styles.flatListContent}
       />
-    </View>
+    </Container>
   );
 };
 
@@ -116,11 +113,9 @@ export default Homework;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    padding: 0,
   },
   title: {
     color: '#8E8E8F',
@@ -132,21 +127,18 @@ const styles = StyleSheet.create({
   },
   flatListContent: {
     alignItems: 'center',
-    paddingBottom: 30,
+    paddingBottom: 50,
   },
   column: {
     justifyContent: 'space-around',
   },
   button: {
     top: 30,
-    marginBottom: 15,
-    marginRight: 10,
-    padding: 15,
+    margin: 5,
+    padding: 20,
     borderRadius: 7,
     alignItems: 'center',
-
-    elevation: 2,
-    width: Dimensions.get('window').width / 2 - 20, // Adjusting for margin
+    width: '46%',
   },
   buttonTextContainer: {
     justifyContent: 'center',
@@ -156,18 +148,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
     color: '#fff',
-    marginBottom: 5,
+    marginBottom: 10,
   },
   buttonText: {
     color: 'white',
     fontWeight: '700',
     fontSize: 16,
-    textAlign: 'center', // Added for centering text
+    textAlign: 'center',
   },
   statusText: {
     marginTop: 10,
     color: 'white',
     fontWeight: '600',
-    textAlign: 'center', // Added for centering text
+    textAlign: 'center',
   },
 });
