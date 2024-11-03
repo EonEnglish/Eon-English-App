@@ -23,18 +23,21 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
     const fetchVocabulary = async () => {
       try {
         const Collection = await getDocs(collection(db, data));
-        Collection.forEach(async (doc) => {
-          // Assuming 'targetDocumentId' is the ID of the document you want to enter
-          if (doc.id === 'Image Match') {
-            const subCollection = await getDocs(collection(doc.ref, 'Collection'));
-            const vocabulary = subCollection.docs.map(doc => doc.data());
-            setVocabList(vocabulary);
-          }
-        });
+        const vocabData = [];
+
+        for (const doc of Collection.docs) {
+          if (doc.id !== 'Image Match') continue;
+
+          const subCollection = await getDocs(collection(doc.ref, 'Collection'));
+          vocabData.push(...subCollection.docs.map(doc => doc.data()));
+        }
+
+        setVocabList(vocabData);
       } catch (error) {
         console.error("Error fetching vocabulary:", error);
       }
     };
+
     fetchVocabulary();
   }, []);
 
@@ -42,23 +45,20 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
     const fetchImages = async () => {
       try {
         const Collection = await getDocs(collection(db, data));
-        if (!Collection.empty) {
-          Collection.forEach(async (doc) => {
-            // Assuming 'targetDocumentId' is the ID of the document you want to enter
-            if (doc.id === 'Image Match') {
-              const subCollection = await getDocs(collection(doc.ref, 'Collection'));
-              const imageUrls = await Promise.all(
-                subCollection.docs.map(async (doc) => {
-                  const imageUrl = doc.data().image;
-                  return await getImageDownloadUrl(imageUrl);
-                })
-              );
-              setImgUrls(imageUrls);
-            }
-          });
-        } else {
-          console.log('No documents found in the vocabSet1 collection.');
+        const imageUrls = [];
+
+        for (const doc of Collection.docs) {
+          if (doc.id !== 'Image Match') continue;
+
+          const subCollection = await getDocs(collection(doc.ref, 'Collection'));
+          for (const subDoc of subCollection.docs) {
+            const imageUrl = subDoc.data().image;
+            const downloadUrl = await getImageDownloadUrl(imageUrl);
+            imageUrls.push(downloadUrl);
+          }
         }
+
+        setImgUrls(imageUrls);
       } catch (error) {
         console.error('Error fetching images:', error);
       }
@@ -78,8 +78,7 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
     try {
       const storage = getStorage();
       const storageRef = ref(storage, imageUrl);
-      const downloadUrl = await getDownloadURL(storageRef);
-      return downloadUrl;
+      return await getDownloadURL(storageRef);
     } catch (error) {
       console.error('Error getting download URL:', error);
       return '';
@@ -100,14 +99,10 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
 
   const checkAnswer = () => {
     const currentWord = vocabList[currentWordIndex];
-    if (selectedOption === currentWord.word) {
-      setScore(score + 1);
-      setTotalScore(totalScore + 1);
-      setAlertMessage('Your answer is correct!');
-    } else {
-      setTotalScore(totalScore + 1);
-      setAlertMessage('Your answer is incorrect!');
-    }
+    const isCorrect = selectedOption === currentWord.word;
+    setScore(score + (isCorrect ? 1 : 0));
+    setTotalScore(totalScore + 1);
+    setAlertMessage(isCorrect ? 'Your answer is correct!' : 'Your answer is incorrect!');
     setShowAlert(true);
   };
 
@@ -116,9 +111,7 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
       setCurrentWordIndex(currentWordIndex + 1);
       setSelectedOption('');
     } else {
-      Alert.alert('Game Over', `You have finished the game! Your final score is ${score}.`, [
-        { text: 'OK' },
-      ]);
+      Alert.alert('Game Over', `You have finished the game! Your final score is ${score}.`, [{ text: 'OK' }]);
       homeworkComplete();
     }
   };
@@ -126,35 +119,28 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
   const homeworkComplete = async () => {
     const auth = getAuth();
     const user = auth.currentUser;
+
     if (!user) {
       console.error('No authenticated user found.');
       return;
     }
 
     const userHomeworkRef = doc(db, "Users", user.uid, "Homework", data, "2", "Vocab Match Photo");
-
     try {
       const homeworkDoc = await getDoc(userHomeworkRef);
-      if (homeworkDoc.exists()) {
-        const existingData = homeworkDoc.data();
-        if (score > existingData.score) {
-          await setDoc(userHomeworkRef, {
-            completed_time: new Date(),
-            score: score,
-            total_score: totalScore,
-          });
-          console.log('Homework completion data updated successfully with a higher score.');
-        } else {
-          console.log('Existing score is higher or equal. No update made.');
-        }
-      } else {
-        await setDoc(userHomeworkRef, {
-          completed_time: new Date(),
-          score: score,
-          total_score: totalScore,
-        });
+      const dataToSet = {
+        completed_time: new Date(),
+        score: score,
+        total_score: totalScore,
+      };
+
+      if (!homeworkDoc.exists() || score > homeworkDoc.data().score) {
+        await setDoc(userHomeworkRef, dataToSet);
         console.log('Homework completion data stored successfully.');
+      } else {
+        console.log('Existing score is higher or equal. No update made.');
       }
+
       navigation.goBack();
     } catch (error) {
       console.error('Error storing homework completion data:', error);
