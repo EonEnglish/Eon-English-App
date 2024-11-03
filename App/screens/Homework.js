@@ -8,6 +8,7 @@ import { db } from "../firebase";
 
 const Homework = ({ navigation }) => {
   const [lessonsState, setLessonsState] = useState([]);
+  const isFocused = useIsFocused(); // Hook to check if the screen is focused
   const lessons = [
     { id: '1', title: 'Where are you going?', status: 'NOT STARTED', color: '#F9C407' },
     { id: '2', title: 'Time for School', status: 'NOT STARTED', color: '#F9C407' },
@@ -26,12 +27,11 @@ const Homework = ({ navigation }) => {
     // Add more lessons as needed
   ];
 
-  const isFocused = useIsFocused(); // Hook to check if the screen is focused
-  
   useEffect(() => {
     const fetchData = async () => {
       const auth = getAuth();
       const user = auth.currentUser;
+
       if (!user) {
         console.error('No authenticated user found.');
         return;
@@ -39,8 +39,8 @@ const Homework = ({ navigation }) => {
 
       const newLessonsState = [...lessons];
 
-      for (let i = 1; i <= 14; i++) {
-        let lessonId = `Lesson ${i}`;
+      for (let i = 0; i < lessons.length; i++) {
+        let lessonId = `Lesson ${i + 1}`;
         let Vocab_Match = doc(db, "Users", user.uid, "Homework", lessonId, "1", "Vocab Match");
         let Vocab_Match_Photo = doc(db, "Users", user.uid, "Homework", lessonId, "2", "Vocab Match Photo");
         let Fill_In_The_blank = doc(db, "Users", user.uid, "Homework", lessonId, "3", "Fill In The blank");
@@ -49,26 +49,27 @@ const Homework = ({ navigation }) => {
           let vocabMatchDoc = await getDoc(Vocab_Match);
           let vocabMatchPhotoDoc = await getDoc(Vocab_Match_Photo);
           let fillInTheBlankDoc = await getDoc(Fill_In_The_blank);
-          
+
           let vocabMatchExists = vocabMatchDoc.exists();
           let vocabMatchPhotoExists = vocabMatchPhotoDoc.exists();
           let fillInTheBlankExists = fillInTheBlankDoc.exists();
 
           if (vocabMatchExists && vocabMatchPhotoExists && fillInTheBlankExists) {
-            newLessonsState[i - 1].status = 'COMPLETED';
-            newLessonsState[i - 1].color = '#0782F9';
+            newLessonsState[i].status = 'COMPLETED';
+            newLessonsState[i].color = '#0782F9';
           }
           else if (vocabMatchExists || vocabMatchPhotoExists || fillInTheBlankExists) {
-            newLessonsState[i - 1].status = 'IN PROGRESS';
-            newLessonsState[i - 1].color = '#8D56FF';
+            newLessonsState[i].status = 'IN PROGRESS';
+            newLessonsState[i].color = '#8D56FF';
           }
+
+          setLessonsState([...newLessonsState]); // continues to updates after loading :)
 
         } catch (error) {
           consol
           e.error('Error fetching homework data:', error);
         }
       }
-      setLessonsState(newLessonsState);
     };
 
     if (isFocused) {
@@ -96,7 +97,7 @@ const Homework = ({ navigation }) => {
   if(lessonsState < lessons.length) {
     return <Text>Loading...</Text>;
   }
-  
+
   return (
     <View style={styles.container}>
       <FlatList
