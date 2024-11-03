@@ -1,33 +1,38 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProfileScreen from '../screens/ProfileScreen';
 import AboutScreen from '../screens/AboutScreen';
 import PasswordResetScreen from '../screens/PasswordResetScreen';
 import { Ionicons } from '@expo/vector-icons'; // Example icon library, adjust as needed
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const ProfileNavigator = () => {
   return (
     <Stack.Navigator initialRouteName="ProfileScreen">
-      <Stack.Screen 
-        name="ProfileScreen" 
-        component={ProfileScreen} 
-        options={{ headerShown: false }} 
+      <Stack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={screenOptions('Profile')}
       />
-      <Stack.Screen 
-        name="AboutScreen" 
-        component={AboutScreen} 
-        options={ screenOptionsWithBackButton('') } 
+      <Stack.Screen
+        name="AboutScreen"
+        component={AboutScreen}
+        options={screenOptionsWithBackButton('Who We Are')}
       />
-      <Stack.Screen 
-        name="PasswordResetScreen" 
-        component={PasswordResetScreen} 
-        options={{ title: 'Reset Password' }} 
+      <Stack.Screen
+        name="PasswordResetScreen"
+        component={PasswordResetScreen}
+        options={{ title: 'Reset Password' }}
       />
     </Stack.Navigator>
   );
 };
+
+const screenOptions = (title) => ({ navigation }) => ({
+  title: title,
+  headerTitleAlign: 'center'
+});
 
 const screenOptionsWithBackButton = (title) => ({ navigation }) => ({
   title: title,

@@ -1,8 +1,9 @@
-import { StyleSheet, Text, TouchableOpacity, View, Alert } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 import React, { useState } from 'react';
 import { auth } from '../firebase';
 import { signOut } from 'firebase/auth';
 import ProfileButton from '../components/profileButton';
+import Container from '../components/Container';
 
 const ProfileScreen = ({ navigation }) => {
     const [deletingAccount, setDeletingAccount] = useState(false);
@@ -51,8 +52,7 @@ const ProfileScreen = ({ navigation }) => {
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.header}>Profile</Text>
+        <Container style={styles.container}>
             <View style={styles.buttonContainer}>
                 <ProfileButton
                     text={"About"}
@@ -83,7 +83,7 @@ const ProfileScreen = ({ navigation }) => {
                     style={styles.deleteAccountButton}
                 />
             </View>
-        </View>
+        </Container>
     );
 }
 
@@ -91,19 +91,11 @@ export default ProfileScreen;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'white',
-    },
-    header: {
-        fontWeight: 'bold',
-        marginBottom: 30,
-        color: '#8E8E8F',
-        fontSize: 42,
     },
     buttonContainer: {
-        width: '80%',
+        width: '100%',
     },
     aboutButton: {
         backgroundColor: '#FFC107',
@@ -115,12 +107,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFC107',
     },
     resetPasswordButton: {
-        backgroundColor: '#8A2BE2',
+        backgroundColor: '#9f47fc',
     },
     logOutButton: {
         backgroundColor: '#007BFF',
     },
     deleteAccountButton: {
-        backgroundColor: 'red',
+        backgroundColor: '#fa4343',
     },
 });
