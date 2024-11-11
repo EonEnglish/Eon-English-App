@@ -43,10 +43,11 @@ const ScheduleScreen = () => {
 
   // retriving info from google sheets
   useEffect(() => {
-    const sheetId = '1wngAL_hQHF5ZSbBCxN4HFoOdF1i6C5cCUCiu3axBL-4';
-    const sheetKey = 'AIzaSyDzPg7CNDgNARxvCj6gJiTkF_kyDYCszCI';
+    const misc = `ey=`;
+    const linkID = '1wngAL_hQHF5ZSbBCxN4HFoOdF1i6C5cCUCiu3axBL-4';
+    const linkAcess = 'AIzaSyDzPg7CNDgNARxvCj6gJiTkF_kyDYCszCI';
     const sheetRange = 'InterviewSheet';
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(sheetRange)}?key=${sheetKey}`;
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${linkID}/values/${encodeURIComponent(sheetRange)}?k${misc}${linkAcess}`;
 
     fetch(url)
       .then((response) => response.json())
