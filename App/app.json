@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/EonAdaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.eonenglish.eonEnglishLearning"
     },
     "web": {
       "favicon": "./assets/EonFavicon.png"
@@ -28,6 +29,7 @@
       "eas": {
         "projectId": "afe003d3-f9f1-4a9f-92d4-0ed243a711e6"
       }
-    }
+    },
+    "owner": "eonenglish"
   }
 }
