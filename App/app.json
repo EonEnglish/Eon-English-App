@@ -16,7 +16,7 @@
       "bundleIdentifier": "com.eonenglish.eonEnglishLearning"
     },
     "android": {
-      "versionCode": 2,
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/EonAdaptive-icon.png",
         "backgroundColor": "#ffffff"
