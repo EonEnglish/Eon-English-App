@@ -16,12 +16,12 @@
       "bundleIdentifier": "com.eonenglish.eonEnglishLearning"
     },
     "android": {
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/EonAdaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.eonenglish.eonEnglishLearning",
-      "versionCode": 2
+      "package": "com.eonenglish.eonEnglishLearning"
     },
     "web": {
       "favicon": "./assets/EonFavicon.png"
