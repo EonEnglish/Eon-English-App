@@ -20,7 +20,8 @@
         "foregroundImage": "./assets/EonAdaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.eonenglish.eonEnglishLearning"
+      "package": "com.eonenglish.eonEnglishLearning",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/EonFavicon.png"
