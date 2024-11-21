@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import ProfileNavigator from './ProfileNavigator';
@@ -7,15 +6,17 @@ import HomeworkNavigator from './HomeworkNavigator';
 import ContactUsNavigator from './ContactUsNavigator'
 import HomeNavigator from './HomeNavigator';
 import ScheduleNavigator from './ScheduleNavigator';
+import { View, Dimensions } from 'react-native';
 
 
 const Tab = createBottomTabNavigator();
+const { height } = Dimensions.get('window');
 
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: ({ focused, size }) => {
           let iconName;
 
           switch (route.name) {
@@ -38,46 +39,34 @@ const BottomTabNavigator = () => {
               iconName = 'question';
           }
 
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-        tabBarLabel: ({ focused }) => {
-          let label;
-
-          switch (route.name) {
-            case 'Home':
-              label = 'Home';
-              break;
-            case 'Homework':
-              label = 'Homework';
-              break;
-            case 'ContactUs':
-              label = 'Contact Us';
-              break;
-            case 'Schedule':
-              label = 'Schedule';
-              break;
-            case 'Profile':
-              label = 'Profile';
-              break;
-            default:
-              label = '';
-          }
-
           return (
-            <Text style={{ fontSize: 12, paddingBottom: 5, color: focused ? '#007AFF' : 'gray' }}>
-              {label}
-            </Text>
-          );
+          <View
+            style={{
+              backgroundColor: focused ? 'rgba(0, 122, 255, 0.1)' : 'transparent',
+              justifyContent: 'center',
+              alignItems: 'center',
+              paddingHorizontal: 9,
+              paddingVertical: 7,
+              borderRadius: 10,
+            }}
+          >
+            <Ionicons
+              name={iconName}
+              size={size}
+              color={focused ? '#007AFF' : 'grey'}
+            />
+          </View>
+        );
+
         },
-        tabBarActiveTintColor: '#007AFF',
-        tabBarInactiveTintColor: 'gray',
-        tabBarShowLabel: true,
+        tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: '#f8f8f8',
-          height: 90, 
-          paddingBottom: 28, 
-          borderTopWidth: 0,
-        },
+          borderTopColor: '#ccc',
+          paddingBottom: 10,
+          paddingHorizontal: 7,
+          height: height / 11,
+        }
       })}
     >
       <Tab.Screen options={{ headerShown: false }} name="Home" component={HomeNavigator} />
