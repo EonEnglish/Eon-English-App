@@ -3,7 +3,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProfileScreen from '../screens/ProfileScreen';
 import AboutScreen from '../screens/AboutScreen';
 import PasswordResetScreen from '../screens/PasswordResetScreen';
-import { Ionicons } from '@expo/vector-icons'; // Example icon library, adjust as needed
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +17,7 @@ const ProfileNavigator = () => {
       <Stack.Screen
         name="AboutScreen"
         component={AboutScreen}
-        options={screenOptionsWithBackButton('Who We Are')}
+        options={screenOptionsWithBackButton('About')}
       />
       <Stack.Screen
         name="PasswordResetScreen"
@@ -37,15 +36,7 @@ const screenOptions = (title) => ({ navigation }) => ({
 const screenOptionsWithBackButton = (title) => ({ navigation }) => ({
   title: title,
   headerTitleAlign: 'center',
-  headerLeft: () => (
-    <Ionicons.Button
-      name="arrow-back"
-      size={24}
-      color="black"
-      backgroundColor="transparent"
-      onPress={() => navigation.goBack()}
-    />
-  ),
 });
+
 
 export default ProfileNavigator;
