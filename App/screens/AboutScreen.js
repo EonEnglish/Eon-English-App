@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Container from '../components/Container';
 import InfoCard from '../components/InfoCard';
 
@@ -13,7 +13,7 @@ const AboutScreen = () => {
   return (
     <Container style={styles.aboutContainer}>
       <InfoCard
-        title="About"
+        title="Who We Are"
         titleStyle={styles.aboutTitle}
         text={aboutText}
         textStyle={styles.aboutText}
