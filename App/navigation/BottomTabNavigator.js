@@ -1,12 +1,14 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import ProfileNavigator from './ProfileNavigator';
-import HomeworkNavigator from './HomeworkNavigator';
-import ContactUsNavigator from './ContactUsNavigator'
-import HomeNavigator from './HomeNavigator';
-import ScheduleNavigator from './ScheduleNavigator';
 import { View, Dimensions } from 'react-native';
+import { 
+  HomeNavigator, 
+  HomeworkNavigator, 
+  ProfileNavigator, 
+  ScheduleNavigator, 
+  ContactUsNavigator 
+} from './TopTabNavigator';
 
 
 const Tab = createBottomTabNavigator();
