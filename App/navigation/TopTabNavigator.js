@@ -13,21 +13,18 @@ import ProfileScreen from '../screens/ProfileScreen';
 import AboutScreen from '../screens/AboutScreen';
 import PasswordResetScreen from '../screens/PasswordResetScreen';
 
+// #F9F9F9
+const background = { contentStyle: {backgroundColor: 'red'} };
 const Stack = createNativeStackNavigator();
 const screenOptionsWithBackButton = (title) => ({
   title: title,
   headerTitleAlign: 'center'
 });
 
-const styles = StyleSheet.create({
-  contentStyle: { 
-    backgroundColor: 'red'
-   }
-});
 
 const HomeNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{contentStyle: {backgroundColor: '#F5F5F5'}}}>
+    <Stack.Navigator screenOptions={background}>
       <Stack.Screen 
         options={screenOptionsWithBackButton('Eon English')} 
         name="Home" 
@@ -39,7 +36,7 @@ const HomeNavigator = () => {
 
 const HomeworkNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{contentStyle: {backgroundColor: '#F5F5F5'}}}>
+    <Stack.Navigator screenOptions={background}>
       <Stack.Screen 
         options={screenOptionsWithBackButton('Homework')} 
         name="HomeWork" 
@@ -71,7 +68,7 @@ const HomeworkNavigator = () => {
 
 const ContactUsNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{contentStyle: {backgroundColor: '#F5F5F5'}}}>
+    <Stack.Navigator screenOptions={background}>
       <Stack.Screen 
         options={screenOptionsWithBackButton('Contact Us')} 
         name="ContactUs" 
@@ -83,7 +80,7 @@ const ContactUsNavigator = () => {
 
 const ScheduleNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{contentStyle: {backgroundColor: '#F5F5F5'}}}>
+    <Stack.Navigator screenOptions={background}>
       <Stack.Screen 
         options={screenOptionsWithBackButton('Schedule')} 
         name="Schedule" 
