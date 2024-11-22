@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
 import Homework from '../screens/Homework';
@@ -13,8 +12,8 @@ import ProfileScreen from '../screens/ProfileScreen';
 import AboutScreen from '../screens/AboutScreen';
 import PasswordResetScreen from '../screens/PasswordResetScreen';
 
-// #F9F9F9
-const background = { contentStyle: {backgroundColor: 'red'} };
+
+const background = { contentStyle: {backgroundColor: '#F9F9F9'} };
 const Stack = createNativeStackNavigator();
 const screenOptionsWithBackButton = (title) => ({
   title: title,
@@ -92,7 +91,7 @@ const ScheduleNavigator = () => {
 
 const ProfileNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="ProfileScreen">
+    <Stack.Navigator initialRouteName="ProfileScreen" screenOptions={background}>
       <Stack.Screen
         name="ProfileScreen"
         component={ProfileScreen}
