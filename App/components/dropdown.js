@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         padding: 13,
         fontSize: 14,
         borderWidth: 3,
-        borderColor: '#CCCCCC',
+        borderColor: '#C9C9C9',
     },
     errorInput: {
         borderColor: '#FF0000',
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         gap: 5,
     },
     label: {
-        color: '#8E8E8F',
+        color: '#585758',
         fontWeight: '700',
         fontWeight: 'bold',
     },
