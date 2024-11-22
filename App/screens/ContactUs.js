@@ -20,24 +20,24 @@ const ContactUs = () => {
 
         // Define errors
         newErrors.firstName = [
-            {condition: firstName.length == 0, result: 'First Name is required'},
-            {condition: firstName.length > 50, result: 'Field cannot be longer than 50 characters'}
+            { condition: firstName.length == 0, result: 'First Name is required' },
+            { condition: firstName.length > 50, result: 'Field cannot be longer than 50 characters' }
         ];
         newErrors.lastName = [
-            {condition: lastName.length == 0, result: 'Last Name is required'},
-            {condition: lastName.length > 50, result: 'Field cannot be longer than 50 characters'}
+            { condition: lastName.length == 0, result: 'Last Name is required' },
+            { condition: lastName.length > 50, result: 'Field cannot be longer than 50 characters' }
         ];
         newErrors.weChatID = [
-            {condition: weChatID.length == 0, result: 'WeChat ID is required'},
-            {condition: weChatID.length < 3, result: 'WeChat ID must be longer than 3 characters'},
-            {condition: weChatID.length > 20, result: 'WeChat ID cannot be longer than 20 characters'}
+            { condition: weChatID.length == 0, result: 'WeChat ID is required' },
+            { condition: weChatID.length < 3, result: 'WeChat ID must be longer than 3 characters' },
+            { condition: weChatID.length > 20, result: 'WeChat ID cannot be longer than 20 characters' }
         ];
         newErrors.subject = [
-            {condition: subject.length == 0, result: 'Subject is required'},
-            {condition: subject.length > 50, result: 'Field cannot be longer than 50 characters'}
+            { condition: subject.length == 0, result: 'Subject is required' },
+            { condition: subject.length > 50, result: 'Field cannot be longer than 50 characters' }
         ];
         newErrors.message = [
-            {condition: message.length == 0, result: 'Message is required'}
+            { condition: message.length == 0, result: 'Message is required' }
         ];
 
         for (const field in newErrors) {
@@ -56,13 +56,15 @@ const ContactUs = () => {
                 body: `Dear Eon English,\n\n${message}\n\nBest\n\n${firstName} ${lastName}.\n\nWeChat ID: ${weChatID}`,
             }).then(() => {
                 Alert.alert('Sent!', 'The form has been sent.', [
-                    {text: 'OK', onPress: () => {
-                        navigation.navigate('Home');
-                    }}
+                    {
+                        text: 'OK', onPress: () => {
+                            navigation.navigate('Home');
+                        }
+                    }
                 ]);
             });
         } catch (error) {
-            Alert.alert('Failed', 'The form has not been sent.', {text: 'OK'});
+            Alert.alert('Failed', 'The form has not been sent.', { text: 'OK' });
         }
     }
 

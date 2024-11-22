@@ -4,11 +4,13 @@ import RegisterScreen from '../screens/RegisterScreen';
 import PasswordResetScreen from '../screens/PasswordResetScreen';
 import BottomTabNavigator from './BottomTabNavigator';
 
+
+const background = { contentStyle: {backgroundColor: '#F9F9F9'} };
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{contentStyle: {backgroundColor: '#F5F5F5'}}}>
+    <Stack.Navigator screenOptions={background}>
       <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen name="PasswordReset" component={PasswordResetScreen} />
@@ -16,5 +18,6 @@ const StackNavigator = () => {
     </Stack.Navigator>
   );
 };
+
 
 export default StackNavigator;

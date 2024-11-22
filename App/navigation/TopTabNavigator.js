@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
 import Homework from '../screens/Homework';
@@ -13,11 +14,18 @@ import AboutScreen from '../screens/AboutScreen';
 import PasswordResetScreen from '../screens/PasswordResetScreen';
 
 
-const background = { contentStyle: {backgroundColor: '#F9F9F9'} };
+StatusBar.setBarStyle('dark-content');
+const background = { contentStyle: {backgroundColor: '#F1F1F1'} };
 const Stack = createNativeStackNavigator();
 const screenOptionsWithBackButton = (title) => ({
   title: title,
-  headerTitleAlign: 'center'
+  headerTitleAlign: 'center',
+  headerStyle: { backgroundColor: '#F4F4F4' },
+  headerTintColor: '#363636',
+  headerTitleStyle: {
+    fontWeight: '800',
+    fontSize: 20
+  },
 });
 
 
@@ -25,7 +33,7 @@ const HomeNavigator = () => {
   return (
     <Stack.Navigator screenOptions={background}>
       <Stack.Screen 
-        options={screenOptionsWithBackButton('Eon English')} 
+        options={screenOptionsWithBackButton('Home')} 
         name="Home" 
         component={HomeScreen}
       />
