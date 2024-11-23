@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { getAuth } from "firebase/auth";
+import { getDoc, doc } from "@firebase/firestore";
+import { useIsFocused } from "@react-navigation/native";
+import { db } from "../firebase";
+import Container from "../components/Container";
 import {
   View,
   Text,
@@ -6,11 +11,6 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import { getAuth } from "firebase/auth";
-import { getDoc, doc } from "@firebase/firestore";
-import { useIsFocused } from "@react-navigation/native";
-import { db } from "../firebase";
-import Container from "../components/Container";
 
 const Homework = ({ navigation }) => {
   const [lessonsState, setLessonsState] = useState([]);
@@ -163,20 +163,19 @@ const Homework = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
+    paddingBottom: 0,
   },
   flatListContent: {
-    padding: 16,
-    paddingTop: 0,
+    padding: 5,
   },
   column: {
     justifyContent: "space-between",
   },
   button: {
-    marginVertical: 8,
-    padding: 24,
-    borderRadius: 16,
-    width: "48%",
+    marginVertical: 5,
+    marginHorizontal: -5,
+    borderRadius: 7,
+    width: "50%",
     aspectRatio: 1,
   },
   buttonTextContainer: {
@@ -185,7 +184,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   lessonNumber: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: "700",
     color: "#fff",
     marginBottom: 8,
