@@ -64,10 +64,14 @@ const BottomTabNavigator = () => {
         tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: '#F6F6F6',
-          borderTopColor: '#ccc',
+          borderBottomWidth: 0,
           paddingBottom: 10,
           paddingHorizontal: 7,
           height: height / 11,
+          borderTopWidth: 0,
+          shadowColor: 'black',
+          shadowOpacity: 0.06,
+          shadowRadius: 20
         }
       })}
     >
