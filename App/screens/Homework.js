@@ -164,6 +164,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingBottom: 0,
+    paddingTop: 0,
   },
   flatListContent: {
     padding: 5,
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
     marginHorizontal: -5,
     borderRadius: 7,
     width: "50%",
-    aspectRatio: 1,
+    aspectRatio: 1.1,
   },
   buttonTextContainer: {
     flex: 1,
