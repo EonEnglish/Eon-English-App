@@ -53,10 +53,8 @@ const Homework = ({ navigation }) => {
       const auth = getAuth();
       const user = auth.currentUser;
 
-      if (!user) {
-        console.error("No authenticated user found.");
-        return;
-      }
+      if (!user)
+        return console.error("No authenticated user found.");
 
       const newLessonsState = [...lessons];
 
@@ -165,6 +163,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingBottom: 0,
     paddingTop: 0,
+    marginTop: 10,
   },
   flatListContent: {
     padding: 5,
