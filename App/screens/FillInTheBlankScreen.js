@@ -43,7 +43,7 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
     fetchSentence();
   }, []);
 
-  console.log(sentenceList)
+  // console.log(sentenceList)
 
   useEffect(() => {
     if (sentenceList.length > 0) {
@@ -160,7 +160,7 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
           total_score: totalScore,
         });
 
-        console.log('Homework completion data updated successfully with a higher score.');
+        // console.log('Homework completion data updated successfully with a higher score.');
         return;
 
       } else {
@@ -171,7 +171,7 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
           total_score: totalScore,
         });
 
-        console.log('Homework completion data stored successfully.');
+        // console.log('Homework completion data stored successfully.');
       }
     } catch (error) {
       console.error('Error storing homework completion data:', error);
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
     padding: 20, // Change isPointInDropArea padding if editing this value
     borderWidth: 3,
     borderColor: '#ccc',
-    borderRadius: 10,
+    borderRadius: 7,
   },
   questionText: {
     fontSize: 18,
@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderWidth: 2,
     borderColor: '#ccc',
-    borderRadius: 5,
+    borderRadius: 7,
   },
   score: {
     fontSize: 24,

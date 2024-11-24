@@ -136,9 +136,9 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
 
       if (!homeworkDoc.exists() || score > homeworkDoc.data().score) {
         await setDoc(userHomeworkRef, dataToSet);
-        console.log('Homework completion data stored successfully.');
+        // console.log('Homework completion data stored successfully.');
       } else {
-        console.log('Existing score is higher or equal. No update made.');
+        // console.log('Existing score is higher or equal. No update made.');
       }
 
       navigation.goBack();
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: '90%',
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 7,
     borderWidth: 3,
     borderColor: '#CCCCCC',
   },
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20,
     borderRadius: 10,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: '#CCCCCC',
     alignItems: 'center',
     justifyContent: 'center',
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
   radioButtonSelected: {
     height: 10,
     width: 10,
-    borderRadius: 5,
+    borderRadius: 7,
     backgroundColor: 'gray',
   },
   optionText: {

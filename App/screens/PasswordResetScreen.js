@@ -74,11 +74,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         paddingHorizontal: 15,
         paddingVertical: 10,
-        borderRadius: 10,
+        borderRadius: 7,
         marginTop: 5,
     },
     buttonContainer: {
-        width: '60%',
+        width: '80%',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 40,
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#0782F9',
         width: '100%',
         padding: 15,
-        borderRadius: 10,
+        borderRadius: 7,
         alignItems: 'center',
     },
     buttonText: {

@@ -58,7 +58,7 @@ const ContactUs = () => {
                 Alert.alert('Sent!', 'The form has been sent.', [
                     {
                         text: 'OK', onPress: () => {
-                            navigation.navigate('Home');
+                            navigation.navigate('HomeStack');
                         }
                     }
                 ]);
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#0782F9',
         width: '100%',
         padding: 15,
-        borderRadius: 10,
+        borderRadius: 7,
         alignItems: 'center',
     },
     buttonText: {
