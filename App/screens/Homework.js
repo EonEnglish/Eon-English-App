@@ -162,11 +162,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingBottom: 0,
+    paddingRight: 5,
     paddingTop: 0,
-    marginTop: 10,
   },
   flatListContent: {
-    padding: 5,
+    paddingRight: 20,
+    paddingLeft: 5,
+    marginTop: 10,
+    paddingBottom: 40,
   },
   column: {
     justifyContent: "space-between",
