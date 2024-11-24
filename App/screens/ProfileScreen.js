@@ -10,7 +10,7 @@ const ProfileScreen = ({ navigation }) => {
 
     const handleSignOut = () => {
         signOut(auth).then(() => {
-            navigation.replace("Login", {manualLogOut: true});
+            navigation.replace("Login", { manualLogOut: true });
         }).catch((error) => {
             alert(error.message);
         });
@@ -23,7 +23,7 @@ const ProfileScreen = ({ navigation }) => {
             [
                 {
                     text: "Cancel",
-                    onPress: () => console.log("Cancel Pressed"),
+                    // onPress: () => console.log("Cancel Pressed"),
                     style: "cancel"
                 },
                 { text: "Delete", onPress: handleDeleteAccount }
@@ -56,7 +56,7 @@ const ProfileScreen = ({ navigation }) => {
             <View style={styles.buttonContainer}>
                 <ProfileButton
                     text={"About"}
-                    onPress={() => navigation.navigate('AboutScreen')}
+                    onPress={() => navigation.navigate('AboutScreenStack')}
                     style={styles.aboutButton}
                 />
                 <ProfileButton
@@ -69,7 +69,7 @@ const ProfileScreen = ({ navigation }) => {
                 />
                 <ProfileButton
                     text={"Reset Password"}
-                    onPress={() => navigation.navigate('PasswordResetScreen')}
+                    onPress={() => navigation.navigate('PasswordResetScreenStack')}
                     style={styles.resetPasswordButton}
                 />
                 <ProfileButton

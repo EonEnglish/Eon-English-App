@@ -136,9 +136,9 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
 
       if (!homeworkDoc.exists() || score > homeworkDoc.data().score) {
         await setDoc(userHomeworkRef, dataToSet);
-        console.log('Homework completion data stored successfully.');
+        // console.log('Homework completion data stored successfully.');
       } else {
-        console.log('Existing score is higher or equal. No update made.');
+        // console.log('Existing score is higher or equal. No update made.');
       }
 
       navigation.goBack();

@@ -129,7 +129,7 @@ const Homework = ({ navigation }) => {
     <TouchableOpacity
       style={[styles.button, { backgroundColor: item.color }]}
       onPress={() =>
-        navigation.navigate("Lessons", { data: `Lesson ${item.id}` })
+        navigation.navigate("LessonsStack", { data: `Lesson ${item.id}` })
       }
     >
       <View style={styles.buttonTextContainer}>

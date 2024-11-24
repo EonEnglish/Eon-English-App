@@ -58,7 +58,7 @@ const ContactUs = () => {
                 Alert.alert('Sent!', 'The form has been sent.', [
                     {
                         text: 'OK', onPress: () => {
-                            navigation.navigate('Home');
+                            navigation.navigate('HomeStack');
                         }
                     }
                 ]);

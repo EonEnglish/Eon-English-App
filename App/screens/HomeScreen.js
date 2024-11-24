@@ -13,7 +13,7 @@ const HomeScreen = ({ navigation }) => {
       try {
         const homePageCollection = await getDocs(collection(db, "Home Page"));
         if (homePageCollection.empty) {
-          console.log('No documents found in the Home Page collection.');
+          // console.log('No documents found in the Home Page collection.');
           setAnnouncementsExist(false);
           return;
         }
