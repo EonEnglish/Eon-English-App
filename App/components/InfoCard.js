@@ -16,7 +16,7 @@ export default InfoCard;
 const styles = StyleSheet.create({
     infoCardContainer: {
         backgroundColor: '#0782F9',
-        borderRadius: 10,
+        borderRadius: 7,
         marginBottom: 20,
         padding: 20,
     },

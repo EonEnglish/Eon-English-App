@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
     padding: 20, // Change isPointInDropArea padding if editing this value
     borderWidth: 3,
     borderColor: '#ccc',
-    borderRadius: 10,
+    borderRadius: 7,
   },
   questionText: {
     fontSize: 18,
@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderWidth: 2,
     borderColor: '#ccc',
-    borderRadius: 5,
+    borderRadius: 7,
   },
   score: {
     fontSize: 24,
