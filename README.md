@@ -2,6 +2,9 @@
 [![Contributors][contributors-shield]][contributors-url]
 [![Issues][issues-shield]][issues-url]
 [![Discord-Server][discord-shield]][discord-url]
+[![App-Store][appStore-shield]][appStore-url]
+[![Play-Store][playStore-shield]][playStore-url]
+
 
 <div style="display: flex;">
   <img src="https://github.com/user-attachments/assets/11735253-cf87-49f5-8d8e-16e3f51faca9" style="width: 200px;">
@@ -86,3 +89,9 @@ Any contributions you make are **greatly appreciated**!
 [discord-shield]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscord.com%2Fapi%2Finvites%2FgwV356qNSj%3Fwith_counts%3Dtrue&query=%24.approximate_presence_count&suffix=%20Online&style=for-the-badge&logo=Discord&logoColor=white&label=Discord&color=%235864f4
 
 [discord-url]: https://discord.gg/gwV356qNSj
+
+[appStore-shield]: https://img.shields.io/badge/download-app%20store-%23007AFF?style=for-the-badge&logo=apple&logoColor=white&labelColor=black
+[appStore-url]: https://apps.apple.com/us/app/eon-english-learning/id6535652983
+
+[playStore-shield]: https://img.shields.io/badge/download-play%20store-%2334A853?style=for-the-badge&logo=android&logoColor=white&labelColor=black
+[playStore-url]: https://play.google.com/store/apps/details?id=com.eonenglish.eonEnglishLearning&pli=1
