@@ -34,7 +34,7 @@ const HomeNavigator = () => {
     <Stack.Navigator screenOptions={background}>
       <Stack.Screen 
         options={screenOptionsWithBackButton('Home')} 
-        name="Home" 
+        name="HomeStack" 
         component={HomeScreen}
       />
     </Stack.Navigator>
@@ -46,27 +46,27 @@ const HomeworkNavigator = () => {
     <Stack.Navigator screenOptions={background}>
       <Stack.Screen 
         options={screenOptionsWithBackButton('Homework')} 
-        name="HomeWork" 
+        name="HomeworkStack" 
         component={Homework}
       />
       <Stack.Screen 
         options={screenOptionsWithBackButton('Lessons')}
-        name="Lessons" 
+        name="LessonsStack" 
         component={Lessons}
       />
       <Stack.Screen 
         options={screenOptionsWithBackButton('Vocab Match')}
-        name="VocabMatch" 
+        name="VocabMatchStack" 
         component={VocabMatchScreen}
       />
       <Stack.Screen 
         options={screenOptionsWithBackButton('Vocab Match Photo')}
-        name="VocabMatchPhoto" 
+        name="VocabMatchPhotoStack" 
         component={VocabMatchPhotoScreen}
       />
       <Stack.Screen 
         options={screenOptionsWithBackButton('Blank Match')}
-        name="BlankMatch" 
+        name="BlankMatchStack" 
         component={FillInTheBlankScreen}
       />
     </Stack.Navigator>
@@ -78,7 +78,7 @@ const ContactUsNavigator = () => {
     <Stack.Navigator screenOptions={background}>
       <Stack.Screen 
         options={screenOptionsWithBackButton('Contact Us')} 
-        name="ContactUs" 
+        name="ContactUsStack" 
         component={ContactUs}
       />
     </Stack.Navigator>
@@ -90,7 +90,7 @@ const ScheduleNavigator = () => {
     <Stack.Navigator screenOptions={background}>
       <Stack.Screen 
         options={screenOptionsWithBackButton('Schedule')} 
-        name="Schedule" 
+        name="ScheduleStack" 
         component={ScheduleScreen}
       />
     </Stack.Navigator>
@@ -101,17 +101,17 @@ const ProfileNavigator = () => {
   return (
     <Stack.Navigator initialRouteName="ProfileScreen" screenOptions={background}>
       <Stack.Screen
-        name="ProfileScreen"
+        name="ProfileScreenStack"
         component={ProfileScreen}
         options={screenOptionsWithBackButton('Profile')}
       />
       <Stack.Screen
-        name="AboutScreen"
+        name="AboutScreenStack"
         component={AboutScreen}
         options={screenOptionsWithBackButton('About')}
       />
       <Stack.Screen
-        name="PasswordResetScreen"
+        name="PasswordResetScreenStack"
         component={PasswordResetScreen}
         options={{ title: 'Reset Password' }}
       />

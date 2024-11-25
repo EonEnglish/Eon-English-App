@@ -49,7 +49,7 @@ const BottomTabNavigator = () => {
               alignItems: 'center',
               paddingHorizontal: 9,
               paddingVertical: 7,
-              borderRadius: 10,
+              borderRadius: 7,
             }}
           >
             <Ionicons

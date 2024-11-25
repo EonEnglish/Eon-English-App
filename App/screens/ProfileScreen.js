@@ -43,7 +43,7 @@ const ProfileScreen = ({ navigation }) => {
       [
         {
           text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
+          // onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
         { text: "Delete", onPress: handleDeleteAccount }
@@ -140,7 +140,7 @@ const ProfileScreen = ({ navigation }) => {
             </View>
             <ProfileButton
               text={t("profile.about")}
-              onPress={() => navigation.navigate("AboutScreen")}
+              onPress={() => navigation.navigate("AboutScreenStack")}
               style={styles.aboutButton}
             />
             <ProfileButton
@@ -153,7 +153,7 @@ const ProfileScreen = ({ navigation }) => {
             />
             <ProfileButton
               text={t("profile.resetPassword")}
-              onPress={() => navigation.navigate("PasswordResetScreen")}
+              onPress={() => navigation.navigate("PasswordResetScreenStack")}
               style={styles.resetPasswordButton}
             />
             <ProfileButton

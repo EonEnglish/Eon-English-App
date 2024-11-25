@@ -10,7 +10,7 @@ const FormModal = () => {
         visible={modalVisible}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-          console.log("EEEE");
+          // console.log("EEEE");
           setModalVisible(!modalVisible);
         }}>
         <View style={styles.centeredView}>

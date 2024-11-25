@@ -4,7 +4,7 @@
     "slug": "eonEnglishLearning",
     "version": "1.2.3",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/EonAdaptive-icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/EonSplash.png",
@@ -31,6 +31,7 @@
         "projectId": "afe003d3-f9f1-4a9f-92d4-0ed243a711e6"
       }
     },
+    "newArchEnabled": true,
     "owner": "eonenglish"
   }
 }

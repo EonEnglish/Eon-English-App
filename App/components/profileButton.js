@@ -15,7 +15,7 @@ export default ProfileButton;
 const styles = StyleSheet.create({
     button: {
         padding: 15,
-        borderRadius: 10,
+        borderRadius: 7,
         alignItems: 'center',
         marginVertical: 10,
     },

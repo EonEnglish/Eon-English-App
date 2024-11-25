@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { getAuth } from "firebase/auth";
+import { getDoc, doc } from "@firebase/firestore";
+import { useIsFocused } from "@react-navigation/native";
+import { db } from "../firebase";
+import Container from "../components/Container";
 import {
   View,
   Text,
@@ -6,11 +11,6 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import { getAuth } from "firebase/auth";
-import { getDoc, doc } from "@firebase/firestore";
-import { useIsFocused } from "@react-navigation/native";
-import { db } from "../firebase";
-import Container from "../components/Container";
 
 const Homework = ({ navigation }) => {
   const [lessonsState, setLessonsState] = useState([]);
@@ -53,10 +53,8 @@ const Homework = ({ navigation }) => {
       const auth = getAuth();
       const user = auth.currentUser;
 
-      if (!user) {
-        console.error("No authenticated user found.");
-        return;
-      }
+      if (!user)
+        return console.error("No authenticated user found.");
 
       const newLessonsState = [...lessons];
 
@@ -131,7 +129,7 @@ const Homework = ({ navigation }) => {
     <TouchableOpacity
       style={[styles.button, { backgroundColor: item.color }]}
       onPress={() =>
-        navigation.navigate("Lessons", { data: `Lesson ${item.id}` })
+        navigation.navigate("LessonsStack", { data: `Lesson ${item.id}` })
       }
     >
       <View style={styles.buttonTextContainer}>
@@ -163,21 +161,25 @@ const Homework = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
+    paddingBottom: 0,
+    paddingRight: 5,
+    paddingTop: 0,
   },
   flatListContent: {
-    padding: 16,
-    paddingTop: 0,
+    paddingRight: 20,
+    paddingLeft: 5,
+    marginTop: 10,
+    paddingBottom: 40,
   },
   column: {
     justifyContent: "space-between",
   },
   button: {
-    marginVertical: 8,
-    padding: 24,
-    borderRadius: 16,
-    width: "48%",
-    aspectRatio: 1,
+    marginVertical: 5,
+    marginHorizontal: -5,
+    borderRadius: 7,
+    width: "50%",
+    aspectRatio: 1.1,
   },
   buttonTextContainer: {
     flex: 1,
@@ -185,7 +187,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   lessonNumber: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: "700",
     color: "#fff",
     marginBottom: 8,
