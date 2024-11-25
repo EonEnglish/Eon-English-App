@@ -2,18 +2,21 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import Container from '../components/Container';
 import InfoCard from '../components/InfoCard';
+import { useTranslation } from "react-i18next";
 
 const AboutScreen = () => {
+  const { t } = useTranslation();
+  const something = t("profile.saveChanges");
   const aboutText = 
-    "Eon English is a non-profit organization that teaches kids from China and Spanish-speaking countries " +
-    "English. We aim to provide this opportunity to kids who don’t have enough access to English learning " +
-    "material. Through this program, students get to learn how to speak native English and about Western " +
-    "culture.";
+  t("about.aboutText1") + t("about.aboutText2") + t("about.aboutText3");
+    // "English. We aim to provide this opportunity to kids who don’t have enough access to English learning " +
+    // "material. Through this program, students get to learn how to speak native English and about Western " +
+    // "culture.";
 
   return (
     <Container style={styles.aboutContainer}>
       <InfoCard
-        title="Who We Are"
+        title={t("about.aboutTitle")}
         titleStyle={styles.aboutTitle}
         text={aboutText}
         textStyle={styles.aboutText}

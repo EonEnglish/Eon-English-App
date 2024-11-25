@@ -1,0 +1,30 @@
+{
+    "common": {
+      "loading": "Loading...",
+      "error": "Error",
+      "ok": "OK",
+      "cancel": "Cancelar"
+    },
+    "profile": {
+      "nativeLanguage": "Native Languge",
+      "targetLanguage": "Target Language",
+      "displayLanguage": "Display Language",
+      "saveChanges": "Save Changes",
+      "selectBothLanguages": "Select both languages",
+      "success": "Success!",
+      "languagePreferencesSaved": "Language Preference Saved",
+      "failedToSave": "Failed to save",
+      "about": "About",
+      "getInvolved": "Get Involved",
+      "findUs": "Find Us",
+      "resetPassword": "Reset password",
+      "logOut": "Logout",
+      "deleteAccount": "Delete Account"
+    },
+    "about": {
+      "aboutText1": "Eon English is a non-profit organization that teaches kids from China and Spanish-speaking countries English.",
+      "aboutText2": "We aim to provide this opportunity to kids who don’t have enough access to English learning material.",
+      "aboutText3": "Through this program, students get to learn how to speak native English and about Western culture.",
+      "aboutTitle": "Who We Are"
+    }
+}
