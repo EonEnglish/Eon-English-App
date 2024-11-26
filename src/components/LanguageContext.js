@@ -44,11 +44,11 @@ export const LanguageProvider = ({ children }) => {
       setNativeLanguage(storedNative || Localization.locale.split('-')[0]);
       setTargetLanguage(storedTarget || 'en');
       setDisplayLanguage(storedDisplay || 'native');
-      
+
       // Set initial app language
       const initialLanguage = storedDisplay === 'target' ? storedTarget : storedNative;
       await i18n.changeLanguage(initialLanguage || Localization.locale.split('-')[0]);
-      
+
       setIsLoading(false);
     } catch (error) {
       console.error('Error loading language preferences:', error);

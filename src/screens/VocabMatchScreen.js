@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet, TextInput, Button, Alert } from 'react-native';
 import { getAuth } from 'firebase/auth';
 import { getDocs, collection, getDoc, doc, setDoc } from "@firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../services/firebase";
 import Container from '../components/Container';
 import ScoreCounter from '../components/ScoreCounter';
 

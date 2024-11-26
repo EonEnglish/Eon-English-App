@@ -1,9 +1,9 @@
 # Eon-English-App
-[![Contributors][contributors-shield]][contributors-url]
-[![Issues][issues-shield]][issues-url]
-[![Discord-Server][discord-shield]][discord-url]
 [![App-Store][appStore-shield]][appStore-url]
 [![Play-Store][playStore-shield]][playStore-url]
+[![Issues][issues-shield]][issues-url]
+[![Discord-Server][discord-shield]][discord-url]
+[![Contributors][contributors-shield]][contributors-url]
 
 
 <div style="display: flex;">

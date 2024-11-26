@@ -3,7 +3,7 @@ import { View, Image, Text, StyleSheet, Alert, TouchableOpacity, Button, ScrollV
 import { getAuth } from 'firebase/auth';
 import { getDocs, collection, getDoc, doc, setDoc } from '@firebase/firestore';
 import { getDownloadURL, ref, getStorage } from 'firebase/storage';
-import { db } from "../firebase";
+import { db } from "../services/firebase";
 import Container from '../components/Container';
 import ScoreCounter from '../components/ScoreCounter';
 

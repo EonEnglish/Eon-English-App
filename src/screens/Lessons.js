@@ -4,7 +4,7 @@ import { getAuth } from 'firebase/auth';
 import { getDoc, doc } from "@firebase/firestore";
 import { Ionicons } from '@expo/vector-icons';
 import { useIsFocused } from '@react-navigation/native';
-import { db } from "../firebase";
+import { db } from "../services/firebase";
 import Container from '../components/Container';
 
 const Lessons = ({ navigation, route }) => {

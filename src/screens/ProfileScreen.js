@@ -1,7 +1,7 @@
 // screens/ProfileScreen.js
 import { StyleSheet, View, Alert, Text, ScrollView, SafeAreaView } from "react-native";
 import React, { useState, useEffect } from "react";
-import { auth } from "../firebase";
+import { auth } from "../services/firebase";
 import { signOut } from "firebase/auth";
 import ProfileButton from "../components/profileButton";
 import Container from "../components/Container";
@@ -92,7 +92,7 @@ const ProfileScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ScrollView 
+      <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContentContainer}
       >
@@ -147,9 +147,9 @@ const ProfileScreen = ({ navigation }) => {
               text={t("profile.getInvolved")}
               style={styles.getInvolvedButton}
             />
-            <ProfileButton 
-              text={t("profile.findUs")} 
-              style={styles.findUsButton} 
+            <ProfileButton
+              text={t("profile.findUs")}
+              style={styles.findUsButton}
             />
             <ProfileButton
               text={t("profile.resetPassword")}
