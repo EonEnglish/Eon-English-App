@@ -79,14 +79,11 @@ Any contributions you make are **greatly appreciated**!
 
 
 <!-- Links -->
-[contributors-shield]: https://img.shields.io/github/contributors/EonEnglish/Eon-English-App.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/EonEnglish/Eon-English-App?style=for-the-badge&logo=github&logoColor=white&labelColor=6e5494&color=6e5494&label=...%20contributors%20...
+
 [contributors-url]: https://github.com/EonEnglish/Eon-English-App/graphs/contributors
 
-[issues-shield]: https://img.shields.io/github/issues/EonEnglish/Eon-English-App.svg?style=for-the-badge
-[issues-url]: https://github.com/EonEnglish/Eon-English-App/issues
-
-[discord-shield]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscord.com%2Fapi%2Finvites%2FgwV356qNSj%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20Members&style=for-the-badge&logo=Discord&logoColor=white&label=Discord&color=%235864f4
-
+[discord-shield]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscord.com%2Fapi%2Finvites%2FgwV356qNSj%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&label=&suffix=%20Members&style=for-the-badge&logo=discord&logoColor=white&color=%235864f4
 [discord-url]: https://discord.gg/gwV356qNSj
 
 [appStore-shield]: https://img.shields.io/badge/download-app%20store-%23007AFF?style=for-the-badge&logo=apple&logoColor=white&labelColor=black
