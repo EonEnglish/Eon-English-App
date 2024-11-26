@@ -1,8 +1,8 @@
 # Eon-English-App
 [![App-Store][appStore-shield]][appStore-url]
 [![Play-Store][playStore-shield]][playStore-url]
-[![Discord-Server][discord-shield]][discord-url]
 [![Contributors][contributors-shield]][contributors-url]
+[![Discord-Server][discord-shield]][discord-url]
 
 
 <div style="display: flex;">
