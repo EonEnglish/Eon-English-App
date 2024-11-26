@@ -3,12 +3,12 @@ import { View, Text, StyleSheet, TouchableOpacity, Modal, ScrollView } from 'rea
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from './LanguageContext';
 
-const LanguageSelector = ({ 
-  label, 
-  value, 
-  onValueChange, 
+const LanguageSelector = ({
+  label,
+  value,
+  onValueChange,
   languages = LANGUAGES,
-  excludeValue 
+  excludeValue
 }) => {
   const [modalVisible, setModalVisible] = React.useState(false);
   const { t } = useTranslation();
@@ -25,7 +25,7 @@ const LanguageSelector = ({
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      
+
       <TouchableOpacity
         style={styles.selector}
         onPress={() => setModalVisible(true)}
@@ -51,7 +51,7 @@ const LanguageSelector = ({
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>{t('language.selectLanguage')}</Text>
-            
+
             <ScrollView style={styles.languageList}>
               {availableLanguages.map((language) => (
                 <TouchableOpacity

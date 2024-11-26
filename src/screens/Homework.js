@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getAuth } from "firebase/auth";
 import { getDoc, doc } from "@firebase/firestore";
 import { useIsFocused } from "@react-navigation/native";
-import { db } from "../firebase";
+import { db } from "../services/firebase";
 import Container from "../components/Container";
 import {
   View,
