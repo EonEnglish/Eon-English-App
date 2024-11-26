@@ -2,7 +2,7 @@
   "expo": {
     "name": "Eon English Learning",
     "slug": "eonEnglishLearning",
-    "version": "1.2.3",
+    "version": "1.3.7",
     "orientation": "portrait",
     "icon": "./assets/EonAdaptive-icon.png",
     "userInterfaceStyle": "light",
@@ -16,7 +16,7 @@
       "bundleIdentifier": "com.eonenglish.eonEnglishLearning"
     },
     "android": {
-      "versionCode": 3,
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/EonAdaptive-icon.png",
         "backgroundColor": "#ffffff"
