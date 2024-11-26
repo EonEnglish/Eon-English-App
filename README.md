@@ -85,7 +85,7 @@ Any contributions you make are **greatly appreciated**!
 [issues-shield]: https://img.shields.io/github/issues/EonEnglish/Eon-English-App.svg?style=for-the-badge
 [issues-url]: https://github.com/EonEnglish/Eon-English-App/issues
 
-[discord-shield]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscord.com%2Fapi%2Finvites%2FgwV356qNSj%3Fwith_counts%3Dtrue&query=%24.approximate_presence_count&suffix=%20Online&style=for-the-badge&logo=Discord&logoColor=white&label=Discord&color=%235864f4
+[discord-shield]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscord.com%2Fapi%2Finvites%2FgwV356qNSj%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20Members&style=for-the-badge&logo=Discord&logoColor=white&label=Discord&color=%235864f4
 
 [discord-url]: https://discord.gg/gwV356qNSj
 
