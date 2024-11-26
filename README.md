@@ -6,9 +6,7 @@
 
 
 <div style="display: flex;">
-  <img src="https://github.com/user-attachments/assets/11735253-cf87-49f5-8d8e-16e3f51faca9" style="width: 200px;">
-  <img src="https://github.com/user-attachments/assets/0891e0e3-09d6-4772-a3de-62e4b40c32a4" style="width: 200px;">
-  <img src="https://github.com/user-attachments/assets/1b070cb2-27ef-445f-8c80-ce69aba4eca3" style="width: 200px;">
+  <img src="https://github.com/user-attachments/assets/b91e63a7-fd5c-4f80-aa98-4e39f3b23a4c">
 </div>
 
 
