@@ -12,7 +12,7 @@ import {
 
 
 const Tab = createBottomTabNavigator();
-const { height } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 const BottomTabNavigator = () => {
   return (
@@ -47,7 +47,7 @@ const BottomTabNavigator = () => {
               backgroundColor: focused ? 'rgba(0, 122, 255, 0.1)' : 'transparent',
               justifyContent: 'center',
               alignItems: 'center',
-              paddingHorizontal: 9,
+              paddingHorizontal: width < 768 ? 9 : 0, // for iPads
               paddingVertical: 7,
               borderRadius: 7,
             }}
