@@ -8,7 +8,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "format:check": "prettier . --check",
-    "format:fix": "prettier . --write"
+    "format:fix": "prettier . --write",
+    "prepare": "husky"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.23.1",
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "husky": "^9.1.7",
     "prettier": "^3.4.1"
   },
   "private": true
