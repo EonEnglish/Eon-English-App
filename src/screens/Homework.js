@@ -53,8 +53,7 @@ const Homework = ({ navigation }) => {
       const auth = getAuth();
       const user = auth.currentUser;
 
-      if (!user)
-        return console.error("No authenticated user found.");
+      if (!user) return console.error("No authenticated user found.");
 
       const newLessonsState = [...lessons];
 
@@ -67,7 +66,7 @@ const Homework = ({ navigation }) => {
           "Homework",
           lessonId,
           "1",
-          "Vocab Match"
+          "Vocab Match",
         );
         let Vocab_Match_Photo = doc(
           db,
@@ -76,7 +75,7 @@ const Homework = ({ navigation }) => {
           "Homework",
           lessonId,
           "2",
-          "Vocab Match Photo"
+          "Vocab Match Photo",
         );
         let Fill_In_The_blank = doc(
           db,
@@ -85,7 +84,7 @@ const Homework = ({ navigation }) => {
           "Homework",
           lessonId,
           "3",
-          "Fill In The blank"
+          "Fill In The blank",
         );
 
         try {

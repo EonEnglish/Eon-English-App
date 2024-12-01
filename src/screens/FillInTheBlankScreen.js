@@ -1,10 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, Alert, Animated, PanResponder } from 'react-native';
-import { getAuth } from 'firebase/auth';
-import { getDocs, collection, getDoc, doc, setDoc } from '@firebase/firestore';
-import { db } from '../services/firebase';
-import Container from '../components/Container';
-import ScoreCounter from '../components/ScoreCounter';
+import React, { useState, useEffect, useRef } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+  Animated,
+  PanResponder,
+} from "react-native";
+import { getAuth } from "firebase/auth";
+import { getDocs, collection, getDoc, doc, setDoc } from "@firebase/firestore";
+import { db } from "../services/firebase";
+import Container from "../components/Container";
+import ScoreCounter from "../components/ScoreCounter";
 
 const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
   const [sentenceList, setSentenceList] = useState([]);
@@ -13,7 +20,7 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
   const [score, setScore] = useState(0);
   const [totalScore, setTotalScore] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
+  const [alertMessage, setAlertMessage] = useState("");
   const [scoreUpdated, setScoreUpdated] = useState(false);
   const { data } = route.params;
 
@@ -30,9 +37,11 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
       try {
         const Collection = await getDocs(collection(db, data));
         Collection.forEach(async (doc) => {
-          if (doc.id === 'Blank Match') {
-            const subCollection = await getDocs(collection(doc.ref, 'Collection'));
-            const sentence = subCollection.docs.map(doc => doc.data());
+          if (doc.id === "Blank Match") {
+            const subCollection = await getDocs(
+              collection(doc.ref, "Collection"),
+            );
+            const sentence = subCollection.docs.map((doc) => doc.data());
             setSentenceList(sentence);
           }
         });
@@ -50,7 +59,6 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
       const currentSentence = sentenceList[currentWordIndex];
       setOptions(generateOptions(currentSentence.answer));
     }
-
   }, [sentenceList, currentWordIndex]);
 
   const generateOptions = (correctAnswer) => {
@@ -77,24 +85,28 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
           onStartShouldSetPanResponder: () => true,
           onMoveShouldSetPanResponder: () => true,
           onPanResponderMove: (evt, gestureState) => {
-            itemPans.current[index].setValue({ x: gestureState.dx, y: gestureState.dy });
+            itemPans.current[index].setValue({
+              x: gestureState.dx,
+              y: gestureState.dy,
+            });
 
-            const isOverDropArea = isPointInDropArea(gestureState.moveX, gestureState.moveY);
+            const isOverDropArea = isPointInDropArea(
+              gestureState.moveX,
+              gestureState.moveY,
+            );
             setDropAreaEntered(isOverDropArea);
 
             if (isOverDropArea && !scoreUpdated) {
-
               setScoreUpdated(true);
 
               if (options[index] === sentenceList[currentWordIndex].answer) {
                 setScore(score + 1);
                 setTotalScore(totalScore + 1);
-                setAlertMessage('Your answer is correct!');
+                setAlertMessage("Your answer is correct!");
                 setDropAreaEntered(false);
-              }
-              else {
+              } else {
                 setTotalScore(totalScore + 1);
-                setAlertMessage('Your answer is incorrect!');
+                setAlertMessage("Your answer is incorrect!");
                 setDropAreaEntered(false);
               }
               setShowAlert(true);
@@ -109,23 +121,33 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
               }).start();
             }
           },
-        })
+        }),
       );
     }
-  }
+  };
 
   initializePanResponders();
 
   const isPointInDropArea = (x, y) => {
     if (!questionContainerLayout) return false;
-    const { x: containerX, y: containerY, width, height } = questionContainerLayout;
+    const {
+      x: containerX,
+      y: containerY,
+      width,
+      height,
+    } = questionContainerLayout;
 
     const dropAreaLeft = containerX; // Left edge of the questionContainer
     const dropAreaRight = containerX + width; // Right edge of the questionContainer
     const dropAreaTop = containerY; // Top edge of the questionContainer
     const dropAreaBottom = containerY + height + 55; // Bottom edge of the questionContainer
 
-    return x > dropAreaLeft && x < dropAreaRight && y > dropAreaTop && y < dropAreaBottom;
+    return (
+      x > dropAreaLeft &&
+      x < dropAreaRight &&
+      y > dropAreaTop &&
+      y < dropAreaBottom
+    );
   };
 
   const handleQuestionContainerLayout = (event) => {
@@ -138,11 +160,19 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
     const user = auth.currentUser;
 
     if (!user) {
-      console.error('No authenticated user found.');
+      console.error("No authenticated user found.");
       return;
     }
 
-    const userHomeworkRef = doc(db, "Users", user.uid, "Homework", data, "3", "Fill In The blank");
+    const userHomeworkRef = doc(
+      db,
+      "Users",
+      user.uid,
+      "Homework",
+      data,
+      "3",
+      "Fill In The blank",
+    );
 
     try {
       const homeworkDoc = await getDoc(userHomeworkRef);
@@ -150,8 +180,7 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
       if (homeworkDoc.exists()) {
         const existingData = homeworkDoc.data();
 
-        if (score <= existingData.score)
-          return; // Early return if no update is needed
+        if (score <= existingData.score) return; // Early return if no update is needed
 
         // Update the document with the higher score
         await setDoc(userHomeworkRef, {
@@ -162,7 +191,6 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
 
         // console.log('Homework completion data updated successfully with a higher score.');
         return;
-
       } else {
         // Document doesn't exist, so create a new one
         await setDoc(userHomeworkRef, {
@@ -174,15 +202,15 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
         // console.log('Homework completion data stored successfully.');
       }
     } catch (error) {
-      console.error('Error storing homework completion data:', error);
+      console.error("Error storing homework completion data:", error);
     }
   };
 
   useEffect(() => {
     if (showAlert) {
-      Alert.alert('Result', alertMessage, [
+      Alert.alert("Result", alertMessage, [
         {
-          text: 'OK',
+          text: "OK",
           onPress: () => {
             setShowAlert(false);
             setScoreUpdated(false);
@@ -197,9 +225,11 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
     if (currentWordIndex < sentenceList.length - 1) {
       setCurrentWordIndex(currentWordIndex + 1);
     } else {
-      Alert.alert('Game Over', `You have finished the game! Your final score is ${score}.`, [
-        { text: 'OK' },
-      ]);
+      Alert.alert(
+        "Game Over",
+        `You have finished the game! Your final score is ${score}.`,
+        [{ text: "OK" }],
+      );
       homeworkComplete();
       navigation.goBack();
     }
@@ -214,22 +244,27 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
       <ScoreCounter>Score: {score}</ScoreCounter>
       <View onLayout={handleQuestionContainerLayout}>
         <View style={styles.questionContainer}>
-          <Text style={styles.questionText}>{sentenceList[currentWordIndex].question}</Text>
+          <Text style={styles.questionText}>
+            {sentenceList[currentWordIndex].question}
+          </Text>
         </View>
       </View>
       <View style={styles.optionContainer}>
         {options.map((option, index) => (
           <View key={index} style={styles.optionText}>
-            {panResponders.current &&
+            {panResponders.current && (
               <Animated.View
                 style={{
-                  transform: [{ translateX: itemPans.current[index]?.x }, { translateY: itemPans.current[index]?.y }],
+                  transform: [
+                    { translateX: itemPans.current[index]?.x },
+                    { translateY: itemPans.current[index]?.y },
+                  ],
                 }}
                 {...panResponders.current[index]?.panHandlers}
               >
                 <Text>{option}</Text>
               </Animated.View>
-            }
+            )}
           </View>
         ))}
       </View>
@@ -239,29 +274,29 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   centerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   questionContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 50,
     padding: 20, // Change isPointInDropArea padding if editing this value
     borderWidth: 3,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 7,
   },
   questionText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
   optionContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 50,
   },
   optionText: {
@@ -271,7 +306,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 8,
     borderWidth: 2,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 7,
   },
   score: {

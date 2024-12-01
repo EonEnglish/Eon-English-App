@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from 'firebase/auth'
-import { getFirestore, collection, getDocs} from 'firebase/firestore'
+import { getAuth } from "firebase/auth";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -12,7 +12,7 @@ const firebaseConfig = {
   projectId: "eon-english-app",
   storageBucket: "eon-english-app.appspot.com",
   messagingSenderId: "894295453065",
-  appId: "1:894295453065:web:4f3045d2716f6894790558"
+  appId: "1:894295453065:web:4f3045d2716f6894790558",
 };
 
 // Initialize Firebase

@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, TextInput, Button, Alert } from 'react-native';
-import { getAuth } from 'firebase/auth';
+import React, { useState, useEffect } from "react";
+import { Text, StyleSheet, TextInput, Button, Alert } from "react-native";
+import { getAuth } from "firebase/auth";
 import { getDocs, collection, getDoc, doc, setDoc } from "@firebase/firestore";
 import { db } from "../services/firebase";
-import Container from '../components/Container';
-import ScoreCounter from '../components/ScoreCounter';
+import Container from "../components/Container";
+import ScoreCounter from "../components/ScoreCounter";
 
 const VocabMatchScreen = ({ navigation, route }) => {
   const [vocabList, setVocabList] = useState([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [userInput, setUserInput] = useState('');
+  const [userInput, setUserInput] = useState("");
   const [score, setScore] = useState(0);
   const [totalScore, setTotalScore] = useState(0);
   const { data } = route.params;
@@ -18,10 +18,14 @@ const VocabMatchScreen = ({ navigation, route }) => {
     const fetchVocabulary = async () => {
       try {
         const vocabCollection = await getDocs(collection(db, data));
-        const vocabMatchDoc = vocabCollection.docs.find(doc => doc.id === 'Vocab Match');
+        const vocabMatchDoc = vocabCollection.docs.find(
+          (doc) => doc.id === "Vocab Match",
+        );
         if (vocabMatchDoc) {
-          const subCollection = await getDocs(collection(vocabMatchDoc.ref, 'Collection'));
-          setVocabList(subCollection.docs.map(doc => doc.data()));
+          const subCollection = await getDocs(
+            collection(vocabMatchDoc.ref, "Collection"),
+          );
+          setVocabList(subCollection.docs.map((doc) => doc.data()));
         }
       } catch (error) {
         console.error("Error fetching vocabulary:", error);
@@ -35,21 +39,29 @@ const VocabMatchScreen = ({ navigation, route }) => {
     if (!currentWord) return;
 
     const userInputTrimmed = userInput.toLowerCase().trim();
-    const correctAnswers = [currentWord.word, currentWord.word2].map(w => w?.toLowerCase().trim());
+    const correctAnswers = [currentWord.word, currentWord.word2].map((w) =>
+      w?.toLowerCase().trim(),
+    );
 
     const isCorrect = correctAnswers.includes(userInputTrimmed);
-    setScore(prev => isCorrect ? prev + 1 : prev);
-    setTotalScore(prev => prev + 1);
-    Alert.alert('Result', isCorrect ? 'Your answer is correct!' : 'Your answer is incorrect!', [{ text: 'OK', onPress: nextWord }]);
+    setScore((prev) => (isCorrect ? prev + 1 : prev));
+    setTotalScore((prev) => prev + 1);
+    Alert.alert(
+      "Result",
+      isCorrect ? "Your answer is correct!" : "Your answer is incorrect!",
+      [{ text: "OK", onPress: nextWord }],
+    );
   };
 
   const nextWord = () => {
     if (currentWordIndex < vocabList.length - 1) {
-      setCurrentWordIndex(prev => prev + 1);
-      setUserInput('');
+      setCurrentWordIndex((prev) => prev + 1);
+      setUserInput("");
     } else {
       navigation.goBack();
-      Alert.alert('Game Over', `You finished! Final score: ${score}`, [{ text: 'OK', onPress: homeworkComplete }]);
+      Alert.alert("Game Over", `You finished! Final score: ${score}`, [
+        { text: "OK", onPress: homeworkComplete },
+      ]);
     }
   };
 
@@ -57,16 +69,27 @@ const VocabMatchScreen = ({ navigation, route }) => {
     const user = getAuth().currentUser;
     if (!user) return;
 
-    const userHomeworkRef = doc(db, "Users", user.uid, "Homework", data, "1", "Vocab Match");
+    const userHomeworkRef = doc(
+      db,
+      "Users",
+      user.uid,
+      "Homework",
+      data,
+      "1",
+      "Vocab Match",
+    );
     try {
       const homeworkDoc = await getDoc(userHomeworkRef);
-      const docData = { completed_time: new Date(), score, total_score: totalScore };
+      const docData = {
+        completed_time: new Date(),
+        score,
+        total_score: totalScore,
+      };
       if (!homeworkDoc.exists() || score > homeworkDoc.data().score) {
         await setDoc(userHomeworkRef, docData);
       }
-
     } catch (error) {
-      console.error('Error updating homework:', error);
+      console.error("Error updating homework:", error);
     }
   };
 
@@ -75,7 +98,9 @@ const VocabMatchScreen = ({ navigation, route }) => {
   return (
     <Container style={styles.centerContainer}>
       <ScoreCounter>Score: {score}</ScoreCounter>
-      <Text style={styles.translation}>{vocabList[currentWordIndex].translation}</Text>
+      <Text style={styles.translation}>
+        {vocabList[currentWordIndex].translation}
+      </Text>
       <TextInput
         style={styles.input}
         placeholder="Enter the word"
@@ -89,18 +114,18 @@ const VocabMatchScreen = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   centerContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   translation: {
     fontSize: 35,
     marginBottom: 20,
-    color: '#8E8E8F',
+    color: "#8E8E8F",
   },
   input: {
-    width: '90%',
+    width: "90%",
     borderWidth: 3,
-    borderColor: '#CCCCCC',
+    borderColor: "#CCCCCC",
     borderRadius: 7,
     padding: 15,
     fontSize: 14,
