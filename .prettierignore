@@ -1,0 +1,10 @@
+# Ignore artifacts:
+build
+coverage
+
+# meta files
+.expo/
+.vscode/
+
+# libraries
+node_modules/
