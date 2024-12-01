@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "react-native-dotenv": "^3.4.11",
     "yarn": "^1.22.22"
   },
   "private": true
