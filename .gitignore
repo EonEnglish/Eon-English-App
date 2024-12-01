@@ -34,3 +34,6 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# vscode IDE workspace configuration folder
+.vscode/
