@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, ScrollView } from 'react-native';
-import { getDocs, collection } from '@firebase/firestore';
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, ScrollView } from "react-native";
+import { getDocs, collection } from "@firebase/firestore";
 import { db } from "../services/firebase";
-import Container from '../components/Container';
-import InfoCard from '../components/InfoCard';
+import Container from "../components/Container";
+import InfoCard from "../components/InfoCard";
 
 const HomeScreen = ({ navigation }) => {
   const [announcements, setAnnouncements] = useState([]);
@@ -17,13 +17,17 @@ const HomeScreen = ({ navigation }) => {
           setAnnouncementsExist(false);
           return;
         }
-        const announcementDoc = homePageCollection.docs.find(doc => doc.id === 'Announcement');
+        const announcementDoc = homePageCollection.docs.find(
+          (doc) => doc.id === "Announcement",
+        );
         if (!announcementDoc) {
           setAnnouncementsExist(false);
           return;
         }
-        const subCollection = await getDocs(collection(announcementDoc.ref, 'Collection'));
-        const announcementData = subCollection.docs.map(doc => doc.data());
+        const subCollection = await getDocs(
+          collection(announcementDoc.ref, "Collection"),
+        );
+        const announcementData = subCollection.docs.map((doc) => doc.data());
         if (announcementData.length === 0) {
           setAnnouncementsExist(false);
         } else {
@@ -31,7 +35,7 @@ const HomeScreen = ({ navigation }) => {
           setAnnouncementsExist(true);
         }
       } catch (error) {
-        console.error('Error fetching announcements:', error);
+        console.error("Error fetching announcements:", error);
         setAnnouncementsExist(false);
       }
     };
@@ -44,7 +48,7 @@ const HomeScreen = ({ navigation }) => {
     <ScrollView>
       <Container>
         <InfoCard
-          title='Welcome to Season 16!'
+          title="Welcome to Season 16!"
           titleStyle={styles.subtitle}
           containerStyle={styles.subtitleContainer}
         />
@@ -71,13 +75,13 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   subtitleContainer: {
-    alignItems: 'center',
-    backgroundColor: '#8D56FF',
+    alignItems: "center",
+    backgroundColor: "#8D56FF",
     marginBottom: 30,
   },
   subtitle: {
     fontSize: 25,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: -30,
   },
   noAnnouncementText: {

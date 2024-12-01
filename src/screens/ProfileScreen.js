@@ -1,5 +1,12 @@
 // screens/ProfileScreen.js
-import { StyleSheet, View, Alert, Text, ScrollView, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Alert,
+  Text,
+  ScrollView,
+  SafeAreaView,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import { auth } from "../services/firebase";
 import { signOut } from "firebase/auth";
@@ -44,11 +51,11 @@ const ProfileScreen = ({ navigation }) => {
         {
           text: "Cancel",
           // onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
+          style: "cancel",
         },
-        { text: "Delete", onPress: handleDeleteAccount }
+        { text: "Delete", onPress: handleDeleteAccount },
       ],
-      { cancelable: false }
+      { cancelable: false },
     );
   };
 
@@ -56,7 +63,8 @@ const ProfileScreen = ({ navigation }) => {
     const user = auth.currentUser;
     if (user) {
       setDeletingAccount(true);
-      user.delete()
+      user
+        .delete()
         .then(() => {
           setDeletingAccount(false);
           Alert.alert("Success", "Account successfully deleted");
@@ -80,7 +88,7 @@ const ProfileScreen = ({ navigation }) => {
     const success = await updateLanguagePreferences(
       tempNative,
       tempTarget,
-      tempDisplay
+      tempDisplay,
     );
 
     if (success) {

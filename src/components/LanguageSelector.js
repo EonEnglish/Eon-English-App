@@ -1,26 +1,36 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal, ScrollView } from 'react-native';
-import { useTranslation } from 'react-i18next';
-import { useLanguage } from './LanguageContext';
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
+  ScrollView,
+} from "react-native";
+import { useTranslation } from "react-i18next";
+import { useLanguage } from "./LanguageContext";
 
 const LanguageSelector = ({
   label,
   value,
   onValueChange,
   languages = LANGUAGES,
-  excludeValue
+  excludeValue,
 }) => {
   const [modalVisible, setModalVisible] = React.useState(false);
   const { t } = useTranslation();
   const { displayLanguage, nativeLanguage } = useLanguage();
 
   // Determine which language to use for displaying names
-  const displayInLanguage = displayLanguage === 'native' ? nativeLanguage : value || 'en';
+  const displayInLanguage =
+    displayLanguage === "native" ? nativeLanguage : value || "en";
 
-  const selectedLanguage = languages.find(lang => lang.code === value);
+  const selectedLanguage = languages.find((lang) => lang.code === value);
 
   // Filter out excluded language if specified
-  const availableLanguages = languages.filter(lang => lang.code !== excludeValue);
+  const availableLanguages = languages.filter(
+    (lang) => lang.code !== excludeValue,
+  );
 
   return (
     <View style={styles.container}>
@@ -38,7 +48,7 @@ const LanguageSelector = ({
             </Text>
           </View>
         ) : (
-          <Text style={styles.placeholder}>{t('language.select')}</Text>
+          <Text style={styles.placeholder}>{t("language.select")}</Text>
         )}
       </TouchableOpacity>
 
@@ -50,7 +60,9 @@ const LanguageSelector = ({
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>{t('language.selectLanguage')}</Text>
+            <Text style={styles.modalTitle}>
+              {t("language.selectLanguage")}
+            </Text>
 
             <ScrollView style={styles.languageList}>
               {availableLanguages.map((language) => (
@@ -58,7 +70,7 @@ const LanguageSelector = ({
                   key={language.code}
                   style={[
                     styles.languageOption,
-                    value === language.code && styles.selectedOption
+                    value === language.code && styles.selectedOption,
                   ]}
                   onPress={() => {
                     onValueChange(language.code);
@@ -66,10 +78,12 @@ const LanguageSelector = ({
                   }}
                 >
                   <Text style={styles.flag}>{language.flag}</Text>
-                  <Text style={[
-                    styles.languageOptionText,
-                    value === language.code && styles.selectedOptionText
-                  ]}>
+                  <Text
+                    style={[
+                      styles.languageOptionText,
+                      value === language.code && styles.selectedOptionText,
+                    ]}
+                  >
                     {language.name[displayInLanguage]}
                   </Text>
                 </TouchableOpacity>
@@ -80,7 +94,7 @@ const LanguageSelector = ({
               style={styles.closeButton}
               onPress={() => setModalVisible(false)}
             >
-              <Text style={styles.closeButtonText}>{t('common.cancel')}</Text>
+              <Text style={styles.closeButtonText}>{t("common.cancel")}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -92,24 +106,24 @@ const LanguageSelector = ({
 const styles = StyleSheet.create({
   container: {
     marginBottom: 16,
-    width: '100%',
+    width: "100%",
   },
   label: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
     marginBottom: 8,
-    color: '#333',
+    color: "#333",
   },
   selector: {
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: "#ddd",
     borderRadius: 8,
     padding: 12,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   selectedLanguage: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   flag: {
     fontSize: 24,
@@ -117,63 +131,63 @@ const styles = StyleSheet.create({
   },
   languageName: {
     fontSize: 16,
-    color: '#333',
+    color: "#333",
   },
   placeholder: {
-    color: '#999',
+    color: "#999",
     fontSize: 16,
   },
   modalContainer: {
     flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: "flex-end",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContent: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 20,
-    maxHeight: '80%',
+    maxHeight: "80%",
   },
   modalTitle: {
     fontSize: 20,
-    fontWeight: '600',
+    fontWeight: "600",
     marginBottom: 16,
-    textAlign: 'center',
-    color: '#333',
+    textAlign: "center",
+    color: "#333",
   },
   languageList: {
     maxHeight: 300,
   },
   languageOption: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    borderBottomColor: "#eee",
   },
   selectedOption: {
-    backgroundColor: '#f0f8ff',
+    backgroundColor: "#f0f8ff",
   },
   languageOptionText: {
     fontSize: 16,
-    color: '#333',
+    color: "#333",
   },
   selectedOptionText: {
-    fontWeight: '600',
-    color: '#007AFF',
+    fontWeight: "600",
+    color: "#007AFF",
   },
   closeButton: {
     marginTop: 16,
     padding: 16,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: "#f5f5f5",
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
   },
   closeButtonText: {
     fontSize: 16,
-    color: '#007AFF',
-    fontWeight: '600',
+    color: "#007AFF",
+    fontWeight: "600",
   },
 });
 

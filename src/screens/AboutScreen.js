@@ -1,7 +1,7 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import Container from '../components/Container';
-import InfoCard from '../components/InfoCard';
+import React from "react";
+import { StyleSheet } from "react-native";
+import Container from "../components/Container";
+import InfoCard from "../components/InfoCard";
 import { useTranslation } from "react-i18next";
 
 const AboutScreen = () => {
@@ -29,16 +29,16 @@ export default AboutScreen;
 
 const styles = StyleSheet.create({
   aboutContainer: {
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   aboutTitle: {
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 15,
-    textAlign: 'center',
+    textAlign: "center",
   },
   aboutText: {
     fontWeight: 500,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });

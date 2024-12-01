@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "main": "expo/AppEntry.js",
   "scripts": {
+    "postinstall": "husky",
     "start": "expo start",
     "android": "expo start --android",
-    "ios": "expo start --ios"
+    "ios": "expo start --ios",
+    "format:check": "prettier . --check",
+    "format:fix": "prettier . --write",
+    "prepare": "husky"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.23.1",
@@ -39,6 +43,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.4.1"
     "react-native-dotenv": "^3.4.11",
     "yarn": "^1.22.22"
   },

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { getAuth } from 'firebase/auth';
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { getAuth } from "firebase/auth";
 import { getDoc, doc } from "@firebase/firestore";
-import { Ionicons } from '@expo/vector-icons';
-import { useIsFocused } from '@react-navigation/native';
+import { Ionicons } from "@expo/vector-icons";
+import { useIsFocused } from "@react-navigation/native";
 import { db } from "../services/firebase";
-import Container from '../components/Container';
+import Container from "../components/Container";
 
 const Lessons = ({ navigation, route }) => {
   const { data } = route.params;
@@ -22,13 +22,37 @@ const Lessons = ({ navigation, route }) => {
       const auth = getAuth();
       const user = auth.currentUser;
       if (!user) {
-        console.error('No authenticated user found.');
+        console.error("No authenticated user found.");
         return;
       }
 
-      const Vocab_Match = doc(db, "Users", user.uid, "Homework", data, "1", "Vocab Match");
-      const Vocab_Match_Photo = doc(db, "Users", user.uid, "Homework", data, "2", "Vocab Match Photo");
-      const Fill_In_The_blank = doc(db, "Users", user.uid, "Homework", data, "3", "Fill In The blank");
+      const Vocab_Match = doc(
+        db,
+        "Users",
+        user.uid,
+        "Homework",
+        data,
+        "1",
+        "Vocab Match",
+      );
+      const Vocab_Match_Photo = doc(
+        db,
+        "Users",
+        user.uid,
+        "Homework",
+        data,
+        "2",
+        "Vocab Match Photo",
+      );
+      const Fill_In_The_blank = doc(
+        db,
+        "Users",
+        user.uid,
+        "Homework",
+        data,
+        "3",
+        "Fill In The blank",
+      );
 
       try {
         const vocabMatchDoc = await getDoc(Vocab_Match);
@@ -41,7 +65,7 @@ const Lessons = ({ navigation, route }) => {
           fillInTheBlank: fillInTheBlankDoc.exists(),
         });
       } catch (error) {
-        console.error('Error fetching homework data:', error);
+        console.error("Error fetching homework data:", error);
       }
     };
 
@@ -63,7 +87,7 @@ const Lessons = ({ navigation, route }) => {
     <Container style={styles.centerContainer}>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('VocabMatchStack', { data })}
+        onPress={() => navigation.navigate("VocabMatchStack", { data })}
       >
         <View style={styles.buttonContainer}>
           <Text style={styles.buttonText}>Match the Vocab</Text>
@@ -72,7 +96,7 @@ const Lessons = ({ navigation, route }) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('VocabMatchPhotoStack', { data })}
+        onPress={() => navigation.navigate("VocabMatchPhotoStack", { data })}
       >
         <View style={styles.buttonContainer}>
           <Text style={styles.buttonText}>Match the Photo</Text>
@@ -81,7 +105,7 @@ const Lessons = ({ navigation, route }) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('BlankMatchStack', { data })}
+        onPress={() => navigation.navigate("BlankMatchStack", { data })}
       >
         <View style={styles.buttonContainer}>
           <Text style={styles.buttonText}>Fill in the Blank</Text>
@@ -90,31 +114,31 @@ const Lessons = ({ navigation, route }) => {
       </TouchableOpacity>
     </Container>
   );
-}
+};
 
 export default Lessons;
 
 const styles = StyleSheet.create({
   centerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   button: {
     borderWidth: 3,
     borderColor: "#CCCCCC",
-    width: '90%',
+    width: "90%",
     padding: 15,
     borderRadius: 7,
     marginTop: 15,
   },
   buttonContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
   },
   buttonText: {
-    fontWeight: '700',
+    fontWeight: "700",
     fontSize: 16,
   },
 });

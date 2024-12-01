@@ -1,11 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { View, Image, Text, StyleSheet, Alert, TouchableOpacity, Button, ScrollView } from 'react-native';
-import { getAuth } from 'firebase/auth';
-import { getDocs, collection, getDoc, doc, setDoc } from '@firebase/firestore';
-import { getDownloadURL, ref, getStorage } from 'firebase/storage';
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  Alert,
+  TouchableOpacity,
+  Button,
+  ScrollView,
+} from "react-native";
+import { getAuth } from "firebase/auth";
+import { getDocs, collection, getDoc, doc, setDoc } from "@firebase/firestore";
+import { getDownloadURL, ref, getStorage } from "firebase/storage";
 import { db } from "../services/firebase";
-import Container from '../components/Container';
-import ScoreCounter from '../components/ScoreCounter';
+import Container from "../components/Container";
+import ScoreCounter from "../components/ScoreCounter";
 
 const VocabMatchPhotoScreen = ({ navigation, route }) => {
   const [vocabList, setVocabList] = useState([]);
@@ -13,8 +22,8 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
   const [score, setScore] = useState(0);
   const [totalScore, setTotalScore] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
-  const [selectedOption, setSelectedOption] = useState('');
+  const [alertMessage, setAlertMessage] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
   const [options, setOptions] = useState([]);
   const [imgUrls, setImgUrls] = useState([]);
   const { data } = route.params;
@@ -26,10 +35,12 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
         const vocabData = [];
 
         for (const doc of Collection.docs) {
-          if (doc.id !== 'Image Match') continue;
+          if (doc.id !== "Image Match") continue;
 
-          const subCollection = await getDocs(collection(doc.ref, 'Collection'));
-          vocabData.push(...subCollection.docs.map(doc => doc.data()));
+          const subCollection = await getDocs(
+            collection(doc.ref, "Collection"),
+          );
+          vocabData.push(...subCollection.docs.map((doc) => doc.data()));
         }
 
         setVocabList(vocabData);
@@ -48,9 +59,11 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
         const imageUrls = [];
 
         for (const doc of Collection.docs) {
-          if (doc.id !== 'Image Match') continue;
+          if (doc.id !== "Image Match") continue;
 
-          const subCollection = await getDocs(collection(doc.ref, 'Collection'));
+          const subCollection = await getDocs(
+            collection(doc.ref, "Collection"),
+          );
           for (const subDoc of subCollection.docs) {
             const imageUrl = subDoc.data().image;
             const downloadUrl = await getImageDownloadUrl(imageUrl);
@@ -60,7 +73,7 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
 
         setImgUrls(imageUrls);
       } catch (error) {
-        console.error('Error fetching images:', error);
+        console.error("Error fetching images:", error);
       }
     };
 
@@ -80,8 +93,8 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
       const storageRef = ref(storage, imageUrl);
       return await getDownloadURL(storageRef);
     } catch (error) {
-      console.error('Error getting download URL:', error);
-      return '';
+      console.error("Error getting download URL:", error);
+      return "";
     }
   };
 
@@ -102,16 +115,22 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
     const isCorrect = selectedOption === currentWord.word;
     setScore(score + (isCorrect ? 1 : 0));
     setTotalScore(totalScore + 1);
-    setAlertMessage(isCorrect ? 'Your answer is correct!' : 'Your answer is incorrect!');
+    setAlertMessage(
+      isCorrect ? "Your answer is correct!" : "Your answer is incorrect!",
+    );
     setShowAlert(true);
   };
 
   const nextWord = () => {
     if (currentWordIndex < vocabList.length - 1) {
       setCurrentWordIndex(currentWordIndex + 1);
-      setSelectedOption('');
+      setSelectedOption("");
     } else {
-      Alert.alert('Game Over', `You have finished the game! Your final score is ${score}.`, [{ text: 'OK' }]);
+      Alert.alert(
+        "Game Over",
+        `You have finished the game! Your final score is ${score}.`,
+        [{ text: "OK" }],
+      );
       homeworkComplete();
     }
   };
@@ -121,11 +140,19 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
     const user = auth.currentUser;
 
     if (!user) {
-      console.error('No authenticated user found.');
+      console.error("No authenticated user found.");
       return;
     }
 
-    const userHomeworkRef = doc(db, "Users", user.uid, "Homework", data, "2", "Vocab Match Photo");
+    const userHomeworkRef = doc(
+      db,
+      "Users",
+      user.uid,
+      "Homework",
+      data,
+      "2",
+      "Vocab Match Photo",
+    );
     try {
       const homeworkDoc = await getDoc(userHomeworkRef);
       const dataToSet = {
@@ -143,15 +170,15 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
 
       navigation.goBack();
     } catch (error) {
-      console.error('Error storing homework completion data:', error);
+      console.error("Error storing homework completion data:", error);
     }
   };
 
   useEffect(() => {
     if (showAlert) {
-      Alert.alert('Result', alertMessage, [
+      Alert.alert("Result", alertMessage, [
         {
-          text: 'OK',
+          text: "OK",
           onPress: () => {
             setShowAlert(false);
             nextWord();
@@ -184,7 +211,9 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
             onPress={() => setSelectedOption(option)}
           >
             <View style={styles.radioButton}>
-              {selectedOption === option && <View style={styles.radioButtonSelected} />}
+              {selectedOption === option && (
+                <View style={styles.radioButtonSelected} />
+              )}
             </View>
             <Text style={styles.optionText}>{option}</Text>
           </TouchableOpacity>
@@ -197,8 +226,8 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   centerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 20,
   },
   image: {
@@ -207,30 +236,30 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   optionContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 10,
-    width: '90%',
+    width: "90%",
     padding: 10,
     borderRadius: 7,
     borderWidth: 3,
-    borderColor: '#CCCCCC',
+    borderColor: "#CCCCCC",
   },
   radioButton: {
     height: 20,
     width: 20,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: '#CCCCCC',
-    alignItems: 'center',
-    justifyContent: 'center',
+    borderColor: "#CCCCCC",
+    alignItems: "center",
+    justifyContent: "center",
     marginRight: 10,
   },
   radioButtonSelected: {
     height: 10,
     width: 10,
     borderRadius: 7,
-    backgroundColor: 'gray',
+    backgroundColor: "gray",
   },
   optionText: {
     fontSize: 16,

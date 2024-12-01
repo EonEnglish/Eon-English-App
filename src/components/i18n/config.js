@@ -1,29 +1,29 @@
 export const LANGUAGES = [
-    {
-      code: 'en',
-      name: {
-        en: 'English',
-        es: 'Inglés',
-        zh: '英语'
-      },
-      flag: '🇺🇸'
+  {
+    code: "en",
+    name: {
+      en: "English",
+      es: "Inglés",
+      zh: "英语",
     },
-    {
-      code: 'es',
-      name: {
-        en: 'Spanish',
-        es: 'Español',
-        zh: '西班牙语'
-      },
-      flag: '🇪🇸'
+    flag: "🇺🇸",
+  },
+  {
+    code: "es",
+    name: {
+      en: "Spanish",
+      es: "Español",
+      zh: "西班牙语",
     },
-    {
-      code: 'zh',
-      name: {
-        en: 'Chinese',
-        es: 'Chino',
-        zh: '中文'
-      },
-      flag: '🇨🇳'
-    }
-  ];
+    flag: "🇪🇸",
+  },
+  {
+    code: "zh",
+    name: {
+      en: "Chinese",
+      es: "Chino",
+      zh: "中文",
+    },
+    flag: "🇨🇳",
+  },
+];

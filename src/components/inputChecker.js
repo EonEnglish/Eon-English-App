@@ -1,11 +1,11 @@
 const checkInput = (entries) => {
-    var errors = [];
+  var errors = [];
 
-    entries.forEach(entry => {
-        if (entry.condition) errors.push(entry.result);
-    });
+  entries.forEach((entry) => {
+    if (entry.condition) errors.push(entry.result);
+  });
 
-    return errors.length != 0 ? errors : null;
-}
+  return errors.length != 0 ? errors : null;
+};
 
 export default checkInput;
