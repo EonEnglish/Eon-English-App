@@ -1,10 +1,10 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
 
-const ProfileButton = ({ text, onPress, style }) => {
+const ProfileButton = ({ text, onPress, style, styleText = {} }) => {
   return (
     <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
-      <Text style={styles.buttonText}>{text}</Text>
+      <Text style={[styles.buttonText, styleText]}>{text}</Text>
     </TouchableOpacity>
   );
 };

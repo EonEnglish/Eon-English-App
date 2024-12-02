@@ -11,6 +11,9 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 const Homework = ({ navigation }) => {
   const [lessonsState, setLessonsState] = useState([]);
@@ -36,9 +39,9 @@ const Homework = ({ navigation }) => {
       color: "#F9C407",
     },
     { id: "5", title: "Home", status: "NOT STARTED", color: "#F9C407" },
-    { id: "6", title: "Meals", status: "NOT STARTED", color: "#F9C407" },
+    { id: "6", title: "Meals", status: "COMPLETED", color: "#F9C407" },
     { id: "7", title: "Fast Food", status: "NOT STARTED", color: "#F9C407" },
-    { id: "8", title: "Review", status: "NOT STARTED", color: "#F9C407" },
+    { id: "8", title: "Review", status: "IN PROGRESS", color: "#F9C407" },
     { id: "9", title: "Nature", status: "NOT STARTED", color: "#F9C407" },
     { id: "10", title: "Animals", status: "NOT STARTED", color: "#F9C407" },
     { id: "11", title: "Shopping", status: "NOT STARTED", color: "#F9C407" },
@@ -126,7 +129,7 @@ const Homework = ({ navigation }) => {
 
   const renderLessonItem = ({ item }) => (
     <TouchableOpacity
-      style={[styles.button, { backgroundColor: item.color }]}
+      style={[styles.button]}
       onPress={() =>
         navigation.navigate("LessonsStack", { data: `Lesson ${item.id}` })
       }
@@ -134,7 +137,18 @@ const Homework = ({ navigation }) => {
       <View style={styles.buttonTextContainer}>
         <Text style={styles.lessonNumber}>Lesson {item.id}</Text>
         <Text style={styles.buttonText}>{item.title}</Text>
-        <Text style={styles.statusText}>{item.status}</Text>
+        <View style={[styles.chip, styles[`${item.status}`]]}>
+          {item.status === "COMPLETED" && (
+            <AntDesign name="checkcircleo" size={15} color="#23DB88" />
+          )}
+          {item.status === "IN PROGRESS" && (
+            <MaterialIcons name="av-timer" size={15} color="#C2A800" />
+          )}
+          {item.status === "NOT STARTED" && (
+            <MaterialCommunityIcons name="restart" size={15} color="#848484" />
+          )}
+          <Text style={styles.statusText}>{item.status}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -160,13 +174,11 @@ const Homework = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingBottom: 0,
-    paddingRight: 5,
-    paddingTop: 0,
+    padding: 0,
   },
   flatListContent: {
-    paddingRight: 20,
-    paddingLeft: 5,
+    paddingRight: 30,
+    paddingLeft: 30,
     marginTop: 10,
     paddingBottom: 40,
   },
@@ -174,11 +186,16 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   button: {
-    marginVertical: 5,
-    marginHorizontal: -5,
+    marginVertical: 10,
+    marginHorizontal: -10,
     borderRadius: 7,
     width: "50%",
     aspectRatio: 1.1,
+    paddingVertical: 7,
+    paddingHorizontal: 9,
+    backgroundColor: "#fff",
+    boxShadow:
+      "rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px",
   },
   buttonTextContainer: {
     flex: 1,
@@ -186,22 +203,40 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   lessonNumber: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#fff",
+    fontSize: 14,
+    color: "#404040",
+    textTransform: "uppercase",
     marginBottom: 8,
   },
   buttonText: {
-    color: "white",
-    fontWeight: "600",
+    color: "#676767",
+    fontWeight: "800",
     fontSize: 18,
     textAlign: "center",
     marginBottom: 16,
   },
   statusText: {
-    color: "white",
-    fontWeight: "600",
-    fontSize: 14,
+    color: "3D3D3D",
+    fontWeight: "500",
+    fontSize: 11,
+  },
+  chip: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 5,
+    padding: 8,
+    gap: 4,
+  },
+  COMPLETED: {
+    backgroundColor: "#CFFFE9",
+  },
+  "NOT STARTED": {
+    backgroundColor: "#EDEEEE",
+  },
+  "IN PROGRESS": {
+    backgroundColor: "#FFF7CB",
   },
 });
 

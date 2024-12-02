@@ -212,6 +212,7 @@ const ScheduleScreen = () => {
           value={name}
           conditions={errors.name}
           onChangeText={setName}
+          style={{ marginBottom: 20 }}
         />
         <InputField
           title={"Email:"}
@@ -219,6 +220,7 @@ const ScheduleScreen = () => {
           value={email}
           conditions={errors.email}
           onChangeText={setEmail}
+          style={{ marginBottom: 20 }}
         />
         <InputField
           title={"WeChat ID:"}
@@ -226,6 +228,7 @@ const ScheduleScreen = () => {
           value={weChatID}
           conditions={errors.weChatID}
           onChangeText={setWeChatID}
+          style={{ marginBottom: 20 }}
         />
         <Dropdown
           title={"How can we assist you?"}
@@ -270,6 +273,7 @@ export default ScheduleScreen;
 const styles = StyleSheet.create({
   messageInput: {
     height: 100,
+    marginBottom: 20,
   },
   buttonContainer: {
     backgroundColor: "#0782F9",
