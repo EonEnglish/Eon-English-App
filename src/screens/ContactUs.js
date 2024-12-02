@@ -100,6 +100,7 @@ const ContactUs = () => {
           value={firstName}
           onChangeText={setFirstName}
           conditions={errors.firstName}
+          style={{ marginBottom: 20 }}
         />
         <InputField
           title={"Last Name: "}
@@ -107,6 +108,7 @@ const ContactUs = () => {
           value={lastName}
           onChangeText={setLastName}
           conditions={errors.lastName}
+          style={{ marginBottom: 20 }}
         />
         <InputField
           title={"WeChat ID: "}
@@ -114,6 +116,7 @@ const ContactUs = () => {
           value={weChatID}
           onChangeText={setWeChatID}
           conditions={errors.weChatID}
+          style={{ marginBottom: 20 }}
         />
         <InputField
           title={"Subject: "}
@@ -121,6 +124,7 @@ const ContactUs = () => {
           value={subject}
           onChangeText={setSubject}
           conditions={errors.subject}
+          style={{ marginBottom: 20 }}
         />
         <InputField
           title={"Message: "}
@@ -152,6 +156,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   messageInput: {
+    marginBottom: 20,
     height: 100, // adjust height for multiline input
   },
   buttonContainer: {

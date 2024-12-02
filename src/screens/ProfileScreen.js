@@ -150,14 +150,17 @@ const ProfileScreen = ({ navigation }) => {
               text={t("profile.about")}
               onPress={() => navigation.navigate("AboutScreenStack")}
               style={styles.aboutButton}
+              styleText={{ color: "#404040" }}
             />
             <ProfileButton
               text={t("profile.getInvolved")}
               style={styles.getInvolvedButton}
+              styleText={{ color: "#404040" }}
             />
             <ProfileButton
               text={t("profile.findUs")}
               style={styles.findUsButton}
+              styleText={{ color: "#404040" }}
             />
             <ProfileButton
               text={t("profile.resetPassword")}
@@ -209,13 +212,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   aboutButton: {
-    backgroundColor: "#FFC107",
+    color: "#404040",
+    backgroundColor: "#FFD643",
   },
   getInvolvedButton: {
-    backgroundColor: "#FFC107",
+    color: "#404040",
+    backgroundColor: "#FFD643",
   },
   findUsButton: {
-    backgroundColor: "#FFC107",
+    color: "#404040",
+    backgroundColor: "#FFD643",
   },
   resetPasswordButton: {
     backgroundColor: "#9f47fc",

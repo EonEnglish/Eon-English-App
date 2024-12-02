@@ -11,6 +11,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import CustomCheckBox from "./CustomCheckBox"; // Adjust the import path according to your project structure
+import InputField from "../components/inputField";
 
 const LoginScreen = ({ route, navigation }) => {
   const [email, setEmail] = useState("");
@@ -94,13 +95,13 @@ const LoginScreen = ({ route, navigation }) => {
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Text style={styles.title}>Sign In</Text>
       <View style={styles.inputContainer}>
-        <TextInput
+        <InputField
           placeholder="Email"
           value={email}
           onChangeText={(text) => setEmail(text)}
           style={styles.input}
         />
-        <TextInput
+        <InputField
           placeholder="Password"
           value={password}
           onChangeText={(text) => setPassword(text)}
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     fontWeight: "800",
-    color: "#CCCCCC",
+    color: "#0089EB",
     padding: 30,
   },
   input: {
@@ -162,9 +163,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 7,
-    marginTop: 10,
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: "#CCCCCC",
+    marginBottom: 10,
+    margintop: 0,
   },
   buttonContainer: {
     width: "80%",
@@ -173,7 +175,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
   },
   loginButton: {
-    backgroundColor: "#0782F9",
+    backgroundColor: "#2D93F5",
     width: "100%",
     padding: 15,
     borderRadius: 7,
@@ -194,7 +196,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   signUpText: {
-    color: "#F9C407",
+    color: "#1C81E4",
     fontWeight: "700",
   },
   errorText: {
