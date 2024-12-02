@@ -150,32 +150,35 @@ const ProfileScreen = ({ navigation }) => {
               text={t("profile.about")}
               onPress={() => navigation.navigate("AboutScreenStack")}
               style={styles.aboutButton}
-              styleText={{ color: "#404040" }}
+              styleText={{ color: "white", fontWeight: 800 }}
             />
             <ProfileButton
               text={t("profile.getInvolved")}
               style={styles.getInvolvedButton}
-              styleText={{ color: "#404040" }}
+              styleText={{ color: "white", fontWeight: 800 }}
             />
             <ProfileButton
               text={t("profile.findUs")}
               style={styles.findUsButton}
-              styleText={{ color: "#404040" }}
+              styleText={{ color: "white", fontWeight: 800 }}
             />
             <ProfileButton
               text={t("profile.resetPassword")}
               onPress={() => navigation.navigate("PasswordResetScreenStack")}
               style={styles.resetPasswordButton}
+              styleText={{ color: "white", fontWeight: 800 }}
             />
             <ProfileButton
               text={t("profile.logOut")}
               onPress={handleSignOut}
               style={styles.logOutButton}
+              styleText={{ color: "white", fontWeight: 800 }}
             />
             <ProfileButton
               text={t("profile.deleteAccount")}
               onPress={confirmDeleteAccount}
               style={styles.deleteAccountButton}
+              styleText={{ color: "white", fontWeight: 800 }}
             />
           </View>
         </Container>
@@ -212,16 +215,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   aboutButton: {
-    color: "#404040",
-    backgroundColor: "#FFD643",
+    backgroundColor: "#2e2e2e",
   },
   getInvolvedButton: {
-    color: "#404040",
-    backgroundColor: "#FFD643",
+    backgroundColor: "#2e2e2e",
   },
   findUsButton: {
-    color: "#404040",
-    backgroundColor: "#FFD643",
+    backgroundColor: "#2e2e2e",
   },
   resetPasswordButton: {
     backgroundColor: "#9f47fc",
