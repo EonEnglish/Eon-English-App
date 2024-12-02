@@ -59,6 +59,8 @@ In addition, we recommend using Microsoft's Visual Studio Code editor with some 
 [<img src="https://github.com/STEM-E-Youth-Career-Development-Program/app-7/assets/154091778/590c3ffd-efed-49af-a959-78042868db41">](https://youtu.be/nBq75f8JVZg)
 [Not working? Use this link](https://youtu.be/nBq75f8JVZg)
 
+<br>
+
 ### ENV Keys
 Copy .env.example as .env file before running application locally 
 <br>
