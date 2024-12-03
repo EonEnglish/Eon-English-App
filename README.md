@@ -62,9 +62,15 @@ In addition, we recommend using Microsoft's Visual Studio Code editor with some 
 <br>
 
 ### ENV Keys
-Copy .env.example as .env file before running application locally 
-<br>
-You need repository access... [find the secret keys here](https://github.com/EonEnglish/Eon-English-App-Secrets)
+Run submodule command to retrieve the .env keys (requires repository access)
+```
+git submodule add https://github.com/EonEnglish/Eon-English-App-Secrets.git secret
+```
+If you want to make sure your keys are up to date, run:
+```
+git submodule update --remote secret
+```
+[Not working? Find the secret keys here...](https://github.com/EonEnglish/Eon-English-App-Secrets)
 
 <br>
 
