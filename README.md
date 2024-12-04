@@ -64,11 +64,7 @@ In addition, we recommend using Microsoft's Visual Studio Code editor with some 
 ### ENV Keys
 Run submodule command to retrieve the .env keys (requires repository access)
 ```
-git submodule add https://github.com/EonEnglish/Eon-English-App-Secrets.git secret
-```
-If you want to make sure your keys are up to date, run:
-```
-git submodule update --remote secret
+git submodule update --remote --recursive
 ```
 [Not working? Find the secret keys here...](https://github.com/EonEnglish/Eon-English-App-Secrets)
 
