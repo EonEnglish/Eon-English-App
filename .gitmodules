@@ -1,3 +1,5 @@
 [submodule "secret"]
 	path = secret
 	url = https://github.com/EonEnglish/Eon-English-App-Secrets.git
+[submodule ".\\secret\\"]
+	url = git@github.com-b0er:EonEnglish/Eon-English-App-Secrets.git

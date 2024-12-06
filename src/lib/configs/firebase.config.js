@@ -16,4 +16,4 @@ export const GetFirebaseConfig = () => {
     messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
     appId: FIREBASE_APP_ID,
   };
-}
+};

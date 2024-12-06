@@ -62,10 +62,18 @@ In addition, we recommend using Microsoft's Visual Studio Code editor with some 
 <br>
 
 ### ENV Keys
-Run submodule command to retrieve the .env keys (requires repository access)
+
+For first time, Run submodule command to retrieve the .env keys (requires repository access)
+```bash
+git submodule update --init --recursive
 ```
+
+For every time to pull new secrets to update sub-repository
+
+```bash
 git submodule update --remote --recursive
 ```
+
 [Not working? Find the secret keys here...](https://github.com/EonEnglish/Eon-English-App-Secrets)
 
 <br>
