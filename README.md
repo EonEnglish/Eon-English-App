@@ -63,12 +63,12 @@ In addition, we recommend using Microsoft's Visual Studio Code editor with some 
 
 ### ENV Keys
 
-For first time, Run submodule command to retrieve the .env keys (requires repository access)
+For the initial start up, run the following submodule command to retrieve the .env keys (requires repository access)
 ```bash
 git submodule update --init --recursive
 ```
 
-For every time to pull new secrets to update sub-repository
+To keep your keys updated, run the following command
 
 ```bash
 git submodule update --remote --recursive
