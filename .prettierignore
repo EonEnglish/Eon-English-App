@@ -8,3 +8,7 @@ coverage
 
 # libraries
 node_modules/
+
+# DELETE IF WE NEED NATIVE PROJECTS
+android/
+ios/
