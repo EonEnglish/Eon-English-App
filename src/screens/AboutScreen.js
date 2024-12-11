@@ -1,8 +1,19 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Linking } from "react-native";
 import Container from "../components/Container";
 import InfoCard from "../components/InfoCard";
 import { useTranslation } from "react-i18next";
+import ProfileButton from "../components/profileButton";
+
+const openFindUsSite = () => {
+  const findUsUrl = "https://www.eonenglish.org";
+  return Linking.openURL(findUsUrl);
+};
+
+const openGetInvolvedSite = () => {
+  const getInvolvedUrl = "https://www.eonenglish.org/chinese";
+  return Linking.openURL(getInvolvedUrl);
+};
 
 const AboutScreen = () => {
   const { t } = useTranslation();
@@ -20,6 +31,18 @@ const AboutScreen = () => {
         titleStyle={styles.aboutTitle}
         text={aboutText}
         textStyle={styles.aboutText}
+      />
+        <ProfileButton
+          text={t("profile.findUs")}
+          onPress={() => openFindUsSite()}
+          style={styles.findUsButton}
+          styleText={{ color: "white", fontWeight: 800 }}
+        />
+      <ProfileButton
+        text={t("profile.getInvolved")}
+        onPress={() => openGetInvolvedSite()}
+        style={styles.getInvolvedButton}
+        styleText={{ color: "white", fontWeight: 800 }}
       />
     </Container>
   );
@@ -40,5 +63,11 @@ const styles = StyleSheet.create({
   aboutText: {
     fontWeight: 500,
     textAlign: "center",
+  },
+  findUsButton: {
+    backgroundColor: "#007BFF",
+  },
+  getInvolvedButton: {
+    backgroundColor: "#007BFF",
   },
 });
