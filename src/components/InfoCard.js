@@ -13,8 +13,10 @@ const InfoCard = ({
   return (
     <View style={[styles.infoCardContainer, containerStyle]}>
       <Text style={[styles.infoCardTitle, titleStyle]}>{title}</Text>
-      <Text style={[styles.infoCardBody, textStyle]}>{text}</Text>
-      <Text style={[styles.infoCardFooter, footerStyle]}>{footer}</Text>
+      {text && <Text style={[styles.infoCardBody, textStyle]}>{text}</Text>}
+      {footer && (
+        <Text style={[styles.infoCardFooter, footerStyle]}>{footer}</Text>
+      )}
     </View>
   );
 };
