@@ -1,23 +1,28 @@
 // screens/ProfileScreen.js
-import {
-  StyleSheet,
-  View,
-  Alert,
-  Text,
-  ScrollView,
-  SafeAreaView,
-} from "react-native";
-import React, { useState, useEffect } from "react";
-import { auth } from "../services/firebase";
 import { signOut } from "firebase/auth";
-import ProfileButton from "../components/profileButton";
-import Container from "../components/Container";
-import LanguageSelector from "../components/LanguageSelector";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import {
+  Alert,
+  Linking,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import { RadioButton } from "react-native-paper";
+import Container from "../components/Container";
 import { LANGUAGES } from "../components/i18n/config";
 import { useLanguage } from "../components/LanguageContext";
-import { RadioButton } from "react-native-paper";
+import LanguageSelector from "../components/LanguageSelector";
+import ProfileButton from "../components/profileButton";
+import { auth } from "../services/firebase";
+
+const openFindUsSite = () => {
+  const findUsUrl = "https://www.eonenglish.org";
+  return Linking.openURL(findUsUrl);
+};
 
 const ProfileScreen = ({ navigation }) => {
   const [deletingAccount, setDeletingAccount] = useState(false);
@@ -159,6 +164,7 @@ const ProfileScreen = ({ navigation }) => {
             />
             <ProfileButton
               text={t("profile.findUs")}
+              onPress={() => openFindUsSite()}
               style={styles.findUsButton}
               styleText={{ color: "white", fontWeight: 800 }}
             />
