@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Alert,
-  Linking,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -18,11 +17,6 @@ import { useLanguage } from "../components/LanguageContext";
 import LanguageSelector from "../components/LanguageSelector";
 import ProfileButton from "../components/profileButton";
 import { auth } from "../services/firebase";
-
-const openFindUsSite = () => {
-  const findUsUrl = "https://www.eonenglish.org";
-  return Linking.openURL(findUsUrl);
-};
 
 const ProfileScreen = ({ navigation }) => {
   const [deletingAccount, setDeletingAccount] = useState(false);
@@ -155,17 +149,6 @@ const ProfileScreen = ({ navigation }) => {
               text={t("profile.about")}
               onPress={() => navigation.navigate("AboutScreenStack")}
               style={styles.aboutButton}
-              styleText={{ color: "white", fontWeight: 800 }}
-            />
-            <ProfileButton
-              text={t("profile.getInvolved")}
-              style={styles.getInvolvedButton}
-              styleText={{ color: "white", fontWeight: 800 }}
-            />
-            <ProfileButton
-              text={t("profile.findUs")}
-              onPress={() => openFindUsSite()}
-              style={styles.findUsButton}
               styleText={{ color: "white", fontWeight: 800 }}
             />
             <ProfileButton
