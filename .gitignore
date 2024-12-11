@@ -40,3 +40,7 @@ secret/
 
 # vscode IDE workspace configuration folder
 .vscode/
+
+# DELETE IF WE NEED NATIVE PROJECTS
+android/
+ios/
