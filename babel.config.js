@@ -1,7 +1,9 @@
 module.exports = function (api) {
   api.cache(true);
   return {
-    presets: ["babel-preset-expo"],
+    presets: [
+      ["babel-preset-expo", { bundler: 'metro' }]
+    ],
     plugins: [
       [
         // if your env variables aren't updating,
