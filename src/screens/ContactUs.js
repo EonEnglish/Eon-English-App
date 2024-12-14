@@ -1,3 +1,8 @@
+import React, { useState } from "react";
+import { composeAsync } from "expo-mail-composer";
+import Container from "../components/Container";
+import InputField from "../components/inputField";
+import { useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
   Text,
@@ -6,11 +11,6 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
-import React, { useState } from "react";
-import { composeAsync } from "expo-mail-composer";
-import Container from "../components/Container";
-import InputField from "../components/inputField";
-import { useNavigation } from "@react-navigation/native";
 
 const ContactUs = () => {
   const [firstName, setFirstName] = useState("");

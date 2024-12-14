@@ -4,6 +4,9 @@ import { getDoc, doc } from "@firebase/firestore";
 import { useIsFocused } from "@react-navigation/native";
 import { db } from "../services/firebase";
 import Container from "../components/Container";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import {
   View,
   Text,
@@ -11,9 +14,6 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 const Homework = ({ navigation }) => {
   const [lessonsState, setLessonsState] = useState([]);
@@ -139,7 +139,7 @@ const Homework = ({ navigation }) => {
         <Text style={styles.buttonText}>{item.title}</Text>
         <View style={[styles.chip, styles[`${item.status}`]]}>
           {item.status === "COMPLETED" && (
-            <AntDesign name="checkcircleo" size={15} color="#23DB88"/>
+            <AntDesign name="checkcircleo" size={15} color="#23DB88" />
           )}
           {item.status === "IN PROGRESS" && (
             <MaterialIcons name="av-timer" size={15} color="#C2A800" />
@@ -194,8 +194,7 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     paddingHorizontal: 9,
     backgroundColor: "white",
-    boxShadow:
-      "rgba(0, 0, 0, 0.05) 0px 0px 5px 0px",
+    boxShadow: "rgba(0, 0, 0, 0.05) 0px 0px 5px 0px",
   },
   buttonTextContainer: {
     flex: 1,

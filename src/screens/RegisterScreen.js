@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -8,7 +9,6 @@ import {
   View,
   ActivityIndicator,
 } from "react-native";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");

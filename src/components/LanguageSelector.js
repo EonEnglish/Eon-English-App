@@ -1,4 +1,6 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+import { useLanguage } from "./LanguageContext";
 import {
   View,
   Text,
@@ -7,8 +9,6 @@ import {
   Modal,
   ScrollView,
 } from "react-native";
-import { useTranslation } from "react-i18next";
-import { useLanguage } from "./LanguageContext";
 
 const LanguageSelector = ({
   label,

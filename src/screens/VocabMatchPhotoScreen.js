@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { getAuth } from "firebase/auth";
+import { getDocs, collection, getDoc, doc, setDoc } from "@firebase/firestore";
+import { getDownloadURL, ref, getStorage } from "firebase/storage";
+import { db } from "../services/firebase";
+import Container from "../components/Container";
+import ScoreCounter from "../components/ScoreCounter";
 import {
   View,
   Image,
@@ -9,12 +15,6 @@ import {
   Button,
   ScrollView,
 } from "react-native";
-import { getAuth } from "firebase/auth";
-import { getDocs, collection, getDoc, doc, setDoc } from "@firebase/firestore";
-import { getDownloadURL, ref, getStorage } from "firebase/storage";
-import { db } from "../services/firebase";
-import Container from "../components/Container";
-import ScoreCounter from "../components/ScoreCounter";
 
 const VocabMatchPhotoScreen = ({ navigation, route }) => {
   const [vocabList, setVocabList] = useState([]);
