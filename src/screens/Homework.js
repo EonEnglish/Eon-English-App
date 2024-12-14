@@ -129,7 +129,7 @@ const Homework = ({ navigation }) => {
 
   const renderLessonItem = ({ item }) => (
     <TouchableOpacity
-      style={[styles.button]}
+      style={item.status === "COMPLETED" ? styles.button : styles.button}
       onPress={() =>
         navigation.navigate("LessonsStack", { data: `Lesson ${item.id}` })
       }
@@ -139,7 +139,7 @@ const Homework = ({ navigation }) => {
         <Text style={styles.buttonText}>{item.title}</Text>
         <View style={[styles.chip, styles[`${item.status}`]]}>
           {item.status === "COMPLETED" && (
-            <AntDesign name="checkcircleo" size={15} color="#23DB88" />
+            <AntDesign name="checkcircleo" size={15} color="#23DB88"/>
           )}
           {item.status === "IN PROGRESS" && (
             <MaterialIcons name="av-timer" size={15} color="#C2A800" />
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 9,
     backgroundColor: "white",
     boxShadow:
-      "rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px",
+      "rgba(0, 0, 0, 0.05) 0px 0px 5px 0px",
   },
   buttonTextContainer: {
     flex: 1,
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   statusText: {
-    color: "3D3D3D",
+    color: "#3D3D3D",
     fontWeight: "500",
     fontSize: 11,
   },
