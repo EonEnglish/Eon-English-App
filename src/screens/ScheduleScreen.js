@@ -1,4 +1,8 @@
 import { React, useState, useEffect } from "react";
+import Container from "../components/Container";
+import InputField from "../components/inputField";
+import Dropdown from "../components/dropdown";
+import { useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
   Text,
@@ -6,10 +10,6 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
-import Container from "../components/Container";
-import InputField from "../components/inputField";
-import Dropdown from "../components/dropdown";
-import { useNavigation } from "@react-navigation/native";
 
 function countOccurrences(str, char) {
   return [...str].reduce(

@@ -4,6 +4,9 @@ import { getDoc, doc } from "@firebase/firestore";
 import { useIsFocused } from "@react-navigation/native";
 import { db } from "../services/firebase";
 import Container from "../components/Container";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import {
   View,
   Text,
@@ -11,9 +14,6 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 const Homework = ({ navigation }) => {
   const [lessonsState, setLessonsState] = useState([]);
@@ -129,7 +129,7 @@ const Homework = ({ navigation }) => {
 
   const renderLessonItem = ({ item }) => (
     <TouchableOpacity
-      style={[styles.button]}
+      style={item.status === "COMPLETED" ? styles.button : styles.button}
       onPress={() =>
         navigation.navigate("LessonsStack", { data: `Lesson ${item.id}` })
       }
@@ -194,8 +194,7 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     paddingHorizontal: 9,
     backgroundColor: "white",
-    boxShadow:
-      "rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px",
+    boxShadow: "rgba(0, 0, 0, 0.05) 0px 0px 5px 0px",
   },
   buttonTextContainer: {
     flex: 1,
@@ -216,7 +215,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   statusText: {
-    color: "3D3D3D",
+    color: "#3D3D3D",
     fontWeight: "500",
     fontSize: 11,
   },

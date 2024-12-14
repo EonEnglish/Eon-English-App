@@ -32,12 +32,12 @@ const AboutScreen = () => {
         text={aboutText}
         textStyle={styles.aboutText}
       />
-        <ProfileButton
-          text={t("profile.findUs")}
-          onPress={() => openFindUsSite()}
-          style={styles.findUsButton}
-          styleText={{ color: "white", fontWeight: 800 }}
-        />
+      <ProfileButton
+        text={t("profile.findUs")}
+        onPress={() => openFindUsSite()}
+        style={styles.findUsButton}
+        styleText={{ color: "white", fontWeight: 800 }}
+      />
       <ProfileButton
         text={t("profile.getInvolved")}
         onPress={() => openGetInvolvedSite()}

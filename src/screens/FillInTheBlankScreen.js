@@ -1,4 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
+import { getAuth } from "firebase/auth";
+import { getDocs, collection, getDoc, doc, setDoc } from "@firebase/firestore";
+import { db } from "../services/firebase";
+import Container from "../components/Container";
+import ScoreCounter from "../components/ScoreCounter";
 import {
   StyleSheet,
   Text,
@@ -7,11 +12,6 @@ import {
   Animated,
   PanResponder,
 } from "react-native";
-import { getAuth } from "firebase/auth";
-import { getDocs, collection, getDoc, doc, setDoc } from "@firebase/firestore";
-import { db } from "../services/firebase";
-import Container from "../components/Container";
-import ScoreCounter from "../components/ScoreCounter";
 
 const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
   const [sentenceList, setSentenceList] = useState([]);

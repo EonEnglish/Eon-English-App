@@ -2,6 +2,13 @@
 import { signOut } from "firebase/auth";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { RadioButton } from "react-native-paper";
+import Container from "../components/Container";
+import { LANGUAGES } from "../components/i18n/config";
+import { useLanguage } from "../components/LanguageContext";
+import LanguageSelector from "../components/LanguageSelector";
+import ProfileButton from "../components/profileButton";
+import { auth } from "../services/firebase";
 import {
   Alert,
   SafeAreaView,
@@ -10,13 +17,6 @@ import {
   Text,
   View,
 } from "react-native";
-import { RadioButton } from "react-native-paper";
-import Container from "../components/Container";
-import { LANGUAGES } from "../components/i18n/config";
-import { useLanguage } from "../components/LanguageContext";
-import LanguageSelector from "../components/LanguageSelector";
-import ProfileButton from "../components/profileButton";
-import { auth } from "../services/firebase";
 
 const ProfileScreen = ({ navigation }) => {
   const [deletingAccount, setDeletingAccount] = useState(false);
@@ -204,12 +204,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   aboutButton: {
-    backgroundColor: "#2e2e2e",
-  },
-  getInvolvedButton: {
-    backgroundColor: "#2e2e2e",
-  },
-  findUsButton: {
     backgroundColor: "#2e2e2e",
   },
   resetPasswordButton: {
