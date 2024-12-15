@@ -1,17 +1,44 @@
 import babelParser from "@babel/eslint-parser";
+import { fixupConfigRules } from "@eslint/compat";
 import pluginJs from "@eslint/js";
+import configReactNative from "@react-native/eslint-config";
 import stylisticJs from "@stylistic/eslint-plugin-js";
 import pluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import pluginReact from "eslint-plugin-react";
 import globals from "globals";
 
+// names for eslint-config inspector
+pluginReact.configs.flat.recommended.name = "eslint-plugin-react";
+pluginReact.configs.flat["jsx-runtime"].name = "eslint-plugin-react/jsx-runtime";
+pluginPrettierRecommended.name = "eslint-plugin-prettier";
+
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  { files: ["**/*.{js,mjs,cjs,jsx}"] },
+  { name: "parsed-files config", files: ["**/*.{js,mjs,cjs,jsx}"] },
   pluginJs.configs.recommended,
   pluginReact.configs.flat.recommended,
   pluginReact.configs.flat["jsx-runtime"],
   {
+    name: "@stylistic/js",
+    plugins: { "@stylistic/js": stylisticJs }
+  },
+
+  // 'eslint-comments',
+  // 'react',
+  // 'react-hooks',
+  // 'react-native',
+  // '@react-native',
+  // 'jest',
+
+  // the lib adds some deprecated rules
+  // ...fixupConfigRules({
+  //   name: "@react-native/eslint-config",
+  //   // plugins: configReactNative.plugins,
+  //   rules: configReactNative.rules,
+  //   settings: configReactNative.settings,
+  // }),
+  {
+    name: "eon-eslint",
     languageOptions: {
       parser: babelParser,
       globals: { ...globals.browser, ...globals.node },
@@ -21,15 +48,11 @@ export default [
         },
       },
     },
-    plugins: {
-      // react: pluginReact.configs.flat.recommended,
-    },
     settings: {
       react: {
         version: "detect",
       },
     },
   },
-  { plugins: { "@stylistic/js": stylisticJs } },
   pluginPrettierRecommended,
 ];
