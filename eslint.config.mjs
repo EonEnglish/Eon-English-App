@@ -1,7 +1,5 @@
 import babelParser from "@babel/eslint-parser";
-import { fixupConfigRules } from "@eslint/compat";
 import pluginJs from "@eslint/js";
-import configReactNative from "@react-native/eslint-config";
 import stylisticJs from "@stylistic/eslint-plugin-js";
 import pluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import pluginReact from "eslint-plugin-react";
@@ -20,23 +18,8 @@ export default [
   pluginReact.configs.flat["jsx-runtime"],
   {
     name: "@stylistic/js",
-    plugins: { "@stylistic/js": stylisticJs }
+    plugins: { "@stylistic/js": stylisticJs },
   },
-
-  // 'eslint-comments',
-  // 'react',
-  // 'react-hooks',
-  // 'react-native',
-  // '@react-native',
-  // 'jest',
-
-  // the lib adds some deprecated rules
-  // ...fixupConfigRules({
-  //   name: "@react-native/eslint-config",
-  //   // plugins: configReactNative.plugins,
-  //   rules: configReactNative.rules,
-  //   settings: configReactNative.settings,
-  // }),
   {
     name: "eon-eslint",
     languageOptions: {
