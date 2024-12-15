@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { getAuth } from "firebase/auth";
-import { getDoc, doc } from "@firebase/firestore";
-import { useIsFocused } from "@react-navigation/native";
-import { db } from "../services/firebase";
-import Container from "../components/Container";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { doc, getDoc } from "@firebase/firestore";
+import { useIsFocused } from "@react-navigation/native";
+import { getAuth } from "firebase/auth";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
   FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
+import Container from "../components/Container";
+import { db } from "../services/firebase";
 
-const Homework = ({ navigation }) => {
+export const Homework = ({ navigation }) => {
   const [lessonsState, setLessonsState] = useState([]);
   const isFocused = useIsFocused(); // Hook to check if the screen is focused
   const lessons = [
@@ -169,6 +170,10 @@ const Homework = ({ navigation }) => {
       />
     </Container>
   );
+};
+
+Homework.propTypes = {
+  navigation: PropTypes.any.isRequired,
 };
 
 const styles = StyleSheet.create({

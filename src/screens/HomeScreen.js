@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet, Text, ScrollView } from "react-native";
 import { getDocs, collection } from "@firebase/firestore";
 import { db } from "../services/firebase";
 import Container from "../components/Container";
 import InfoCard from "../components/InfoCard";
+import PropTypes from "prop-types";
 
-const HomeScreen = ({ navigation }) => {
+export const HomeScreen = () => {
   const [announcements, setAnnouncements] = useState([]);
   const [announcementsExist, setAnnouncementsExist] = useState(true);
   useEffect(() => {
@@ -69,6 +70,10 @@ const HomeScreen = ({ navigation }) => {
       </Container>
     </ScrollView>
   );
+};
+
+HomeScreen.propTypes = {
+  navigation: PropTypes.any,
 };
 
 export default HomeScreen;

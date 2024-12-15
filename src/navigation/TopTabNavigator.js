@@ -1,17 +1,16 @@
-import React from "react";
 import { StatusBar } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "../screens/HomeScreen";
-import Homework from "../screens/Homework";
-import VocabMatchScreen from "../screens/VocabMatchScreen";
-import VocabMatchPhotoScreen from "../screens/VocabMatchPhotoScreen";
-import Lessons from "../screens/Lessons";
-import FillInTheBlankScreen from "../screens/FillInTheBlankScreen";
-import ContactUs from "../screens/ContactUs";
-import ScheduleScreen from "../screens/ScheduleScreen";
-import ProfileScreen from "../screens/ProfileScreen";
-import AboutScreen from "../screens/AboutScreen";
-import PasswordResetScreen from "../screens/PasswordResetScreen";
+import { HomeScreen } from "../screens/HomeScreen";
+import { Homework } from "../screens/Homework";
+import { VocabMatchScreen } from "../screens/VocabMatchScreen";
+import { VocabMatchPhotoScreen } from "../screens/VocabMatchPhotoScreen";
+import { Lessons } from "../screens/Lessons";
+import { FillInTheBlankScreen } from "../screens/FillInTheBlankScreen";
+import { ContactUs } from "../screens/ContactUs";
+import { ScheduleScreen } from "../screens/ScheduleScreen";
+import { ProfileScreen } from "../screens/ProfileScreen";
+import { AboutScreen } from "../screens/AboutScreen";
+import { PasswordResetScreen } from "../screens/PasswordResetScreen";
 
 StatusBar.setBarStyle("dark-content");
 const background = { contentStyle: { backgroundColor: "#F1F1F1" } };
