@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { getAuth } from "firebase/auth";
 import { getDoc, doc } from "@firebase/firestore";
@@ -6,8 +6,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { useIsFocused } from "@react-navigation/native";
 import { db } from "../services/firebase";
 import Container from "../components/Container";
+import PropTypes from "prop-types";
 
-const Lessons = ({ navigation, route }) => {
+export const Lessons = ({ navigation, route }) => {
   const { data } = route.params;
   const [conditions, setConditions] = useState({
     vocabMatch: null,
@@ -114,6 +115,11 @@ const Lessons = ({ navigation, route }) => {
       </TouchableOpacity>
     </Container>
   );
+};
+
+Lessons.propTypes = {
+  navigation: PropTypes.any.isRequired,
+  route: PropTypes.any.isRequired,
 };
 
 export default Lessons;

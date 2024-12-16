@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../services/firebase";
 import {
@@ -11,11 +11,12 @@ import {
   Alert,
   ActivityIndicator,
 } from "react-native";
+import PropTypes from "prop-types";
 
-const PasswordResetScreen = ({ navigation }) => {
+export const PasswordResetScreen = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error] = useState("");
 
   const resetPassword = async () => {
     if (!email) {
@@ -63,6 +64,10 @@ const PasswordResetScreen = ({ navigation }) => {
       </View>
     </KeyboardAvoidingView>
   );
+};
+
+PasswordResetScreen.propTypes = {
+  navigation: PropTypes.any,
 };
 
 export default PasswordResetScreen;

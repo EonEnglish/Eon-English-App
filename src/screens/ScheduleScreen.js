@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Container from "../components/Container";
 import InputField from "../components/inputField";
 import Dropdown from "../components/dropdown";
@@ -18,7 +18,7 @@ function countOccurrences(str, char) {
   );
 }
 
-const ScheduleScreen = () => {
+export const ScheduleScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [weChatID, setWeChatID] = useState("");
@@ -188,7 +188,7 @@ const ScheduleScreen = () => {
       },
       body: new URLSearchParams(formScheduleData).toString(),
     })
-      .then((response) => {
+      .then(() => {
         Alert.alert("Sent!", "The form has been sent.", [
           {
             text: "OK",
@@ -198,7 +198,7 @@ const ScheduleScreen = () => {
           },
         ]);
       })
-      .catch((error) =>
+      .catch(() =>
         Alert.alert("Failed", "The form has not been sent.", { text: "OK" }),
       );
   };

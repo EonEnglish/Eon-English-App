@@ -1,8 +1,8 @@
-import React from "react";
 import { TouchableOpacity, Text, View, StyleSheet } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import PropTypes from "prop-types";
 
-const CustomCheckBox = ({ value, onValueChange }) => {
+export const CustomCheckBox = ({ value, onValueChange }) => {
   return (
     <TouchableOpacity
       onPress={() => onValueChange(!value)}
@@ -18,6 +18,11 @@ const CustomCheckBox = ({ value, onValueChange }) => {
       <Text style={styles.label}>Remember Me</Text>
     </TouchableOpacity>
   );
+};
+
+CustomCheckBox.propTypes = {
+  value: PropTypes.any.isRequired,
+  onValueChange: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { composeAsync } from "expo-mail-composer";
 import Container from "../components/Container";
 import InputField from "../components/inputField";
@@ -12,7 +12,7 @@ import {
   Alert,
 } from "react-native";
 
-const ContactUs = () => {
+export const ContactUs = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [weChatID, setWeChatID] = useState("");
@@ -86,7 +86,7 @@ const ContactUs = () => {
           },
         ]);
       });
-    } catch (error) {
+    } catch {
       Alert.alert("Failed", "The form has not been sent.", { text: "OK" });
     }
   };

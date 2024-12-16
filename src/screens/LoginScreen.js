@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -11,6 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import CustomCheckBox from "./CustomCheckBox"; // Adjust the import path according to your project structure
 import InputField from "../components/inputField";
+import PropTypes from "prop-types";
 
 const LoginScreen = ({ route, navigation }) => {
   const [email, setEmail] = useState("");
@@ -130,13 +131,18 @@ const LoginScreen = ({ route, navigation }) => {
           style={styles.registerButton}
         >
           <Text style={styles.buttonRegisterText}>
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Text style={styles.signUpText}>Sign Up</Text>
           </Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );
+};
+
+LoginScreen.propTypes = {
+  navigation: PropTypes.any.isRequired,
+  route: PropTypes.any.isRequired,
 };
 
 export default LoginScreen;

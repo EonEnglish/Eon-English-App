@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Text, TextInput } from "react-native";
+import PropTypes from "prop-types";
+import { useState } from "react";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 import checkInput from "./inputChecker";
 
-const InputField = ({
+export const InputField = ({
   title,
   placeholderText,
   value,
@@ -13,7 +14,7 @@ const InputField = ({
   ...props
 }) => {
   const [isFocus, setFocus] = useState(false);
-  error = conditions && checkInput(conditions);
+  let error = conditions && checkInput(conditions);
 
   return (
     <View style={styles.inputGroup}>
@@ -36,6 +37,18 @@ const InputField = ({
       {error && <Text style={styles.errorText}>{error[0]}</Text>}
     </View>
   );
+};
+
+InputField.propTypes = {
+  navigation: PropTypes.any.isRequired,
+  route: PropTypes.any.isRequired,
+  title: PropTypes.string,
+  placeholderText: PropTypes.string,
+  value: PropTypes.string,
+  onChangeText: PropTypes.func,
+  style: PropTypes.any,
+  multiline: PropTypes.bool,
+  conditions: PropTypes.bool,
 };
 
 export default InputField;
@@ -61,7 +74,6 @@ const styles = StyleSheet.create({
   label: {
     color: "#585758",
     fontWeight: "700",
-    fontWeight: "bold",
   },
   errorText: {
     color: "#FF0000",

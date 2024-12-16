@@ -1,4 +1,3 @@
-import React from "react";
 import { StyleSheet, Linking } from "react-native";
 import Container from "../components/Container";
 import InfoCard from "../components/InfoCard";
@@ -15,9 +14,8 @@ const openGetInvolvedSite = () => {
   return Linking.openURL(getInvolvedUrl);
 };
 
-const AboutScreen = () => {
+export const AboutScreen = () => {
   const { t } = useTranslation();
-  const something = t("profile.saveChanges");
   const aboutText =
     t("about.aboutText1") + t("about.aboutText2") + t("about.aboutText3");
   // "English. We aim to provide this opportunity to kids who don’t have enough access to English learning " +

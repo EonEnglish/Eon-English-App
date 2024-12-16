@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, View } from "react-native";
 import ProfileButton from "./profileButton";
 
