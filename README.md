@@ -22,6 +22,7 @@
   - [ Courses and Tools](#courses-and-tools)
   - [ How to Run the App](#how-to-run-the-app)
   - [ How to Access our ENV Keys](#how-to-access-our-env-keys)
+  - [ How to Access our Figma Design](#how-to-access-our-figma-design)
 - [ How to Run the App](#how-to-run-the-app)
   - [ Accessing .env keys](#env-keys)
 - [ How to Contribute](#how-to-contribute)
@@ -91,7 +92,7 @@ git submodule update --remote --recursive
 
 <br>
 
-### How to Accesss our Figma Design
+### How to Access our Figma Design
 You will have permission to view the document. If you would like to make direct changes, contact a team manager for `write` permissions.
 - [Figma Design](https://www.figma.com/design/QEKUmbK9a6TUb1IQa4Xxyq/EON-ENGLISH-APP?node-id=0-1&t=TOuX2P7soMWlf3g5-1)
 
