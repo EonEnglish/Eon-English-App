@@ -36,15 +36,16 @@ export const FillInTheBlankScreen = ({ navigation, route }) => {
     const fetchSentence = async () => {
       try {
         const Collection = await getDocs(collection(db, data));
-        Collection.forEach(async (doc) => {
-          if (doc.id === "Blank Match") {
-            const subCollection = await getDocs(
-              collection(doc.ref, "Collection"),
-            );
-            const sentence = subCollection.docs.map((doc) => doc.data());
-            setSentenceList(sentence);
+        for (const doc of Collection.docs) {
+          if (doc.id !== "Blank Match") {
+            continue;
           }
-        });
+          const subCollection = await getDocs(
+            collection(doc.ref, "Collection"),
+          );
+          const sentence = subCollection.docs.map((doc) => doc.data());
+          setSentenceList(sentence);
+        }
       } catch (error) {
         console.error("Error fetching vocabulary:", error);
       }

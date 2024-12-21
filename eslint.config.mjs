@@ -4,11 +4,14 @@ import stylisticJs from "@stylistic/eslint-plugin-js";
 import pluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import pluginReact from "eslint-plugin-react";
 import globals from "globals";
+import sonarjs from "eslint-plugin-sonarjs";
 
 // names for eslint-config inspector
 pluginReact.configs.flat.recommended.name = "eslint-plugin-react";
-pluginReact.configs.flat["jsx-runtime"].name = "eslint-plugin-react/jsx-runtime";
+pluginReact.configs.flat["jsx-runtime"].name =
+  "eslint-plugin-react/jsx-runtime";
 pluginPrettierRecommended.name = "eslint-plugin-prettier";
+sonarjs.configs.recommended.name = "eslint-plugin-sonarjs";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -20,6 +23,7 @@ export default [
     name: "@stylistic/js",
     plugins: { "@stylistic/js": stylisticJs },
   },
+  sonarjs.configs.recommended,
   {
     name: "eon-eslint",
     languageOptions: {
@@ -35,6 +39,9 @@ export default [
       react: {
         version: "detect",
       },
+    },
+    rules: {
+      "sonarjs/pseudo-random": "off",
     },
   },
   pluginPrettierRecommended,

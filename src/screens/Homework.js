@@ -130,7 +130,7 @@ export const Homework = ({ navigation }) => {
 
   const renderLessonItem = ({ item }) => (
     <TouchableOpacity
-      style={item.status === "COMPLETED" ? styles.button : styles.button}
+      style={item.status === "COMPLETED" ? styles.COMPLETED : styles.button}
       onPress={() =>
         navigation.navigate("LessonsStack", { data: `Lesson ${item.id}` })
       }
