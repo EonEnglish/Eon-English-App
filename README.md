@@ -23,8 +23,6 @@
   - [ How to Run the App](#how-to-run-the-app)
   - [ How to Access our ENV Keys](#how-to-access-our-env-keys)
   - [ How to Access our Figma Design](#how-to-access-our-figma-design)
-- [ How to Run the App](#how-to-run-the-app)
-  - [ Accessing .env keys](#env-keys)
 - [ How to Contribute](#how-to-contribute)
 
 <br>
