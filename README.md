@@ -18,7 +18,10 @@
 
 - [ About The Project](#about-the-project)
   - [ Built with](#built-with)
-  - [ Resources](#resources)
+- [ Instructions](#instructions)
+  - [ Courses and Tools](#courses-and-tools)
+  - [ How to Run the App](#how-to-run-the-app)
+  - [ How to Access our ENV Keys](#how-to-access-our-env-keys)
 - [ How to Run the App](#how-to-run-the-app)
   - [ Accessing .env keys](#env-keys)
 - [ How to Contribute](#how-to-contribute)
@@ -34,34 +37,44 @@ This app will help Eon students find their homework and apply what they have lea
 ### Built With
 
 - ![Static Badge](https://img.shields.io/badge/JavaScript-%23212329?style=for-the-badge&logo=JavaScript)
-- ![Static Badge](https://img.shields.io/badge/HTML-%23212329?style=for-the-badge&logo=HTML5)
-- ![Static Badge](https://img.shields.io/badge/CSS-%23212329?style=for-the-badge&logo=CSS3)
 - ![Static Badge](https://img.shields.io/badge/React_Native-%23212329?style=for-the-badge&logo=React)
+- ![Static Badge](https://img.shields.io/badge/Expo_CLI-%23212329?style=for-the-badge&logo=Expo)
+- ![Static Badge](https://img.shields.io/badge/Firebase-%23212329?style=for-the-badge&logo=Firebase)
+- ![Static Badge](https://img.shields.io/badge/App_script-%23212329?style=for-the-badge&logo=Google)
 
 <br>
 
-### Resources
+## Instructions
 
-The project uses React Native. Therefore, we recommend building foundational knowledge. The materials we provide are optional, and you may learn with whatever strategy you prefer. Otherwise, we suggest taking this course _(complete at least 25%)_
+The project uses React Native and requires some knowledge of JavaScript. Therefore, we recommend building foundational knowledge. The materials we provide are optional.
 
-- [Codeacademy's React Native](https://www.codecademy.com/learn/learn-react-native)
 
-In addition, we recommend using Microsoft's Visual Studio Code editor with some handy plug-ins
+### Courses and Tools
+- [Codeacademy's React Native Course](https://www.codecademy.com/learn/learn-react-native)
 
-- [Visual Studio Code](https://code.visualstudio.com)
-  - [Emulator Plug-in](https://marketplace.visualstudio.com/items?itemName=DiemasMichiels.emulate)
-  - [Prettier Plug-in](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [Codeacademy's JavaScript Course](https://www.codecademy.com/learn/introduction-to-javascript)
 
-<br>
-
-## How to Run the App
-
-[<img src="https://github.com/STEM-E-Youth-Career-Development-Program/app-7/assets/154091778/590c3ffd-efed-49af-a959-78042868db41">](https://youtu.be/nBq75f8JVZg)
-[Not working? Use this link](https://youtu.be/nBq75f8JVZg)
+- [Visual Studio Code (Editor)](https://code.visualstudio.com)
+  - [Android Studios (universal emulator)](https://developer.android.com/studio)
+  - [VS Code Emulator Plug-in](https://marketplace.visualstudio.com/items?itemName=DiemasMichiels.emulate)
+  - [Prettier Plug-in (formatter)](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
 <br>
 
-### ENV Keys
+### How to Run the App
+
+We use React Native and Expo's CLI to run the application locally. You may use the following guides for your operating system. 
+
+- [Set up React Native environment (MacOS)](https://www.youtube.com/watch?v=4U_OQHGhSf0)
+     - [Run our app locally using Xcode/Android Studios](https://youtu.be/nBq75f8JVZg)
+
+- [Set up React Native environment (Windows)](https://www.youtube.com/watch?v=f6TXEnHT_Mk)
+     - [Set up Android Studios Windows](https://youtu.be/TAHMNftUSZg)
+
+
+<br>
+
+### How to Access our ENV Keys
 
 For the initial start up, run the following submodule command to retrieve the .env keys (requires repository access)
 ```bash
@@ -75,6 +88,12 @@ git submodule update --remote --recursive
 ```
 
 [Not working? Find the secret keys here...](https://github.com/EonEnglish/Eon-English-App-Secrets)
+
+<br>
+
+### How to Accesss our Figma Design
+You will have permission to view the document. If you would like to make direct changes, contact a team manager for `write` permissions.
+- [Figma Design](https://www.figma.com/design/QEKUmbK9a6TUb1IQa4Xxyq/EON-ENGLISH-APP?node-id=0-1&t=TOuX2P7soMWlf3g5-1)
 
 <br>
 
