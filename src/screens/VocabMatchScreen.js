@@ -1,5 +1,4 @@
 import { collection, doc, getDoc, getDocs, setDoc } from "@firebase/firestore";
-import { Navigator } from "@react-navigation/native";
 import { getAuth } from "firebase/auth";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
@@ -115,7 +114,7 @@ export const VocabMatchScreen = ({ navigation, route }) => {
 };
 
 VocabMatchScreen.propTypes = {
-  navigation: PropTypes.objectOf(Navigator).isRequired,
+  navigation: PropTypes.any.isRequired,
   route: PropTypes.any.isRequired,
 };
 

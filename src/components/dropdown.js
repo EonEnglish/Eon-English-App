@@ -29,12 +29,11 @@ export const Dropdown = ({
 };
 
 Dropdown.propTypes = {
-  navigation: PropTypes.any.isRequired,
   title: PropTypes.string,
   placeholderText: PropTypes.string,
   setSelected: PropTypes.func,
   data: PropTypes.any,
-  conditions: PropTypes.bool,
+  conditions: PropTypes.array,
 };
 
 export default Dropdown;

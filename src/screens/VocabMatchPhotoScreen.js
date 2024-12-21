@@ -226,7 +226,7 @@ export const VocabMatchPhotoScreen = ({ navigation, route }) => {
 };
 
 VocabMatchPhotoScreen.propTypes = {
-  navigation: PropTypes.objectOf(Navigator).isRequired,
+  navigation: PropTypes.any.isRequired,
   route: PropTypes.any.isRequired,
 };
 

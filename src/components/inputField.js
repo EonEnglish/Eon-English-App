@@ -40,15 +40,13 @@ export const InputField = ({
 };
 
 InputField.propTypes = {
-  navigation: PropTypes.any.isRequired,
-  route: PropTypes.any.isRequired,
   title: PropTypes.string,
   placeholderText: PropTypes.string,
   value: PropTypes.string,
   onChangeText: PropTypes.func,
   style: PropTypes.any,
   multiline: PropTypes.bool,
-  conditions: PropTypes.bool,
+  conditions: PropTypes.array,
 };
 
 export default InputField;

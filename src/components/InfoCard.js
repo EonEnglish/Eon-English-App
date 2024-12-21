@@ -22,8 +22,6 @@ export const InfoCard = ({
 };
 
 InfoCard.propTypes = {
-  navigation: PropTypes.any.isRequired,
-  route: PropTypes.any.isRequired,
   title: PropTypes.string,
   text: PropTypes.string,
   footer: PropTypes.string,

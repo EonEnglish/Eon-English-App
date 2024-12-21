@@ -14,7 +14,7 @@ import { RadioButton } from "react-native-paper";
 import Container from "../components/Container";
 import { LANGUAGES } from "../components/i18n/config";
 import { useLanguage } from "../components/LanguageContext";
-import LanguageSelector from "../components/LanguageSelector";
+import { LanguageSelector } from "../components/LanguageSelector";
 import ProfileButton from "../components/profileButton";
 import { auth } from "../services/firebase";
 
