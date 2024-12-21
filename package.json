@@ -8,8 +8,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "lint": "eslint ./src ./App.js",
-    "format:check": "prettier ./src --check",
-    "format:fix": "prettier ./src --write",
+    "format:check": "prettier ./src ./App.js --check",
+    "format:fix": "prettier ./src ./App.js --write",
     "prepare": "husky"
   },
   "dependencies": {
