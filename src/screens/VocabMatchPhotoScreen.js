@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from "react";
+import { collection, doc, getDoc, getDocs, setDoc } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { getDocs, collection, getDoc, doc, setDoc } from "@firebase/firestore";
-import { getDownloadURL, ref, getStorage } from "firebase/storage";
-import { db } from "../services/firebase";
-import Container from "../components/Container";
-import ScoreCounter from "../components/ScoreCounter";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import {
-  View,
-  Image,
-  Text,
-  StyleSheet,
   Alert,
-  TouchableOpacity,
   Button,
+  Image,
   ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
+import { Container } from "../components/Container";
+import { ScoreCounter } from "../components/ScoreCounter";
+import { db } from "../services/firebase";
 
-const VocabMatchPhotoScreen = ({ navigation, route }) => {
+export const VocabMatchPhotoScreen = ({ navigation, route }) => {
   const [vocabList, setVocabList] = useState([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -192,7 +193,7 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
     return <Text>Loading...</Text>;
   }
 
-  const currentWord = vocabList[currentWordIndex];
+  // const currentWord = vocabList[currentWordIndex];
   const currentImageUrl = imgUrls[currentWordIndex];
 
   return (
@@ -222,6 +223,11 @@ const VocabMatchPhotoScreen = ({ navigation, route }) => {
       </Container>
     </ScrollView>
   );
+};
+
+VocabMatchPhotoScreen.propTypes = {
+  navigation: PropTypes.any.isRequired,
+  route: PropTypes.any.isRequired,
 };
 
 const styles = StyleSheet.create({

@@ -1,8 +1,13 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import PropTypes from "prop-types";
+import { StyleSheet, View } from "react-native";
 
-const Container = ({ children, style }) => {
+export const Container = ({ children, style }) => {
   return <View style={[styles.container, style]}>{children}</View>;
+};
+
+Container.propTypes = {
+  children: PropTypes.any.isRequired,
+  style: PropTypes.any,
 };
 
 export default Container;

@@ -1,7 +1,7 @@
-import React from "react";
+import PropTypes from "prop-types";
 import { View, StyleSheet, Text } from "react-native";
 
-const InfoCard = ({
+export const InfoCard = ({
   title,
   text,
   footer,
@@ -19,6 +19,16 @@ const InfoCard = ({
       )}
     </View>
   );
+};
+
+InfoCard.propTypes = {
+  title: PropTypes.string,
+  text: PropTypes.string,
+  footer: PropTypes.string,
+  containerStyle: PropTypes.any,
+  titleStyle: PropTypes.any,
+  textStyle: PropTypes.any,
+  footerStyle: PropTypes.any,
 };
 
 export default InfoCard;

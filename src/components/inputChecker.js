@@ -1,4 +1,4 @@
-const checkInput = (entries) => {
+export const checkInput = (entries) => {
   var errors = [];
 
   entries.forEach((entry) => {

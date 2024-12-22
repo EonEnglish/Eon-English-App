@@ -1,16 +1,16 @@
-import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import PropTypes from "prop-types";
+import { StyleSheet, Text, View } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
-import checkInput from "./inputChecker";
+import { checkInput } from "./inputChecker";
 
-const Dropdown = ({
+export const Dropdown = ({
   title,
   placeholderText,
   setSelected,
   data,
   conditions,
 }) => {
-  error = conditions && checkInput(conditions);
+  let error = conditions && checkInput(conditions);
 
   return (
     <View style={styles.inputGroup}>
@@ -26,6 +26,14 @@ const Dropdown = ({
       {error && <Text style={styles.errorText}>{error[0]}</Text>}
     </View>
   );
+};
+
+Dropdown.propTypes = {
+  title: PropTypes.string,
+  placeholderText: PropTypes.string,
+  setSelected: PropTypes.func,
+  data: PropTypes.any,
+  conditions: PropTypes.array,
 };
 
 export default Dropdown;
@@ -52,7 +60,6 @@ const styles = StyleSheet.create({
   label: {
     color: "#585758",
     fontWeight: "700",
-    fontWeight: "bold",
   },
   errorText: {
     color: "#FF0000",

@@ -1,7 +1,6 @@
-import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const CongratsScreen = ({ completedParts }) => {
+export const CongratsScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Congratulations!</Text>

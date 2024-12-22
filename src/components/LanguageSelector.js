@@ -9,8 +9,11 @@ import {
   Modal,
   ScrollView,
 } from "react-native";
+import PropTypes from "prop-types";
 
-const LanguageSelector = ({
+const LANGUAGES = [];
+
+export const LanguageSelector = ({
   label,
   value,
   onValueChange,
@@ -101,6 +104,14 @@ const LanguageSelector = ({
       </Modal>
     </View>
   );
+};
+
+LanguageSelector.propTypes = {
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onValueChange: PropTypes.func.isRequired,
+  languages: PropTypes.array,
+  excludeValue: PropTypes.string,
 };
 
 const styles = StyleSheet.create({

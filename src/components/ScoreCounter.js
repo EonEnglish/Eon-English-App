@@ -1,8 +1,13 @@
-import React from "react";
+import PropTypes from "prop-types";
 import { Text, StyleSheet } from "react-native";
 
-const ScoreCounter = ({ children, style }) => {
+export const ScoreCounter = ({ children, style }) => {
   return <Text style={[styles.container, style]}>{children}</Text>;
+};
+
+ScoreCounter.propTypes = {
+  children: PropTypes.node,
+  style: PropTypes.any,
 };
 
 export default ScoreCounter;

@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Text, StyleSheet, TextInput, Button, Alert } from "react-native";
+import { collection, doc, getDoc, getDocs, setDoc } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { getDocs, collection, getDoc, doc, setDoc } from "@firebase/firestore";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { Alert, Button, StyleSheet, Text, TextInput } from "react-native";
+import { Container } from "../components/Container";
+import { ScoreCounter } from "../components/ScoreCounter";
 import { db } from "../services/firebase";
-import Container from "../components/Container";
-import ScoreCounter from "../components/ScoreCounter";
 
-const VocabMatchScreen = ({ navigation, route }) => {
+export const VocabMatchScreen = ({ navigation, route }) => {
   const [vocabList, setVocabList] = useState([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [userInput, setUserInput] = useState("");
@@ -110,6 +111,11 @@ const VocabMatchScreen = ({ navigation, route }) => {
       <Button title="Submit" onPress={checkAnswer} />
     </Container>
   );
+};
+
+VocabMatchScreen.propTypes = {
+  navigation: PropTypes.any.isRequired,
+  route: PropTypes.any.isRequired,
 };
 
 const styles = StyleSheet.create({

@@ -1,19 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
+import { collection, doc, getDoc, getDocs, setDoc } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { getDocs, collection, getDoc, doc, setDoc } from "@firebase/firestore";
-import { db } from "../services/firebase";
-import Container from "../components/Container";
-import ScoreCounter from "../components/ScoreCounter";
+import PropTypes from "prop-types";
+import { useEffect, useRef, useState } from "react";
 import {
-  StyleSheet,
-  Text,
-  View,
   Alert,
   Animated,
   PanResponder,
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
+import Container from "../components/Container";
+import ScoreCounter from "../components/ScoreCounter";
+import { db } from "../services/firebase";
 
-const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
+export const FillInTheBlankScreen = ({ navigation, route }) => {
   const [sentenceList, setSentenceList] = useState([]);
   const [options, setOptions] = useState([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -26,7 +27,6 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
 
   //Drag
   const [questionContainerLayout, setQuestionContainerLayout] = useState(null);
-  const [draggedOption, setDraggedOption] = useState(null); // Track the option being dragged
   const [dropAreaEntered, setDropAreaEntered] = useState(false); // Track if an option is over the drop area
 
   const itemPans = useRef([]);
@@ -36,15 +36,16 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
     const fetchSentence = async () => {
       try {
         const Collection = await getDocs(collection(db, data));
-        Collection.forEach(async (doc) => {
-          if (doc.id === "Blank Match") {
-            const subCollection = await getDocs(
-              collection(doc.ref, "Collection"),
-            );
-            const sentence = subCollection.docs.map((doc) => doc.data());
-            setSentenceList(sentence);
+        for (const doc of Collection.docs) {
+          if (doc.id !== "Blank Match") {
+            continue;
           }
-        });
+          const subCollection = await getDocs(
+            collection(doc.ref, "Collection"),
+          );
+          const sentence = subCollection.docs.map((doc) => doc.data());
+          setSentenceList(sentence);
+        }
       } catch (error) {
         console.error("Error fetching vocabulary:", error);
       }
@@ -272,6 +273,11 @@ const Fill_In_The_Blank_Screen = ({ navigation, route }) => {
   );
 };
 
+FillInTheBlankScreen.propTypes = {
+  navigation: PropTypes.any.isRequired,
+  route: PropTypes.any.isRequired,
+};
+
 const styles = StyleSheet.create({
   centerContainer: {
     justifyContent: "center",
@@ -315,4 +321,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Fill_In_The_Blank_Screen;
+export default FillInTheBlankScreen;

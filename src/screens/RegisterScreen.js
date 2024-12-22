@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import PropTypes from "prop-types";
+import { useState } from "react";
 import {
+  ActivityIndicator,
   KeyboardAvoidingView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-  ActivityIndicator,
 } from "react-native";
 
 const RegisterScreen = ({ navigation }) => {
@@ -22,11 +23,7 @@ const RegisterScreen = ({ navigation }) => {
 
     try {
       const auth = getAuth();
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password,
-      );
+      await createUserWithEmailAndPassword(auth, email, password);
       navigation.replace("Tab");
     } catch (err) {
       setError(getCustomErrorMessage(err.code));
@@ -82,6 +79,10 @@ const RegisterScreen = ({ navigation }) => {
       </View>
     </KeyboardAvoidingView>
   );
+};
+
+RegisterScreen.propTypes = {
+  navigation: PropTypes.any.isRequired,
 };
 
 export default RegisterScreen;

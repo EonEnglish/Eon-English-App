@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { I18nextProvider } from "react-i18next";
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
 import * as Localization from "expo-localization";
+import i18n from "i18next";
+import PropTypes from "prop-types";
+import { createContext, useContext, useEffect, useState } from "react";
+import { I18nextProvider, initReactI18next } from "react-i18next";
 
 const LanguageContext = createContext();
 
@@ -83,6 +83,10 @@ export const LanguageProvider = ({ children }) => {
       console.error("Error saving language preferences:", error);
       return false;
     }
+  };
+
+  LanguageProvider.propTypes = {
+    children: PropTypes.node,
   };
 
   const value = {
