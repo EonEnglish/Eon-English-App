@@ -3,7 +3,25 @@
     "loading": "Loading...",
     "error": "Error",
     "ok": "OK",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "submitBtn": "submit"
+  },
+  "schedule": {
+    "screenTitle": "Schedule",
+    "nameInputLabel": "Name:",
+    "nameInput": "Enter your first & last name",
+    "emailInputLabel": "Email:",
+    "emailInput": "Enter your email",
+    "weChatIDLabel": "WeChat ID:",
+    "weChatIDInput": "Enter WeChat ID",
+    "howCanWeAssistLabel": "How can we assist you?",
+    "howCanWeAssistInput": "Select type",
+    "specifiyWhichLessonLabel": "Specify which lesson",
+    "specifyWhichLessonInput": "Select lesson",
+    "chooseAScheduleLabel": "Choose a schedule",
+    "chooseAScheduleInput": "Select available time",
+    "additionalNotesLabel": "Additional Notes:",
+    "additionalNotesInput": "Write any additional information (optional)"
   },
   "profile": {
     "nativeLanguage": "Native Languge",

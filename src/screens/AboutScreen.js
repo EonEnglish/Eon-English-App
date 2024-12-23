@@ -18,9 +18,6 @@ export const AboutScreen = () => {
   const { t } = useTranslation();
   const aboutText =
     t("about.aboutText1") + t("about.aboutText2") + t("about.aboutText3");
-  // "English. We aim to provide this opportunity to kids who don’t have enough access to English learning " +
-  // "material. Through this program, students get to learn how to speak native English and about Western " +
-  // "culture.";
 
   return (
     <Container style={styles.aboutContainer}>
