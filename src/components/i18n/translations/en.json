@@ -5,6 +5,22 @@
     "ok": "OK",
     "cancel": "Cancelar"
   },
+  "Schedule": {
+    "screenTitle": "Schedule",
+    "nameInputLabel": "Name:",
+    "nameInput": "Enter your first & last name",
+    "emailInputLabel": "Email:",
+    "emailInput": "Enter your email",
+    "weChatIDLabel": "WeChat ID:",
+    "weChatIDInput": "Enter WeChat ID",
+    "howCanWeAssistLabel": "How can we assist you?",
+    "howCanWeAssistInput": "Select type",
+    "chooseAScheduleLabel": "Choose a schedule",
+    "chooseAScheduleInput": "Select available time",
+    "additionalNotesLabel": "Additional Notes:",
+    "additionalNotesInput": "Write any additional information (optional)",
+    "submitBtn": "submit"
+  },
   "profile": {
     "nativeLanguage": "Native Languge",
     "targetLanguage": "Target Language",
