@@ -3,7 +3,25 @@
     "loading": "加载中...",
     "error": "错误",
     "ok": "确定",
-    "cancel": "取消"
+    "cancel": "取消",
+    "submitBtn": "提交"
+  },
+  "schedule": {
+    "screenTitle": "日程",
+    "nameInputLabel": "姓名：",
+    "nameInput": "输入您的名字和姓氏",
+    "emailInputLabel": "电子邮件：",
+    "emailInput": "输入您的电子邮件",
+    "weChatIDLabel": "微信ID：",
+    "weChatIDInput": "输入微信ID",
+    "howCanWeAssistLabel": "我们可以如何帮助您？",
+    "howCanWeAssistInput": "选择类型",
+    "specifiyWhichLessonLabel": "指定哪一课",
+    "specifyWhichLessonInput": "选择课程",
+    "chooseAScheduleLabel": "选择时间表",
+    "chooseAScheduleInput": "选择可用时间",
+    "additionalNotesLabel": "附加说明：",
+    "additionalNotesInput": "写下任何附加信息（可选）"
   },
   "profile": {
     "nativeLanguage": "母语",
