@@ -44,5 +44,18 @@
     "aboutText2": "We aim to provide this opportunity to kids who don’t have enough access to English learning material.",
     "aboutText3": "Through this program, students get to learn how to speak native English and about Western culture.",
     "aboutTitle": "Who We Are"
+  },
+  "contactUs": {
+    "screenTitle": "home",
+    "firstNameLabel": "First Name:",
+    "firstNameInput": "Enter your first name",
+    "lastNameLabel": "Last Name:",
+    "lastNameInput": "Enter your last name",
+    "weChatIDLabel": "WeChat ID:",
+    "weChatIDInput": "Enter WeChat ID",
+    "subjectLabel": "Subject:",
+    "subjectInput": "Enter subject",
+    "messageLabel": "Message:",
+    "messageInput": "Enter message"
   }
 }

@@ -3,6 +3,7 @@ import { composeAsync } from "expo-mail-composer";
 import Container from "../components/Container";
 import InputField from "../components/inputField";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 import {
   StyleSheet,
   Text,
@@ -19,6 +20,7 @@ export const ContactUs = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState({});
+  const { t } = useTranslation();
 
   const navigation = useNavigation();
 
@@ -95,40 +97,40 @@ export const ContactUs = () => {
     <ScrollView>
       <Container>
         <InputField
-          title={"First Name: "}
-          placeholderText={"Enter First Name"}
+          title={t("contactUs.firstNameLabel")}
+          placeholderText={t("contactUs.firstNameInput")}
           value={firstName}
           onChangeText={setFirstName}
           conditions={errors.firstName}
           style={{ marginBottom: 20 }}
         />
         <InputField
-          title={"Last Name: "}
-          placeholderText={"Enter Last Name"}
+          title={t("contactUs.lastNameLabel")}
+          placeholderText={t("contactUs.lastNameInput")}
           value={lastName}
           onChangeText={setLastName}
           conditions={errors.lastName}
           style={{ marginBottom: 20 }}
         />
         <InputField
-          title={"WeChat ID: "}
-          placeholderText={"Enter WeChat ID"}
+          title={t("contactUs.weChatIDLabel")}
+          placeholderText={t("contactUs.weChatIDInput")}
           value={weChatID}
           onChangeText={setWeChatID}
           conditions={errors.weChatID}
           style={{ marginBottom: 20 }}
         />
         <InputField
-          title={"Subject: "}
-          placeholderText={"Enter Subject"}
+          title={t("contactUs.subjectLabel")}
+          placeholderText={t("contactUs.subjectInput")}
           value={subject}
           onChangeText={setSubject}
           conditions={errors.subject}
           style={{ marginBottom: 20 }}
         />
         <InputField
-          title={"Message: "}
-          placeholderText={"Enter Message"}
+          title={t("contactUs.messageLabel")}
+          placeholderText={t("contactUs.messageInput")}
           value={message}
           onChangeText={setMessage}
           style={styles.messageInput}
@@ -136,7 +138,7 @@ export const ContactUs = () => {
           multiline={true}
         />
         <TouchableOpacity style={styles.buttonContainer} onPress={sendEmail}>
-          <Text style={styles.buttonText}>Send</Text>
+          <Text style={styles.buttonText}>{t("common.submitBtn")}</Text>
         </TouchableOpacity>
         <View style={{ paddingBottom: 40 }} />
       </Container>

@@ -44,5 +44,18 @@
     "aboutText2": "我们的目标是为那些无法获得足够英语学习材料的孩​​子提供这个机会。",
     "aboutText3": "通过这个项目，学生可以学习如何说地​​道英语和了解西方文化。",
     "aboutTitle": "我们是谁"
+  },
+  "contactUs": {
+    "screenTitle": "首頁",
+    "firstNameLabel": "名字：",
+    "firstNameInput": "輸入您的名字",
+    "lastNameLabel": "姓氏：",
+    "lastNameInput": "輸入您的姓氏",
+    "weChatIDLabel": "微信ID：",
+    "weChatIDInput": "輸入微信ID",
+    "subjectLabel": "主題：",
+    "subjectInput": "輸入主題",
+    "messageLabel": "訊息：",
+    "messageInput": "輸入訊息"
   }
 }

@@ -44,5 +44,18 @@
     "aboutText2": "Nuestro objetivo es brindar esta oportunidad a los niños que no tienen suficiente acceso al material de aprendizaje de inglés.",
     "aboutText3": "A través de este programa, los estudiantes aprenden a hablar inglés nativo y sobre la cultura occidental.",
     "aboutTitle": "Quienes somos"
+  },
+  "contactUs": {
+    "screenTitle": "home",
+    "firstNameLabel": "Nombre:",
+    "firstNameInput": "Ingresa tu nombre",
+    "lastNameLabel": "Apellido:",
+    "lastNameInput": "Ingresa tu apellido",
+    "weChatIDLabel": "ID de WeChat:",
+    "weChatIDInput": "Ingresa ID de WeChat",
+    "subjectLabel": "Asunto:",
+    "subjectInput": "Ingresa el asunto",
+    "messageLabel": "Mensaje:",
+    "messageInput": "Ingresa el mensaje"
   }
 }
