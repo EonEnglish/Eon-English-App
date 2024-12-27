@@ -5,7 +5,7 @@ import { Container } from "../components/Container";
 import { ScoreCounter } from "../components/ScoreCounter";
 import { VocabEnum } from "../lib/constant";
 import { auth } from "../services/firebase";
-import { CompleteHomework, GetHomework } from "../services/lessons.service";
+import { CompleteHomework, GetHomework } from "../services/lesson.service";
 
 export const VocabMatchScreen = ({ navigation, route }) => {
   const [vocabList, setVocabList] = useState([]);

@@ -13,7 +13,7 @@ import {
   View,
 } from "react-native";
 import Container from "../components/Container";
-import { GetUserLessons } from "../services/lessons.service";
+import { GetUserLessons } from "../services/lesson.service";
 
 export const Homework = ({ navigation }) => {
   const [lessonsState, setLessonsState] = useState([]);

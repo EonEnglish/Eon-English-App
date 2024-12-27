@@ -9,7 +9,7 @@ import {
   where,
 } from "@firebase/firestore";
 import { CollectionNames } from "../lib/constant";
-import { db } from "../services/firebase";
+import { db } from "./firebase";
 
 /**
  *

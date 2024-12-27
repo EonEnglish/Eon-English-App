@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Container from "../components/Container";
 import { auth } from "../services/firebase";
-import { GetLessonCompletion } from "../services/lessons.service";
+import { GetLessonCompletion } from "../services/lesson.service";
 
 export const Lessons = ({ navigation, route }) => {
   const { lesson_id } = route.params;

@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import Container from "../components/Container";
 import ScoreCounter from "../components/ScoreCounter";
-import { CompleteHomework, GetHomework } from "../services/lessons.service";
+import { CompleteHomework, GetHomework } from "../services/lesson.service";
 import { VocabEnum } from "../lib/constant";
 
 export const FillInTheBlankScreen = ({ navigation, route }) => {

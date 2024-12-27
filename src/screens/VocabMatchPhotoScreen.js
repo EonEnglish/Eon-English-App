@@ -14,7 +14,7 @@ import {
 import { Container } from "../components/Container";
 import { ScoreCounter } from "../components/ScoreCounter";
 import { auth } from "../services/firebase";
-import { CompleteHomework, GetHomework } from "../services/lessons.service";
+import { CompleteHomework, GetHomework } from "../services/lesson.service";
 import { VocabEnum } from "../lib/constant";
 
 export const VocabMatchPhotoScreen = ({ navigation, route }) => {
