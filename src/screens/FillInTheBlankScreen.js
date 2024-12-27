@@ -1,4 +1,3 @@
-import { collection, doc, getDoc, getDocs, setDoc } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
@@ -12,7 +11,8 @@ import {
 } from "react-native";
 import Container from "../components/Container";
 import ScoreCounter from "../components/ScoreCounter";
-import { db } from "../services/firebase";
+import { CompleteHomework, GetHomework } from "../services/lessons.service";
+import { VocabEnum } from "../lib/constant";
 
 export const FillInTheBlankScreen = ({ navigation, route }) => {
   const [sentenceList, setSentenceList] = useState([]);
@@ -23,7 +23,7 @@ export const FillInTheBlankScreen = ({ navigation, route }) => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [scoreUpdated, setScoreUpdated] = useState(false);
-  const { data } = route.params;
+  const { lesson_id } = route.params;
 
   //Drag
   const [questionContainerLayout, setQuestionContainerLayout] = useState(null);
@@ -35,17 +35,8 @@ export const FillInTheBlankScreen = ({ navigation, route }) => {
   useEffect(() => {
     const fetchSentence = async () => {
       try {
-        const Collection = await getDocs(collection(db, data));
-        for (const doc of Collection.docs) {
-          if (doc.id !== "Blank Match") {
-            continue;
-          }
-          const subCollection = await getDocs(
-            collection(doc.ref, "Collection"),
-          );
-          const sentence = subCollection.docs.map((doc) => doc.data());
-          setSentenceList(sentence);
-        }
+        const vocab = await GetHomework(lesson_id, VocabEnum.FILL_BLANK);
+        setSentenceList(vocab);
       } catch (error) {
         console.error("Error fetching vocabulary:", error);
       }
@@ -56,10 +47,12 @@ export const FillInTheBlankScreen = ({ navigation, route }) => {
   // console.log(sentenceList)
 
   useEffect(() => {
-    if (sentenceList.length > 0) {
-      const currentSentence = sentenceList[currentWordIndex];
-      setOptions(generateOptions(currentSentence.answer));
+    if (!sentenceList.length) {
+      return;
     }
+
+    const currentSentence = sentenceList[currentWordIndex];
+    setOptions(generateOptions(currentSentence.answer));
   }, [sentenceList, currentWordIndex]);
 
   const generateOptions = (correctAnswer) => {
@@ -80,57 +73,60 @@ export const FillInTheBlankScreen = ({ navigation, route }) => {
   }, [options]);
 
   const initializePanResponders = () => {
-    if (options.length > 0) {
-      panResponders.current = options.map((item, index) =>
-        PanResponder.create({
-          onStartShouldSetPanResponder: () => true,
-          onMoveShouldSetPanResponder: () => true,
-          onPanResponderMove: (evt, gestureState) => {
-            itemPans.current[index].setValue({
-              x: gestureState.dx,
-              y: gestureState.dy,
-            });
-
-            const isOverDropArea = isPointInDropArea(
-              gestureState.moveX,
-              gestureState.moveY,
-            );
-            setDropAreaEntered(isOverDropArea);
-
-            if (isOverDropArea && !scoreUpdated) {
-              setScoreUpdated(true);
-
-              if (options[index] === sentenceList[currentWordIndex].answer) {
-                setScore(score + 1);
-                setTotalScore(totalScore + 1);
-                setAlertMessage("Your answer is correct!");
-                setDropAreaEntered(false);
-              } else {
-                setTotalScore(totalScore + 1);
-                setAlertMessage("Your answer is incorrect!");
-                setDropAreaEntered(false);
-              }
-              setShowAlert(true);
-            }
-          },
-          onPanResponderRelease: () => {
-            // Handle release logic here if needed
-            if (!dropAreaEntered) {
-              Animated.spring(itemPans.current[index], {
-                toValue: { x: 0, y: 0 },
-                useNativeDriver: false,
-              }).start();
-            }
-          },
-        }),
-      );
+    if (!options.length) {
+      return;
     }
+
+    panResponders.current = options.map((item, index) =>
+      PanResponder.create({
+        onStartShouldSetPanResponder: () => true,
+        onMoveShouldSetPanResponder: () => true,
+        onPanResponderMove: (evt, gestureState) => {
+          itemPans.current[index].setValue({
+            x: gestureState.dx,
+            y: gestureState.dy,
+          });
+
+          const isOverDropArea = isPointInDropArea(
+            gestureState.moveX,
+            gestureState.moveY,
+          );
+          setDropAreaEntered(isOverDropArea);
+
+          if (isOverDropArea && !scoreUpdated) {
+            setScoreUpdated(true);
+
+            if (options[index] === sentenceList[currentWordIndex].answer) {
+              setScore(score + 1);
+              setTotalScore(totalScore + 1);
+              setAlertMessage("Your answer is correct!");
+              setDropAreaEntered(false);
+            } else {
+              setTotalScore(totalScore + 1);
+              setAlertMessage("Your answer is incorrect!");
+              setDropAreaEntered(false);
+            }
+            setShowAlert(true);
+          }
+        },
+        onPanResponderRelease: () => {
+          // Handle release logic here if needed
+          if (!dropAreaEntered) {
+            Animated.spring(itemPans.current[index], {
+              toValue: { x: 0, y: 0 },
+              useNativeDriver: false,
+            }).start();
+          }
+        },
+      }),
+    );
   };
 
   initializePanResponders();
 
   const isPointInDropArea = (x, y) => {
     if (!questionContainerLayout) return false;
+
     const {
       x: containerX,
       y: containerY,
@@ -165,43 +161,12 @@ export const FillInTheBlankScreen = ({ navigation, route }) => {
       return;
     }
 
-    const userHomeworkRef = doc(
-      db,
-      "Users",
-      user.uid,
-      "Homework",
-      data,
-      "3",
-      "Fill In The blank",
-    );
-
     try {
-      const homeworkDoc = await getDoc(userHomeworkRef);
-
-      if (homeworkDoc.exists()) {
-        const existingData = homeworkDoc.data();
-
-        if (score <= existingData.score) return; // Early return if no update is needed
-
-        // Update the document with the higher score
-        await setDoc(userHomeworkRef, {
-          completed_time: new Date(),
-          score: score,
-          total_score: totalScore,
-        });
-
-        // console.log('Homework completion data updated successfully with a higher score.');
-        return;
-      } else {
-        // Document doesn't exist, so create a new one
-        await setDoc(userHomeworkRef, {
-          completed_time: new Date(),
-          score: score,
-          total_score: totalScore,
-        });
-
-        // console.log('Homework completion data stored successfully.');
-      }
+      await CompleteHomework(user.uid, lesson_id, {
+        totalScore,
+        score,
+        type: VocabEnum.FILL_BLANK,
+      });
     } catch (error) {
       console.error("Error storing homework completion data:", error);
     }

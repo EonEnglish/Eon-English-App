@@ -13,11 +13,12 @@ import {
   View,
 } from "react-native";
 import Container from "../components/Container";
-import { defaultLessons, GetUserLessons } from "../services/lessons.service";
+import { GetUserLessons } from "../services/lessons.service";
 
 export const Homework = ({ navigation }) => {
   const [lessonsState, setLessonsState] = useState([]);
   const isFocused = useIsFocused(); // Hook to check if the screen is focused
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!isFocused) {
@@ -29,45 +30,47 @@ export const Homework = ({ navigation }) => {
 
     if (!user) return console.error("No authenticated user found.");
 
-    GetUserLessons(user.uid, (lessons) => setLessonsState([...lessons])).catch(
-      (err) => console.error(err),
-    );
+    GetUserLessons(user.uid, (lessons) => setLessonsState([...lessons]))
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((err) => console.error(err));
   }, [isFocused]);
 
   const renderLessonItem = ({ item }) => (
     <TouchableOpacity
       style={styles.button}
       onPress={() =>
-        navigation.navigate("LessonsStack", { data: `Lesson ${item.id}` })
+        navigation.navigate("LessonsStack", { lesson_id: item.id })
       }
     >
       <View style={styles.buttonTextContainer}>
-        <Text style={styles.lessonNumber}>Lesson {item.id}</Text>
+        <Text style={styles.lessonNumber}>Lesson {item.index}</Text>
         <Text style={styles.buttonText}>{item.title}</Text>
-        <View style={[styles.chip, styles[`${item.status}`]]}>
+        <View style={[styles.chip, styles[`${item.status || "NOT STARTED"}`]]}>
           {item.status === "COMPLETED" && (
             <AntDesign name="checkcircleo" size={15} color="#23DB88" />
           )}
           {item.status === "IN PROGRESS" && (
             <MaterialIcons name="av-timer" size={15} color="#C2A800" />
           )}
-          {item.status === "NOT STARTED" && (
+          {item.status === undefined && (
             <MaterialCommunityIcons name="restart" size={15} color="#848484" />
           )}
-          <Text style={styles.statusText}>{item.status}</Text>
+          <Text style={styles.statusText}>{item.status || "NOT STARTED"}</Text>
         </View>
       </View>
     </TouchableOpacity>
   );
 
-  if (lessonsState.length < defaultLessons.length) {
+  if (isLoading) {
     return <Text>Loading...</Text>;
   }
 
   return (
     <Container style={styles.container}>
       <FlatList
-        data={lessonsState.length ? lessonsState : defaultLessons}
+        data={lessonsState.length ? lessonsState : []}
         renderItem={renderLessonItem}
         keyExtractor={(item) => item.id}
         numColumns={2}
