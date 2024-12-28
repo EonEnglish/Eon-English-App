@@ -81,12 +81,13 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   subtitleContainer: {
     alignItems: "center",
-    backgroundColor: "#8D56FF",
+    backgroundColor: "#0782F9",
     marginBottom: 30,
   },
   subtitle: {
     fontSize: 25,
     fontWeight: "bold",
+    color: "white",
   },
   noAnnouncementText: {
     fontSize: 20,
