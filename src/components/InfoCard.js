@@ -35,28 +35,25 @@ export default InfoCard;
 
 const styles = StyleSheet.create({
   infoCardContainer: {
-    backgroundColor: "white",
-    boxShadow: "rgba(0, 0, 0, 0.05) 0px 0px 5px 0px",
+    backgroundColor: "#0782F9",
     borderRadius: 7,
     marginBottom: 20,
     padding: 20,
   },
   infoCardTitle: {
-    color: "#676767",
+    color: "white",
     fontSize: 17,
-    fontWeight: "800",
   },
   infoCardBody: {
-    color: "#676767",
+    color: "white",
     fontSize: 15,
     fontWeight: "300",
     lineHeight: 22,
   },
   infoCardFooter: {
-    color: "#676767",
+    color: "white",
     fontSize: 15,
     fontStyle: "italic",
     textAlign: "right",
-    fontWeight: "600",
   },
 });
