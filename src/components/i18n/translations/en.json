@@ -3,7 +3,25 @@
     "loading": "Loading...",
     "error": "Error",
     "ok": "OK",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "submitBtn": "submit"
+  },
+  "schedule": {
+    "screenTitle": "Schedule",
+    "nameInputLabel": "Name:",
+    "nameInput": "Enter your first & last name",
+    "emailInputLabel": "Email:",
+    "emailInput": "Enter your email",
+    "weChatIDLabel": "WeChat ID:",
+    "weChatIDInput": "Enter WeChat ID",
+    "howCanWeAssistLabel": "How can we assist you?",
+    "howCanWeAssistInput": "Select type",
+    "specifiyWhichLessonLabel": "Specify which lesson",
+    "specifyWhichLessonInput": "Select lesson",
+    "chooseAScheduleLabel": "Choose a schedule",
+    "chooseAScheduleInput": "Select available time",
+    "additionalNotesLabel": "Additional Notes:",
+    "additionalNotesInput": "Write any additional information (optional)"
   },
   "profile": {
     "nativeLanguage": "Native Languge",
@@ -26,5 +44,18 @@
     "aboutText2": "We aim to provide this opportunity to kids who don’t have enough access to English learning material.",
     "aboutText3": "Through this program, students get to learn how to speak native English and about Western culture.",
     "aboutTitle": "Who We Are"
+  },
+  "contactUs": {
+    "screenTitle": "home",
+    "firstNameLabel": "First Name:",
+    "firstNameInput": "Enter your first name",
+    "lastNameLabel": "Last Name:",
+    "lastNameInput": "Enter your last name",
+    "weChatIDLabel": "WeChat ID:",
+    "weChatIDInput": "Enter WeChat ID",
+    "subjectLabel": "Subject:",
+    "subjectInput": "Enter subject",
+    "messageLabel": "Message:",
+    "messageInput": "Enter message"
   }
 }
