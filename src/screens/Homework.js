@@ -15,8 +15,10 @@ import {
 } from "react-native";
 import Container from "../components/Container";
 import { db } from "../services/firebase";
+import { Loading } from "../components/Loading";
 
 export const Homework = ({ navigation }) => {
+  const [isLoading, setLoading] = useState(true);
   const [lessonsState, setLessonsState] = useState([]);
   const isFocused = useIsFocused(); // Hook to check if the screen is focused
   const lessons = [
@@ -124,7 +126,8 @@ export const Homework = ({ navigation }) => {
     };
 
     if (isFocused) {
-      fetchData();
+      setLoading(true);
+      fetchData().finally(() => setLoading(false));
     }
   }, [isFocused]);
 
@@ -162,21 +165,24 @@ export const Homework = ({ navigation }) => {
     </TouchableOpacity>
   );
 
-  if (lessonsState.length < lessons.length) {
-    return <Text>Loading...</Text>;
-  }
-
   return (
-    <Container style={styles.container}>
-      <FlatList
-        data={lessonsState.length ? lessonsState : lessons}
-        renderItem={renderLessonItem}
-        keyExtractor={(item) => item.id}
-        numColumns={2}
-        columnWrapperStyle={styles.column}
-        contentContainerStyle={styles.flatListContent}
-      />
-    </Container>
+    <Loading
+      isLoading={isLoading}
+      style={{
+        height: "100%",
+      }}
+    >
+      <Container style={styles.container}>
+        <FlatList
+          data={lessonsState.length ? lessonsState : lessons}
+          renderItem={renderLessonItem}
+          keyExtractor={(item) => item.id}
+          numColumns={2}
+          columnWrapperStyle={styles.column}
+          contentContainerStyle={styles.flatListContent}
+        />
+      </Container>
+    </Loading>
   );
 };
 
