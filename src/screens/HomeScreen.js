@@ -44,7 +44,12 @@ export const HomeScreen = () => {
   }, [isFocused, announcements]);
 
   return (
-    <Loading isLoading={isLoading}>
+    <Loading
+      isLoading={isLoading}
+      style={{
+        height: "100%",
+      }}
+    >
       <ScrollView>
         <Container>
           <InfoCard

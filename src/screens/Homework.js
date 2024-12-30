@@ -130,25 +130,33 @@ export const Homework = ({ navigation }) => {
 
   const renderLessonItem = ({ item }) => (
     <TouchableOpacity
-      style={styles.button}
+      style={styles.buttonContainer}
       onPress={() =>
         navigation.navigate("LessonsStack", { data: `Lesson ${item.id}` })
       }
     >
-      <View style={styles.buttonTextContainer}>
-        <Text style={styles.lessonNumber}>Lesson {item.id}</Text>
-        <Text style={styles.buttonText}>{item.title}</Text>
-        <View style={[styles.chip, styles[`${item.status}`]]}>
-          {item.status === "COMPLETED" && (
-            <AntDesign name="checkcircleo" size={15} color="#23DB88" />
-          )}
-          {item.status === "IN PROGRESS" && (
-            <MaterialIcons name="av-timer" size={15} color="#C2A800" />
-          )}
-          {item.status === "NOT STARTED" && (
-            <MaterialCommunityIcons name="restart" size={15} color="#848484" />
-          )}
-          <Text style={styles.statusText}>{item.status}</Text>
+      <View style={styles.button}>
+        <View style={styles.buttonTextContainer}>
+          <Text style={styles.lessonNumber}>Lesson {item.id}</Text>
+          <Text style={styles.buttonText}>{item.title}</Text>
+        </View>
+        <View style={styles.chipContainer}>
+          <View style={[styles.chip, styles[`${item.status}`]]}>
+            {item.status === "COMPLETED" && (
+              <AntDesign name="checkcircleo" size={15} color="#23DB88" />
+            )}
+            {item.status === "IN PROGRESS" && (
+              <MaterialIcons name="av-timer" size={15} color="#C2A800" />
+            )}
+            {item.status === "NOT STARTED" && (
+              <MaterialCommunityIcons
+                name="restart"
+                size={15}
+                color="#848484"
+              />
+            )}
+            <Text style={styles.statusText}>{item.status}</Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -178,32 +186,29 @@ Homework.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 0,
+    paddingTop: 0,
   },
   flatListContent: {
-    paddingRight: 30,
-    paddingLeft: 30,
-    marginTop: 10,
-    paddingBottom: 40,
+    paddingRight: 10,
+    paddingLeft: 10,
   },
   column: {
     justifyContent: "space-between",
   },
+  buttonContainer: {
+    flex: 1,
+    justifyContent: "space-between",
+    padding: 10,
+  },
   button: {
-    marginVertical: 10,
-    marginHorizontal: -10,
+    flexGrow: 1,
+    padding: 15,
     borderRadius: 7,
-    width: "50%",
-    aspectRatio: 1.1,
-    paddingVertical: 7,
-    paddingHorizontal: 9,
     backgroundColor: "white",
     boxShadow: "rgba(0, 0, 0, 0.05) 0px 0px 5px 0px",
   },
   buttonTextContainer: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
   },
   lessonNumber: {
@@ -223,6 +228,10 @@ const styles = StyleSheet.create({
     color: "#3D3D3D",
     fontWeight: "500",
     fontSize: 11,
+  },
+  chipContainer: {
+    paddingLeft: 5,
+    paddingRight: 5,
   },
   chip: {
     display: "flex",
