@@ -1,74 +1,76 @@
-import { useState, useEffect } from "react";
-import { StyleSheet, Text, ScrollView } from "react-native";
-import { getDocs, collection } from "@firebase/firestore";
-import { db } from "../services/firebase";
+import { collection, getDocs } from "@firebase/firestore";
+import { useIsFocused } from "@react-navigation/native";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { ScrollView, StyleSheet, Text } from "react-native";
 import Container from "../components/Container";
 import InfoCard from "../components/InfoCard";
-import PropTypes from "prop-types";
+import { Loading } from "../components/Loading";
+import { db } from "../services/firebase";
 
 export const HomeScreen = () => {
+  const [isLoading, setLoading] = useState(true);
   const [announcements, setAnnouncements] = useState([]);
-  const [announcementsExist, setAnnouncementsExist] = useState(true);
+  const isFocused = useIsFocused();
+
   useEffect(() => {
+    if (!isFocused) {
+      return;
+    }
+
+    if (announcements.length) {
+      return;
+    }
+
     const fetchHome = async () => {
       try {
-        const homePageCollection = await getDocs(collection(db, "Home Page"));
-        if (homePageCollection.empty) {
-          // console.log('No documents found in the Home Page collection.');
-          setAnnouncementsExist(false);
+        const announcementSnap = await getDocs(
+          collection(db, "Home Page", "Announcement", "Collection"),
+        );
+        if (announcementSnap.empty) {
           return;
         }
-        const announcementDoc = homePageCollection.docs.find(
-          (doc) => doc.id === "Announcement",
-        );
-        if (!announcementDoc) {
-          setAnnouncementsExist(false);
-          return;
-        }
-        const subCollection = await getDocs(
-          collection(announcementDoc.ref, "Collection"),
-        );
-        const announcementData = subCollection.docs.map((doc) => doc.data());
-        if (announcementData.length === 0) {
-          setAnnouncementsExist(false);
-        } else {
-          setAnnouncements(announcementData);
-          setAnnouncementsExist(true);
-        }
+
+        const announcementData = announcementSnap.docs.map((doc) => doc.data());
+        setAnnouncements([...announcementData]);
       } catch (error) {
         console.error("Error fetching announcements:", error);
-        setAnnouncementsExist(false);
       }
     };
-    fetchHome();
-  }, []);
-  if (announcements.length === 0 && announcementsExist) {
-    return <Text>Loading...</Text>;
-  }
+
+    fetchHome().finally(() => {
+      setLoading(false);
+    });
+  }, [isFocused, announcements]);
+
   return (
-    <ScrollView>
-      <Container>
-        <InfoCard
-          title="Welcome to Season 16!"
-          titleStyle={styles.subtitle}
-          containerStyle={styles.subtitleContainer}
-        />
-        {announcementsExist ? (
-          announcements.map((announcement, index) => (
-            <InfoCard
-              key={index}
-              title={announcement.title}
-              titleStyle={styles.announcementTitle}
-              text={announcement.announcement}
-              footer={announcement.date}
-              footerStyle={styles.announcementFooter}
-            />
-          ))
-        ) : (
-          <Text style={styles.noAnnouncementText}>No announcement for now</Text>
-        )}
-      </Container>
-    </ScrollView>
+    <Loading isLoading={isLoading}>
+      <ScrollView>
+        <Container>
+          <InfoCard
+            title="Welcome to Season 16!"
+            titleStyle={styles.subtitle}
+            containerStyle={styles.subtitleContainer}
+          />
+          {announcements.length ? (
+            announcements.map((announcement, index) => (
+              <InfoCard
+                key={index}
+                title={announcement.title}
+                titleStyle={styles.announcementTitle}
+                text={announcement.announcement}
+                footer={announcement.date}
+                footerStyle={styles.announcementFooter}
+              />
+            ))
+          ) : (
+            <Text style={styles.noAnnouncementText}>
+              No announcement for now
+            </Text>
+          )}
+        </Container>
+      </ScrollView>
+    </Loading>
   );
 };
 

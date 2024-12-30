@@ -1,16 +1,19 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import StackNavigator from "./src/navigation/StackNavigator";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { LanguageProvider } from "./src/components/LanguageContext";
+import StackNavigator from "./src/navigation/StackNavigator";
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <GestureHandlerRootView>
-        <NavigationContainer>
-          <StackNavigator />
-        </NavigationContainer>
-      </GestureHandlerRootView>
-    </LanguageProvider>
+    <SafeAreaProvider>
+      <LanguageProvider>
+        <GestureHandlerRootView>
+          <NavigationContainer>
+            <StackNavigator />
+          </NavigationContainer>
+        </GestureHandlerRootView>
+      </LanguageProvider>
+    </SafeAreaProvider>
   );
 }
