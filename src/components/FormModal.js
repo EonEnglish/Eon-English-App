@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    backgroundColor: "#0782F9",
+    backgroundColor: "#2D93F5",
   },
   modalText: {
     marginBottom: 15,

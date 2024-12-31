@@ -41,7 +41,7 @@ export const PasswordResetScreen = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <Text style={styles.title}>Forgot Password?</Text>
+      <Text style={styles.title}>Recover Password</Text>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -75,7 +75,7 @@ export default PasswordResetScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
+    justifyContent: "flex-center",
     alignItems: "center",
     paddingTop: 200,
   },
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 7,
     marginTop: 10,
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: "#CCCCCC",
   },
   buttonContainer: {
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   button: {
-    backgroundColor: "#0782F9",
+    backgroundColor: "#2D93F5",
     width: "100%",
     padding: 15,
     borderRadius: 7,
@@ -118,5 +118,7 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     color: "#CCCCCC",
     paddingBottom: 30,
+    width: "80%",
+    textAlign: "center",
   },
 });

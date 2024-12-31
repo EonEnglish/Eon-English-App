@@ -16,7 +16,7 @@ const StackNavigator = () => {
         component={LoginScreen}
       />
       <Stack.Screen name="Register" component={RegisterScreen} />
-      <Stack.Screen name="PasswordReset" component={PasswordResetScreen} />
+      <Stack.Screen name="Reset Password" component={PasswordResetScreen} />
       <Stack.Screen
         options={{ headerShown: false }}
         name="Tab"

@@ -81,7 +81,7 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   subtitleContainer: {
     alignItems: "center",
-    backgroundColor: "#0782F9",
+    backgroundColor: "#2D93F5",
     marginBottom: 30,
   },
   subtitle: {

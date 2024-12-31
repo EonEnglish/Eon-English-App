@@ -60,9 +60,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   findUsButton: {
-    backgroundColor: "#007BFF",
+    backgroundColor: "#2D93F5",
   },
   getInvolvedButton: {
-    backgroundColor: "#007BFF",
+    backgroundColor: "#2D93F5",
   },
 });

@@ -106,7 +106,7 @@ export const Homework = ({ navigation }) => {
             fillInTheBlankExists
           ) {
             newLessonsState[i].status = "COMPLETED";
-            newLessonsState[i].color = "#0782F9";
+            newLessonsState[i].color = "#2D93F5";
           } else if (
             vocabMatchExists ||
             vocabMatchPhotoExists ||

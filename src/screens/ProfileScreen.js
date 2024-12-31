@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#9f47fc",
   },
   logOutButton: {
-    backgroundColor: "#007BFF",
+    backgroundColor: "#2D93F5",
   },
   deleteAccountButton: {
     backgroundColor: "#fa4343",
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
   },
   toggleButton: {
     padding: 10,
-    backgroundColor: "#007BFF",
+    backgroundColor: "#2D93F5",
     borderRadius: 8,
     marginVertical: 5,
   },

@@ -121,7 +121,7 @@ const LoginScreen = ({ route, navigation }) => {
           )}
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate("PasswordReset")}
+          onPress={() => navigation.navigate("Reset Password")}
           style={styles.reset}
         >
           <Text style={styles.resetText}>Forgot your password?</Text>
@@ -152,7 +152,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F9F9F9",
   },
   inputContainer: {
     width: "80%",
