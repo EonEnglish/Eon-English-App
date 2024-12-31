@@ -42,6 +42,7 @@ export default [
     },
     rules: {
       "sonarjs/pseudo-random": "off",
+      "sonarjs/todo-tag": "warn",
     },
   },
   pluginPrettierRecommended,
