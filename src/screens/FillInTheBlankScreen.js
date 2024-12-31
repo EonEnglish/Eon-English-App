@@ -13,8 +13,10 @@ import {
 import Container from "../components/Container";
 import ScoreCounter from "../components/ScoreCounter";
 import { db } from "../services/firebase";
+import { Loading } from "../components/Loading";
 
 export const FillInTheBlankScreen = ({ navigation, route }) => {
+  const [isLoading, setLoading] = useState(true);
   const [sentenceList, setSentenceList] = useState([]);
   const [options, setOptions] = useState([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -50,7 +52,8 @@ export const FillInTheBlankScreen = ({ navigation, route }) => {
         console.error("Error fetching vocabulary:", error);
       }
     };
-    fetchSentence();
+    setLoading(true);
+    fetchSentence().finally(() => setLoading(false));
   }, []);
 
   // console.log(sentenceList)
@@ -236,40 +239,43 @@ export const FillInTheBlankScreen = ({ navigation, route }) => {
     }
   };
 
-  if (sentenceList.length === 0) {
-    return <Text>Loading...</Text>;
-  }
-
   return (
-    <Container style={styles.centerContainer}>
-      <ScoreCounter>Score: {score}</ScoreCounter>
-      <View onLayout={handleQuestionContainerLayout}>
-        <View style={styles.questionContainer}>
-          <Text style={styles.questionText}>
-            {sentenceList[currentWordIndex].question}
-          </Text>
-        </View>
-      </View>
-      <View style={styles.optionContainer}>
-        {options.map((option, index) => (
-          <View key={index} style={styles.optionText}>
-            {panResponders.current && (
-              <Animated.View
-                style={{
-                  transform: [
-                    { translateX: itemPans.current[index]?.x },
-                    { translateY: itemPans.current[index]?.y },
-                  ],
-                }}
-                {...panResponders.current[index]?.panHandlers}
-              >
-                <Text>{option}</Text>
-              </Animated.View>
-            )}
+    <Loading
+      isLoading={isLoading}
+      style={{
+        height: "100%",
+      }}
+    >
+      <Container style={styles.centerContainer}>
+        <ScoreCounter>Score: {score}</ScoreCounter>
+        <View onLayout={handleQuestionContainerLayout}>
+          <View style={styles.questionContainer}>
+            <Text style={styles.questionText}>
+              {sentenceList?.[currentWordIndex]?.question}
+            </Text>
           </View>
-        ))}
-      </View>
-    </Container>
+        </View>
+        <View style={styles.optionContainer}>
+          {options.map((option, index) => (
+            <View key={index} style={styles.optionText}>
+              {panResponders.current && (
+                <Animated.View
+                  style={{
+                    transform: [
+                      { translateX: itemPans.current[index]?.x },
+                      { translateY: itemPans.current[index]?.y },
+                    ],
+                  }}
+                  {...panResponders.current[index]?.panHandlers}
+                >
+                  <Text>{option}</Text>
+                </Animated.View>
+              )}
+            </View>
+          ))}
+        </View>
+      </Container>
+    </Loading>
   );
 };
 

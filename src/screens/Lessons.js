@@ -76,7 +76,7 @@ export const Lessons = ({ navigation, route }) => {
   }, [isFocused, navigation, data]);
 
   const renderIcon = (condition) => {
-    if (condition === null) return null; // Loading state
+    if (condition === null) return <View style={{ height: 24, width: 24 }} />; // Loading state
     return condition ? (
       <Ionicons name="checkmark-circle" size={24} color="green" />
     ) : (

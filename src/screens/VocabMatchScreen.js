@@ -6,8 +6,10 @@ import { Alert, Button, StyleSheet, Text, TextInput } from "react-native";
 import { Container } from "../components/Container";
 import { ScoreCounter } from "../components/ScoreCounter";
 import { db } from "../services/firebase";
+import { Loading } from "../components/Loading";
 
 export const VocabMatchScreen = ({ navigation, route }) => {
+  const [isLoading, setLoading] = useState(true);
   const [vocabList, setVocabList] = useState([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [userInput, setUserInput] = useState("");
@@ -32,7 +34,8 @@ export const VocabMatchScreen = ({ navigation, route }) => {
         console.error("Error fetching vocabulary:", error);
       }
     };
-    fetchVocabulary();
+    setLoading(true);
+    fetchVocabulary().finally(() => setLoading(false));
   }, [data]);
 
   const checkAnswer = () => {
@@ -94,22 +97,27 @@ export const VocabMatchScreen = ({ navigation, route }) => {
     }
   };
 
-  if (vocabList.length === 0) return <Text>Loading...</Text>;
-
   return (
-    <Container style={styles.centerContainer}>
-      <ScoreCounter>Score: {score}</ScoreCounter>
-      <Text style={styles.translation}>
-        {vocabList[currentWordIndex].translation}
-      </Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter the word"
-        value={userInput}
-        onChangeText={setUserInput}
-      />
-      <Button title="Submit" onPress={checkAnswer} />
-    </Container>
+    <Loading
+      isLoading={isLoading}
+      style={{
+        height: "100%",
+      }}
+    >
+      <Container style={styles.centerContainer}>
+        <ScoreCounter>Score: {score}</ScoreCounter>
+        <Text style={styles.translation}>
+          {vocabList?.[currentWordIndex]?.translation}
+        </Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter the word"
+          value={userInput}
+          onChangeText={setUserInput}
+        />
+        <Button title="Submit" onPress={checkAnswer} />
+      </Container>
+    </Loading>
   );
 };
 

@@ -16,8 +16,10 @@ import {
 import { Container } from "../components/Container";
 import { ScoreCounter } from "../components/ScoreCounter";
 import { db } from "../services/firebase";
+import { Loading } from "../components/Loading";
 
 export const VocabMatchPhotoScreen = ({ navigation, route }) => {
+  const [isLoading, setLoading] = useState(true);
   const [vocabList, setVocabList] = useState([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -50,7 +52,8 @@ export const VocabMatchPhotoScreen = ({ navigation, route }) => {
       }
     };
 
-    fetchVocabulary();
+    setLoading(true);
+    fetchVocabulary().finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -189,39 +192,42 @@ export const VocabMatchPhotoScreen = ({ navigation, route }) => {
     }
   }, [showAlert]);
 
-  if (vocabList.length === 0) {
-    return <Text>Loading...</Text>;
-  }
-
   // const currentWord = vocabList[currentWordIndex];
   const currentImageUrl = imgUrls[currentWordIndex];
 
   return (
-    <ScrollView>
-      <Container style={styles.centerContainer}>
-        <ScoreCounter>Score: {score}</ScoreCounter>
-        {currentImageUrl ? (
-          <Image source={{ uri: currentImageUrl }} style={styles.image} />
-        ) : (
-          <Text>No image available</Text>
-        )}
-        {options.map((option, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.optionContainer}
-            onPress={() => setSelectedOption(option)}
-          >
-            <View style={styles.radioButton}>
-              {selectedOption === option && (
-                <View style={styles.radioButtonSelected} />
-              )}
-            </View>
-            <Text style={styles.optionText}>{option}</Text>
-          </TouchableOpacity>
-        ))}
-        <Button title="Submit" onPress={checkAnswer} />
-      </Container>
-    </ScrollView>
+    <Loading
+      isLoading={isLoading}
+      style={{
+        height: "100%",
+      }}
+    >
+      <ScrollView>
+        <Container style={styles.centerContainer}>
+          <ScoreCounter>Score: {score}</ScoreCounter>
+          {currentImageUrl ? (
+            <Image source={{ uri: currentImageUrl }} style={styles.image} />
+          ) : (
+            <Text>No image available</Text>
+          )}
+          {options.map((option, index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.optionContainer}
+              onPress={() => setSelectedOption(option)}
+            >
+              <View style={styles.radioButton}>
+                {selectedOption === option && (
+                  <View style={styles.radioButtonSelected} />
+                )}
+              </View>
+              <Text style={styles.optionText}>{option}</Text>
+            </TouchableOpacity>
+          ))}
+          <Button title="Submit" onPress={checkAnswer} />
+        </Container>
+      </ScrollView>
+    </Loading>
   );
 };
 
