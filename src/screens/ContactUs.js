@@ -160,9 +160,10 @@ const styles = StyleSheet.create({
   messageInput: {
     marginBottom: 20,
     height: 100, // adjust height for multiline input
+    backgroundColor: "#f5f5f5",
   },
   buttonContainer: {
-    backgroundColor: "#0782F9",
+    backgroundColor: "#2D93F5",
     width: "100%",
     padding: 15,
     borderRadius: 7,
