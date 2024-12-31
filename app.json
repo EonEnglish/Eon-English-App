@@ -32,6 +32,9 @@
       }
     },
     "newArchEnabled": true,
-    "owner": "eonenglish"
+    "owner": "eonenglish",
+    "plugins": [
+      "./plugins/withDisableForcedDarkModeAndroid.js"
+    ]
   }
 }
