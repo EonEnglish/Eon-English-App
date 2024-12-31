@@ -14,9 +14,7 @@ export default Container;
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
-    paddingTop: 20,
-    paddingLeft: 20,
-    paddingRight: 20,
+    flex: 1,
+    padding: 20,
   },
 });
