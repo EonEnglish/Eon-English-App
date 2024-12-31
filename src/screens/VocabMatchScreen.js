@@ -1,11 +1,11 @@
+import { collection, doc, getDoc, getDocs, setDoc } from "@firebase/firestore";
+import { getAuth } from "firebase/auth";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { Alert, Button, StyleSheet, Text, TextInput } from "react-native";
 import { Container } from "../components/Container";
 import { ScoreCounter } from "../components/ScoreCounter";
-import { VocabEnum } from "../lib/constant";
-import { auth } from "../services/firebase";
-import { CompleteHomework, GetHomework } from "../services/lesson.service";
+import { db } from "../services/firebase";
 
 export const VocabMatchScreen = ({ navigation, route }) => {
   const [vocabList, setVocabList] = useState([]);
@@ -13,19 +13,27 @@ export const VocabMatchScreen = ({ navigation, route }) => {
   const [userInput, setUserInput] = useState("");
   const [score, setScore] = useState(0);
   const [totalScore, setTotalScore] = useState(0);
-  const { lesson_id } = route.params;
+  const { data } = route.params;
 
   useEffect(() => {
     const fetchVocabulary = async () => {
       try {
-        const vocab = await GetHomework(lesson_id, "vocab");
-        setVocabList(vocab);
+        const vocabCollection = await getDocs(collection(db, data));
+        const vocabMatchDoc = vocabCollection.docs.find(
+          (doc) => doc.id === "Vocab Match",
+        );
+        if (vocabMatchDoc) {
+          const subCollection = await getDocs(
+            collection(vocabMatchDoc.ref, "Collection"),
+          );
+          setVocabList(subCollection.docs.map((doc) => doc.data()));
+        }
       } catch (error) {
         console.error("Error fetching vocabulary:", error);
       }
     };
     fetchVocabulary();
-  }, [lesson_id]);
+  }, [data]);
 
   const checkAnswer = () => {
     const currentWord = vocabList[currentWordIndex];
@@ -50,26 +58,37 @@ export const VocabMatchScreen = ({ navigation, route }) => {
     if (currentWordIndex < vocabList.length - 1) {
       setCurrentWordIndex((prev) => prev + 1);
       setUserInput("");
-      return;
+    } else {
+      navigation.goBack();
+      Alert.alert("Game Over", `You finished! Final score: ${score}`, [
+        { text: "OK", onPress: homeworkComplete },
+      ]);
     }
-
-    // move back if answered all
-    navigation.goBack();
-    Alert.alert("Game Over", `You finished! Final score: ${score}`, [
-      { text: "OK", onPress: homeworkComplete },
-    ]);
   };
 
   const homeworkComplete = async () => {
-    const user = auth.currentUser;
+    const user = getAuth().currentUser;
     if (!user) return;
 
+    const userHomeworkRef = doc(
+      db,
+      "Users",
+      user.uid,
+      "Homework",
+      data,
+      "1",
+      "Vocab Match",
+    );
     try {
-      await CompleteHomework(user.uid, lesson_id, {
-        totalScore,
+      const homeworkDoc = await getDoc(userHomeworkRef);
+      const docData = {
+        completed_time: new Date(),
         score,
-        type: VocabEnum.VOCAB,
-      });
+        total_score: totalScore,
+      };
+      if (!homeworkDoc.exists() || score > homeworkDoc.data().score) {
+        await setDoc(userHomeworkRef, docData);
+      }
     } catch (error) {
       console.error("Error updating homework:", error);
     }
@@ -81,7 +100,7 @@ export const VocabMatchScreen = ({ navigation, route }) => {
     <Container style={styles.centerContainer}>
       <ScoreCounter>Score: {score}</ScoreCounter>
       <Text style={styles.translation}>
-        {vocabList[currentWordIndex].question}
+        {vocabList[currentWordIndex].translation}
       </Text>
       <TextInput
         style={styles.input}

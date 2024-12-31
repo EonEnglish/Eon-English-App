@@ -1,3 +1,4 @@
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import {
@@ -9,9 +10,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { RegisterUser } from "../services/user.service";
 
-export const RegisterScreen = ({ navigation }) => {
+const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,8 +22,8 @@ export const RegisterScreen = ({ navigation }) => {
     setError("");
 
     try {
-      await RegisterUser({ email, password });
-
+      const auth = getAuth();
+      await createUserWithEmailAndPassword(auth, email, password);
       navigation.replace("Tab");
     } catch (err) {
       setError(getCustomErrorMessage(err.code));
