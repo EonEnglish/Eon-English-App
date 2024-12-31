@@ -6,6 +6,9 @@ import { useIsFocused } from "@react-navigation/native";
 import { getAuth } from "firebase/auth";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import Container from "../components/Container";
+import { db } from "../services/firebase";
+import { Loading } from "../components/Loading";
 import {
   FlatList,
   StyleSheet,
@@ -13,9 +16,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import Container from "../components/Container";
-import { db } from "../services/firebase";
-import { Loading } from "../components/Loading";
 
 export const Homework = ({ navigation }) => {
   const [isLoading, setLoading] = useState(true);
@@ -128,61 +128,69 @@ export const Homework = ({ navigation }) => {
     if (isFocused) {
       setLoading(true);
       fetchData().finally(() => setLoading(false));
+      fetchData();
     }
   }, [isFocused]);
 
   const renderLessonItem = ({ item }) => (
     <TouchableOpacity
-      style={styles.buttonContainer}
+      style={styles.button}
       onPress={() =>
         navigation.navigate("LessonsStack", { data: `Lesson ${item.id}` })
       }
     >
-      <View style={styles.button}>
-        <View style={styles.buttonTextContainer}>
-          <Text style={styles.lessonNumber}>Lesson {item.id}</Text>
-          <Text style={styles.buttonText}>{item.title}</Text>
-        </View>
-        <View style={styles.chipContainer}>
-          <View style={[styles.chip, styles[`${item.status}`]]}>
-            {item.status === "COMPLETED" && (
-              <AntDesign name="checkcircleo" size={15} color="#23DB88" />
-            )}
-            {item.status === "IN PROGRESS" && (
-              <MaterialIcons name="av-timer" size={15} color="#C2A800" />
-            )}
-            {item.status === "NOT STARTED" && (
-              <MaterialCommunityIcons
-                name="restart"
-                size={15}
-                color="#848484"
-              />
-            )}
-            <Text style={styles.statusText}>{item.status}</Text>
-          </View>
+      <View style={styles.buttonTextContainer}>
+        <Text style={styles.lessonNumber}>Lesson {item.id}</Text>
+        <Text style={styles.buttonText}>{item.title}</Text>
+        <View style={[styles.chip, styles[`${item.status}`]]}>
+          {item.status === "COMPLETED" && (
+            <AntDesign name="checkcircleo" size={15} color="#23DB88" />
+          )}
+          {item.status === "IN PROGRESS" && (
+            <MaterialIcons name="av-timer" size={15} color="#C2A800" />
+          )}
+          {item.status === "NOT STARTED" && (
+            <MaterialCommunityIcons name="restart" size={15} color="#848484" />
+          )}
+          <Text style={styles.statusText}>{item.status}</Text>
         </View>
       </View>
     </TouchableOpacity>
   );
 
+  if (lessonsState.length < lessons.length) {
+    return (
+      <Loading
+        isLoading={isLoading}
+        style={{
+          height: "100%",
+        }}
+      >
+        <Container style={styles.container}>
+          <FlatList
+            data={lessonsState.length ? lessonsState : lessons}
+            renderItem={renderLessonItem}
+            keyExtractor={(item) => item.id}
+            numColumns={2}
+            columnWrapperStyle={styles.column}
+            contentContainerStyle={styles.flatListContent}
+          />
+        </Container>
+      </Loading>
+    );
+  }
+
   return (
-    <Loading
-      isLoading={isLoading}
-      style={{
-        height: "100%",
-      }}
-    >
-      <Container style={styles.container}>
-        <FlatList
-          data={lessonsState.length ? lessonsState : lessons}
-          renderItem={renderLessonItem}
-          keyExtractor={(item) => item.id}
-          numColumns={2}
-          columnWrapperStyle={styles.column}
-          contentContainerStyle={styles.flatListContent}
-        />
-      </Container>
-    </Loading>
+    <Container style={styles.container}>
+      <FlatList
+        data={lessonsState.length ? lessonsState : lessons}
+        renderItem={renderLessonItem}
+        keyExtractor={(item) => item.id}
+        numColumns={2}
+        columnWrapperStyle={styles.column}
+        contentContainerStyle={styles.flatListContent}
+      />
+    </Container>
   );
 };
 
@@ -192,29 +200,32 @@ Homework.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 0,
+    flex: 1,
+    padding: 0,
   },
   flatListContent: {
-    paddingRight: 10,
-    paddingLeft: 10,
+    paddingRight: 30,
+    paddingLeft: 30,
+    marginTop: 10,
+    paddingBottom: 40,
   },
   column: {
     justifyContent: "space-between",
   },
-  buttonContainer: {
-    flex: 1,
-    justifyContent: "space-between",
-    padding: 10,
-  },
   button: {
-    flexGrow: 1,
-    padding: 15,
+    marginVertical: 10,
+    marginHorizontal: -10,
     borderRadius: 7,
+    width: "50%",
+    aspectRatio: 1.1,
+    paddingVertical: 7,
+    paddingHorizontal: 9,
     backgroundColor: "white",
     boxShadow: "rgba(0, 0, 0, 0.05) 0px 0px 5px 0px",
   },
   buttonTextContainer: {
     flex: 1,
+    justifyContent: "center",
     alignItems: "center",
   },
   lessonNumber: {
@@ -234,10 +245,6 @@ const styles = StyleSheet.create({
     color: "#3D3D3D",
     fontWeight: "500",
     fontSize: 11,
-  },
-  chipContainer: {
-    paddingLeft: 5,
-    paddingRight: 5,
   },
   chip: {
     display: "flex",
