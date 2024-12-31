@@ -27,6 +27,22 @@ export const Homework = ({ navigation }) => {
 
     const auth = getAuth();
     const user = auth.currentUser;
+    
+    if (
+      vocabMatchExists &&
+      vocabMatchPhotoExists &&
+      fillInTheBlankExists
+    ) {
+      newLessonsState[i].status = "COMPLETED";
+      newLessonsState[i].color = "#2D93F5";
+    } else if (
+      vocabMatchExists ||
+      vocabMatchPhotoExists ||
+      fillInTheBlankExists
+    ) {
+      newLessonsState[i].status = "IN PROGRESS";
+      newLessonsState[i].color = "#8D56FF";
+    }
 
     if (!user) return console.error("No authenticated user found.");
 

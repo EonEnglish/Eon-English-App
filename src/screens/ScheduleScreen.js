@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Container from "../components/Container";
 import InputField from "../components/inputField";
 import Dropdown from "../components/dropdown";
+import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
@@ -19,6 +20,7 @@ function countOccurrences(str, char) {
 }
 
 export const ScheduleScreen = () => {
+  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [weChatID, setWeChatID] = useState("");
@@ -207,61 +209,61 @@ export const ScheduleScreen = () => {
     <ScrollView>
       <Container>
         <InputField
-          title={"Name:"}
-          placeholderText={"Enter your first & last name"}
+          title={t("schedule.nameInputLabel")}
+          placeholderText={t("schedule.nameInput")}
           value={name}
           conditions={errors.name}
           onChangeText={setName}
           style={{ marginBottom: 20 }}
         />
         <InputField
-          title={"Email:"}
-          placeholderText={"Enter your email"}
+          title={t("schedule.emailInputLabel")}
+          placeholderText={t("schedule.emailInput")}
           value={email}
           conditions={errors.email}
           onChangeText={setEmail}
           style={{ marginBottom: 20 }}
         />
         <InputField
-          title={"WeChat ID:"}
-          placeholderText={"Enter WeChat ID"}
+          title={t("schedule.weChatIDLabel")}
+          placeholderText={t("schedule.weChatIDInput")}
           value={weChatID}
           conditions={errors.weChatID}
           onChangeText={setWeChatID}
           style={{ marginBottom: 20 }}
         />
         <Dropdown
-          title={"How can we assist you?"}
-          placeholderText={"Select type"}
+          title={t("schedule.howCanWeAssistLabel")}
+          placeholderText={t("schedule.howCanWeAssistInput")}
           setSelected={setUserTypeSelect}
           conditions={errors.types}
           data={types}
         />
         {userTypeSelect === types[0].key && (
           <Dropdown
-            title={"Specify which lesson"}
-            placeholderText={"Select lesson"}
+            title={t("schedule.specifiyWhichLessonLabel")}
+            placeholderText={t("schedule.specifyWhichLessonInput")}
             setSelected={setUserLessonSelect}
             conditions={errors.lessons}
             data={lessons}
           />
         )}
         <Dropdown
-          title={"Choose a schedule"}
-          placeholderText={"Select available time"}
+          title={t("schedule.chooseAScheduleLabel")}
+          placeholderText={t("schedule.chooseAScheduleInput")}
           setSelected={setUserScheduleSelect}
           conditions={errors.schedule}
           data={schedule}
         />
         <InputField
-          title={"Additional Notes"}
-          placeholderText={"Write any additional information (optional)"}
+          title={t("schedule.additionalNotesLabel")}
+          placeholderText={t("schedule.additionalNotesInput")}
           value={userMessage}
           onChangeText={setUserMessage}
           style={styles.messageInput}
         />
         <TouchableOpacity style={styles.buttonContainer} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>Submit</Text>
+          <Text style={styles.buttonText}>{t("common.submitBtn")}</Text>
         </TouchableOpacity>
       </Container>
     </ScrollView>
@@ -276,7 +278,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   buttonContainer: {
-    backgroundColor: "#0782F9",
+    backgroundColor: "#2D93F5",
     width: "100%",
     padding: 15,
     borderRadius: 7,

@@ -1308,7 +1308,7 @@
     node-forge "^1.2.1"
     nullthrows "^1.1.1"
 
-"@expo/config-plugins@~9.0.10":
+"@expo/config-plugins@^9.0.12", "@expo/config-plugins@~9.0.10":
   version "9.0.12"
   resolved "https://registry.npmjs.org/@expo/config-plugins/-/config-plugins-9.0.12.tgz"
   integrity sha512-/Ko/NM+GzvJyRkq8PITm8ms0KY5v0wmN1OQFYRMkcJqOi3PjlhndW+G6bHpJI9mkQXBaUnHwAiGLqIC3+MQ5Wg==

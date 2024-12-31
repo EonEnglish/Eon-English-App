@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     borderWidth: 2,
     borderColor: "#C9C9C9",
+    backgroundColor: "#f5f5f5",
   },
   errorInput: {
     borderColor: "#FF0000",

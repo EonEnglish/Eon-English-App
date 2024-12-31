@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: "#CCCCCC",
     width: "90%",
     padding: 15,
