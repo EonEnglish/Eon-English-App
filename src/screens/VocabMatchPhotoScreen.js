@@ -1,5 +1,3 @@
-import { collection, doc, getDoc, getDocs, setDoc } from "@firebase/firestore";
-import { getAuth } from "firebase/auth";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
@@ -15,7 +13,9 @@ import {
 } from "react-native";
 import { Container } from "../components/Container";
 import { ScoreCounter } from "../components/ScoreCounter";
-import { db } from "../services/firebase";
+import { auth } from "../services/firebase";
+import { CompleteHomework, GetHomework } from "../services/lesson.service";
+import { VocabEnum } from "../lib/constant";
 
 export const VocabMatchPhotoScreen = ({ navigation, route }) => {
   const [vocabList, setVocabList] = useState([]);
@@ -27,49 +27,33 @@ export const VocabMatchPhotoScreen = ({ navigation, route }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [options, setOptions] = useState([]);
   const [imgUrls, setImgUrls] = useState([]);
-  const { data } = route.params;
+  const { lesson_id } = route.params;
 
   useEffect(() => {
     const fetchVocabulary = async () => {
       try {
-        const Collection = await getDocs(collection(db, data));
-        const vocabData = [];
-
-        for (const doc of Collection.docs) {
-          if (doc.id !== "Image Match") continue;
-
-          const subCollection = await getDocs(
-            collection(doc.ref, "Collection"),
-          );
-          vocabData.push(...subCollection.docs.map((doc) => doc.data()));
-        }
-
-        setVocabList(vocabData);
+        const vocab = await GetHomework(lesson_id, VocabEnum.IMAGE);
+        setVocabList(vocab);
       } catch (error) {
         console.error("Error fetching vocabulary:", error);
       }
     };
 
-    fetchVocabulary();
+    fetchVocabulary().catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
+    if (!vocabList.length) {
+      return;
+    }
+
     const fetchImages = async () => {
       try {
-        const Collection = await getDocs(collection(db, data));
         const imageUrls = [];
 
-        for (const doc of Collection.docs) {
-          if (doc.id !== "Image Match") continue;
-
-          const subCollection = await getDocs(
-            collection(doc.ref, "Collection"),
-          );
-          for (const subDoc of subCollection.docs) {
-            const imageUrl = subDoc.data().image;
-            const downloadUrl = await getImageDownloadUrl(imageUrl);
-            imageUrls.push(downloadUrl);
-          }
+        for (const question of vocabList) {
+          const downloadUrl = await getImageDownloadUrl(question.image);
+          imageUrls.push(downloadUrl);
         }
 
         setImgUrls(imageUrls);
@@ -78,21 +62,24 @@ export const VocabMatchPhotoScreen = ({ navigation, route }) => {
       }
     };
 
-    fetchImages();
-  }, []);
+    fetchImages().catch((err) => console.log(err));
+  }, [vocabList]);
 
   useEffect(() => {
-    if (vocabList.length > 0) {
-      const currentWord = vocabList[currentWordIndex];
-      setOptions(generateOptions(currentWord.word));
+    if (!vocabList.length) {
+      return;
     }
+
+    const currentWord = vocabList[currentWordIndex];
+    setOptions(generateOptions(currentWord.answer));
   }, [vocabList, currentWordIndex]);
 
   const getImageDownloadUrl = async (imageUrl) => {
     try {
       const storage = getStorage();
       const storageRef = ref(storage, imageUrl);
-      return await getDownloadURL(storageRef);
+      const url = await getDownloadURL(storageRef);
+      return url;
     } catch (error) {
       console.error("Error getting download URL:", error);
       return "";
@@ -103,7 +90,7 @@ export const VocabMatchPhotoScreen = ({ navigation, route }) => {
     const options = [correctWord];
     while (options.length < 4) {
       const randomIndex = Math.floor(Math.random() * vocabList.length);
-      const randomWord = vocabList[randomIndex].word;
+      const randomWord = vocabList[randomIndex].answer;
       if (!options.includes(randomWord)) {
         options.push(randomWord);
       }
@@ -113,7 +100,7 @@ export const VocabMatchPhotoScreen = ({ navigation, route }) => {
 
   const checkAnswer = () => {
     const currentWord = vocabList[currentWordIndex];
-    const isCorrect = selectedOption === currentWord.word;
+    const isCorrect = selectedOption === currentWord.answer;
     setScore(score + (isCorrect ? 1 : 0));
     setTotalScore(totalScore + 1);
     setAlertMessage(
@@ -137,7 +124,6 @@ export const VocabMatchPhotoScreen = ({ navigation, route }) => {
   };
 
   const homeworkComplete = async () => {
-    const auth = getAuth();
     const user = auth.currentUser;
 
     if (!user) {
@@ -145,29 +131,12 @@ export const VocabMatchPhotoScreen = ({ navigation, route }) => {
       return;
     }
 
-    const userHomeworkRef = doc(
-      db,
-      "Users",
-      user.uid,
-      "Homework",
-      data,
-      "2",
-      "Vocab Match Photo",
-    );
     try {
-      const homeworkDoc = await getDoc(userHomeworkRef);
-      const dataToSet = {
-        completed_time: new Date(),
-        score: score,
-        total_score: totalScore,
-      };
-
-      if (!homeworkDoc.exists() || score > homeworkDoc.data().score) {
-        await setDoc(userHomeworkRef, dataToSet);
-        // console.log('Homework completion data stored successfully.');
-      } else {
-        // console.log('Existing score is higher or equal. No update made.');
-      }
+      await CompleteHomework(user.uid, lesson_id, {
+        totalScore,
+        score,
+        type: VocabEnum.IMAGE,
+      });
 
       navigation.goBack();
     } catch (error) {
@@ -176,17 +145,19 @@ export const VocabMatchPhotoScreen = ({ navigation, route }) => {
   };
 
   useEffect(() => {
-    if (showAlert) {
-      Alert.alert("Result", alertMessage, [
-        {
-          text: "OK",
-          onPress: () => {
-            setShowAlert(false);
-            nextWord();
-          },
-        },
-      ]);
+    if (!showAlert) {
+      return;
     }
+
+    Alert.alert("Result", alertMessage, [
+      {
+        text: "OK",
+        onPress: () => {
+          setShowAlert(false);
+          nextWord();
+        },
+      },
+    ]);
   }, [showAlert]);
 
   if (vocabList.length === 0) {
