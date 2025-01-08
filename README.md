@@ -71,7 +71,7 @@ We use React Native and Expo's CLI to run the application locally. You may use t
      - [Set up Android Studios Windows](https://youtu.be/TAHMNftUSZg) -->
 
 
-<br>
+<!-- <br>
 
 ### How to Access our ENV Keys
 
@@ -86,7 +86,7 @@ To keep your keys updated, run the following command
 git submodule update --remote --recursive
 ```
 
-[Not working? Find the secret keys here...](https://github.com/EonEnglish/Eon-English-App-Secrets)
+[Not working? Find the secret keys here...](https://github.com/EonEnglish/Eon-English-App-Secrets) -->
 
 <br>
 
@@ -139,6 +139,8 @@ To ensure your `.env` keys stay updated, use:
 ```bash  
 git submodule update --remote --recursive  
 ```  
+
+[Not working? Find the secret keys here...](https://github.com/EonEnglish/Eon-English-App-Secrets)
 
 <br>
 
