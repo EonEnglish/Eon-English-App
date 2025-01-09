@@ -110,7 +110,14 @@ git submodule update --remote --recursive
 - Assign a task to yourself or [create one](https://github.com/EonEnglish/Eon-English-App/issues/new) and assign it to yourself.  
 - Once assigned, start working on your task.
 
-### 5. Team Meetings
+### 5. Submit a Pull Request
+- Once your task is completed, commit and push your changes to your branch.
+- Go to the repository and create a Pull Request (PR) with a detailed description of the changes.
+- Mention the issue or task you were working on (if applicable). Wait for the code review.
+- If changes are requested, make the updates and push them to the same branch.
+- Once approved, your PR will be merged into the main branch.
+
+### 6. Team Meetings
 - We hold team meetings **biweekly on Sundays**.  
 - The meeting link can be found on Discord.  
 
