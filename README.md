@@ -98,12 +98,7 @@ You will have permission to view the document. If you would like to make direct 
 
 ## How to Contribute
 
-Contributions are what make this community such an amazing place to learn, inspire, and create! There are a many ways you can help
-
-- [Did you spot any errors?](https://github.com/EonEnglish/Eon-English-App/issues/new)
-- [What features could we add?](https://github.com/EonEnglish/Eon-English-App/issues/new)
-- [What would improve the app?](https://github.com/EonEnglish/Eon-English-App/issues/new)
-- [How can we work better as a team?](https://github.com/EonEnglish/Eon-English-App/issues/new)
+Contributions are what make this community such an amazing place to learn, inspire, and create!
 
 Any contributions you make are **greatly appreciated**!
 
@@ -144,14 +139,21 @@ git submodule update --remote --recursive
 
 <br>
 
-## 5. **Pick a Task**  
+## 4. **Pick a Task** 
 - Visit the **[Planning Tab](https://github.com/orgs/EonEnglish/projects/3/views/1)** on GitHub.  
 - Assign a task to yourself or create one and assign it to yourself.  
-- Once assigned, start working on your task.  
+- Once assigned, start working on your task.
+
+There are a many ways you can help
+
+- [Did you spot any errors?](https://github.com/EonEnglish/Eon-English-App/issues/new)
+- [What features could we add?](https://github.com/EonEnglish/Eon-English-App/issues/new)
+- [What would improve the app?](https://github.com/EonEnglish/Eon-English-App/issues/new)
+- [How can we work better as a team?](https://github.com/EonEnglish/Eon-English-App/issues/new)
 
 <br>
 
-## 6. **Team Meetings**  
+## 5. **Team Meetings**  
 - We hold team meetings **biweekly on Sundays**.  
 - The meeting link can be found on Discord.  
 
