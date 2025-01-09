@@ -29,8 +29,13 @@
 
 ## About The Project
 
-This app will help Eon students find their homework and apply what they have learned during tutor sessions. It is filled with many short questions and quizzes to help them retain information.
+The Eon English App is designed to support Eon students in their learning journey by providing a seamless way to access and complete their homework. This app complements the concepts taught during tutor sessions, enabling students to practice and reinforce their learning.
 
+Key Features:
+
+- A vast collection of short questions and interactive quizzes to help students retain knowledge effectively.
+- A user-friendly interface to make homework submission and progress tracking effortless.
+- Tools to ensure students apply what they learn, fostering better understanding and retention.
 <br>
 
 ### Built With
@@ -40,6 +45,8 @@ This app will help Eon students find their homework and apply what they have lea
 - ![Static Badge](https://img.shields.io/badge/Expo_CLI-%23212329?style=for-the-badge&logo=Expo)
 - ![Static Badge](https://img.shields.io/badge/Firebase-%23212329?style=for-the-badge&logo=Firebase)
 - ![Static Badge](https://img.shields.io/badge/App_script-%23212329?style=for-the-badge&logo=Google)
+
+The Eon English App serves as a bridge between classroom learning and practical application, empowering students to achieve their educational goals with ease.
 
 <br>
 
@@ -87,7 +94,7 @@ Ensure you have the following installed:
 - Join our Discord channel and contact **@Tech_Manager**.  
 - Share your GitHub email to gain access to the application's secrets.  
 
-After cloning the repository from [Eon-English-App](https://github.com/EonEnglish/Eon-English-App), initialize the Git submodules with:  
+After cloning the repository from [Github Repo](https://github.com/EonEnglish/Eon-English-App), initialize the Git submodules with:  
 
 ```bash  
 git submodule update --init --recursive  
