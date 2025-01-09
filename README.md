@@ -48,7 +48,7 @@ This app will help Eon students find their homework and apply what they have lea
 The project uses React Native and requires some knowledge of JavaScript. Therefore, we recommend building foundational knowledge. The materials we provide are optional.
 
 
-## Courses and Tools
+### Courses and Tools
 - [Codeacademy's React Native Course](https://www.codecademy.com/learn/learn-react-native)
 
 - [Codeacademy's JavaScript Course](https://www.codecademy.com/learn/introduction-to-javascript)
@@ -74,7 +74,6 @@ Any contributions you make are **greatly appreciated**!
 
 ### 1. Fork or Create a Branch
 - Begin by forking the repository or creating a branch from the [GitHub Repo](https://github.com/EonEnglish/Eon-English-App).  
-<br>
 
 ### 2. Set Up Your Environment
 Ensure you have the following installed:
@@ -83,7 +82,6 @@ Ensure you have the following installed:
 
 - [Set up React Native environment (Windows)](https://www.youtube.com/watch?v=f6TXEnHT_Mk)
      - [Set up Android Studios Windows](https://youtu.be/TAHMNftUSZg)
-<br>
 
 ### 3. Get Access to ENV Keys
 - Join our Discord channel and contact **@Tech_Manager**.  
@@ -102,18 +100,15 @@ git submodule update --remote --recursive
 ```  
 
 [Not working? Find the secret keys here...](https://github.com/EonEnglish/Eon-English-App-Secrets)
-<br>
 
 ### 4. Pick a Task
 - Visit the **[Planning Tab](https://github.com/orgs/EonEnglish/projects/3/views/1)** on GitHub.  
 - Assign a task to yourself or [create one](https://github.com/EonEnglish/Eon-English-App/issues/new) and assign it to yourself.  
 - Once assigned, start working on your task.
-<br>
 
 ### 5. Team Meetings
 - We hold team meetings **biweekly on Sundays**.  
 - The meeting link can be found on Discord.  
-<br>
 
 Feel free to reach out on Discord if you have any questions or need guidance. Happy contributing!
 
