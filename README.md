@@ -58,36 +58,6 @@ The project uses React Native and requires some knowledge of JavaScript. Therefo
   - [VS Code Emulator Plug-in](https://marketplace.visualstudio.com/items?itemName=DiemasMichiels.emulate)
   - [Prettier Plug-in (formatter)](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
-<!-- <br>
-
-### How to Run the App
-
-We use React Native and Expo's CLI to run the application locally. You may use the following guides for your operating system. 
-
-- [Set up React Native environment (MacOS)](https://www.youtube.com/watch?v=4U_OQHGhSf0)
-     - [Run our app locally using Xcode/Android Studios](https://youtu.be/nBq75f8JVZg)
-
-- [Set up React Native environment (Windows)](https://www.youtube.com/watch?v=f6TXEnHT_Mk)
-     - [Set up Android Studios Windows](https://youtu.be/TAHMNftUSZg) -->
-
-
-<!-- <br>
-
-### How to Access our ENV Keys
-
-For the initial start up, run the following submodule command to retrieve the .env keys (requires repository access)
-```bash
-git submodule update --init --recursive
-```
-
-To keep your keys updated, run the following command
-
-```bash
-git submodule update --remote --recursive
-```
-
-[Not working? Find the secret keys here...](https://github.com/EonEnglish/Eon-English-App-Secrets) -->
-
 <br>
 
 ### How to Access our Figma Design
@@ -96,21 +66,19 @@ You will have permission to view the document. If you would like to make direct 
 
 <br>
 
-## How to Contribute
+### How to Contribute
 
 Contributions are what make this community such an amazing place to learn, inspire, and create!
 
 Any contributions you make are **greatly appreciated**!
 
-## 1. **Fork or Create a Branch**  
+#### 1. Fork or Create a Branch
 - Begin by forking the repository or creating a branch from the [GitHub Repo](https://github.com/EonEnglish/Eon-English-App).  
 
 <br>
 
-## 2. **Set Up Your Environment**  
-Ensure you have the following installed:  
-<!-- - **React Native**
-- **Android Studio** (for Android development) or **Xcode** (for iOS development).   -->
+#### 2. Set Up Your Environment
+Ensure you have the following installed:
 - [Set up React Native environment (MacOS)](https://www.youtube.com/watch?v=4U_OQHGhSf0)
      - [Run our app locally using Xcode/Android Studios](https://youtu.be/nBq75f8JVZg)
 
@@ -143,13 +111,6 @@ git submodule update --remote --recursive
 - Visit the **[Planning Tab](https://github.com/orgs/EonEnglish/projects/3/views/1)** on GitHub.  
 - Assign a task to yourself or [create one](https://github.com/EonEnglish/Eon-English-App/issues/new) and assign it to yourself.  
 - Once assigned, start working on your task.
-
-<!-- There are a many ways you can help
-
-- [Did you spot any errors?](https://github.com/EonEnglish/Eon-English-App/issues/new)
-- [What features could we add?](https://github.com/EonEnglish/Eon-English-App/issues/new)
-- [What would improve the app?](https://github.com/EonEnglish/Eon-English-App/issues/new)
-- [How can we work better as a team?](https://github.com/EonEnglish/Eon-English-App/issues/new) -->
 
 <br>
 
