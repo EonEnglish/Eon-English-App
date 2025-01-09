@@ -20,8 +20,6 @@
   - [ Built with](#built-with)
 - [ Instructions](#instructions)
   - [ Courses and Tools](#courses-and-tools)
-  - [ How to Run the App](#how-to-run-the-app)
-  - [ How to Access our ENV Keys](#how-to-access-our-env-keys)
   - [ How to Access our Figma Design](#how-to-access-our-figma-design)
 - [ How to Contribute](#how-to-contribute)
 
@@ -36,7 +34,7 @@ Key Features:
 - A vast collection of short questions and interactive quizzes to help students retain knowledge effectively.
 - A user-friendly interface to make homework submission and progress tracking effortless.
 - Tools to ensure students apply what they learn, fostering better understanding and retention.
-<br>
+
 ### Built With
 
 - ![Static Badge](https://img.shields.io/badge/JavaScript-%23212329?style=for-the-badge&logo=JavaScript)
