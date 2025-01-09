@@ -37,7 +37,6 @@ Key Features:
 - A user-friendly interface to make homework submission and progress tracking effortless.
 - Tools to ensure students apply what they learn, fostering better understanding and retention.
 <br>
-
 ### Built With
 
 - ![Static Badge](https://img.shields.io/badge/JavaScript-%23212329?style=for-the-badge&logo=JavaScript)
