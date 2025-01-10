@@ -26,8 +26,10 @@
 <br>
 
 ## About The Project
+The Eon English App serves as a bridge between classroom learning and practical application, empowering students to achieve their educational goals with ease.
 
-The Eon English App is designed to support Eon students in their learning journey by providing a seamless way to access and complete their homework. This app complements the concepts taught during tutor sessions, enabling students to practice and reinforce their learning.
+
+The app is designed to support Eon students in their learning journey by providing a seamless way to access and complete their homework. This app complements the concepts taught during tutor sessions, enabling students to practice and reinforce their learning.
 
 Key Features:
 
@@ -42,8 +44,6 @@ Key Features:
 - ![Static Badge](https://img.shields.io/badge/Expo_CLI-%23212329?style=for-the-badge&logo=Expo)
 - ![Static Badge](https://img.shields.io/badge/Firebase-%23212329?style=for-the-badge&logo=Firebase)
 - ![Static Badge](https://img.shields.io/badge/App_script-%23212329?style=for-the-badge&logo=Google)
-
-The Eon English App serves as a bridge between classroom learning and practical application, empowering students to achieve their educational goals with ease.
 
 <br>
 
@@ -128,7 +128,7 @@ Feel free to reach out on Discord if you have any questions or need guidance. Ha
 [contributors-shield]: https://img.shields.io/github/contributors/EonEnglish/Eon-English-App?style=for-the-badge&logo=github&logoColor=white&labelColor=black&color=6e5494&label=contributors
 [contributors-url]: https://github.com/EonEnglish/Eon-English-App/graphs/contributors
 [discord-shield]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscord.com%2Fapi%2Finvites%2FgwV356qNSj%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&style=for-the-badge&logo=Discord&logoColor=white&labelColor=black&label=Discord%20Members&color=%235864f4
-[discord-url]: https://discord.gg/gwV356qNSj
+[discord-url]: https://discord.gg/ScAhewnwdn
 [appStore-shield]: https://img.shields.io/badge/download-app%20store-%23007AFF?style=for-the-badge&logo=apple&logoColor=white&labelColor=black
 [appStore-url]: https://apps.apple.com/us/app/eon-english-learning/id6535652983
 [playStore-shield]: https://img.shields.io/badge/download-play%20store-%2334A853?style=for-the-badge&logo=android&logoColor=white&labelColor=black
