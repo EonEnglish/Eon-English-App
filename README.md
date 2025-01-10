@@ -20,8 +20,6 @@
   - [ Built with](#built-with)
 - [ Instructions](#instructions)
   - [ Courses and Tools](#courses-and-tools)
-  - [ How to Run the App](#how-to-run-the-app)
-  - [ How to Access our ENV Keys](#how-to-access-our-env-keys)
   - [ How to Access our Figma Design](#how-to-access-our-figma-design)
 - [ How to Contribute](#how-to-contribute)
 
@@ -29,9 +27,13 @@
 
 ## About The Project
 
-This app will help Eon students find their homework and apply what they have learned during tutor sessions. It is filled with many short questions and quizzes to help them retain information.
+The Eon English App is designed to support Eon students in their learning journey by providing a seamless way to access and complete their homework. This app complements the concepts taught during tutor sessions, enabling students to practice and reinforce their learning.
 
-<br>
+Key Features:
+
+- A vast collection of short questions and interactive quizzes to help students retain knowledge effectively.
+- A user-friendly interface to make homework submission and progress tracking effortless.
+- Tools to ensure students apply what they learn, fostering better understanding and retention.
 
 ### Built With
 
@@ -40,6 +42,8 @@ This app will help Eon students find their homework and apply what they have lea
 - ![Static Badge](https://img.shields.io/badge/Expo_CLI-%23212329?style=for-the-badge&logo=Expo)
 - ![Static Badge](https://img.shields.io/badge/Firebase-%23212329?style=for-the-badge&logo=Firebase)
 - ![Static Badge](https://img.shields.io/badge/App_script-%23212329?style=for-the-badge&logo=Google)
+
+The Eon English App serves as a bridge between classroom learning and practical application, empowering students to achieve their educational goals with ease.
 
 <br>
 
@@ -60,37 +64,7 @@ The project uses React Native and requires some knowledge of JavaScript. Therefo
 
 <br>
 
-### How to Run the App
-
-We use React Native and Expo's CLI to run the application locally. You may use the following guides for your operating system. 
-
-- [Set up React Native environment (MacOS)](https://www.youtube.com/watch?v=4U_OQHGhSf0)
-     - [Run our app locally using Xcode/Android Studios](https://youtu.be/nBq75f8JVZg)
-
-- [Set up React Native environment (Windows)](https://www.youtube.com/watch?v=f6TXEnHT_Mk)
-     - [Set up Android Studios Windows](https://youtu.be/TAHMNftUSZg)
-
-
-<br>
-
-### How to Access our ENV Keys
-
-For the initial start up, run the following submodule command to retrieve the .env keys (requires repository access)
-```bash
-git submodule update --init --recursive
-```
-
-To keep your keys updated, run the following command
-
-```bash
-git submodule update --remote --recursive
-```
-
-[Not working? Find the secret keys here...](https://github.com/EonEnglish/Eon-English-App-Secrets)
-
-<br>
-
-### How to Access our Figma Design
+## How to Access our Figma Design
 You will have permission to view the document. If you would like to make direct changes, contact a team manager for `write` permissions.
 - [Figma Design](https://www.figma.com/design/QEKUmbK9a6TUb1IQa4Xxyq/EON-ENGLISH-APP?node-id=0-1&t=TOuX2P7soMWlf3g5-1)
 
@@ -98,14 +72,56 @@ You will have permission to view the document. If you would like to make direct 
 
 ## How to Contribute
 
-Contributions are what make this community such an amazing place to learn, inspire, and create! There are a many ways you can help
-
-- [Did you spot any errors?](https://github.com/EonEnglish/Eon-English-App/issues/new)
-- [What features could we add?](https://github.com/EonEnglish/Eon-English-App/issues/new)
-- [What would improve the app?](https://github.com/EonEnglish/Eon-English-App/issues/new)
-- [How can we work better as a team?](https://github.com/EonEnglish/Eon-English-App/issues/new)
+Contributions are what make this community such an amazing place to learn, inspire, and create!
 
 Any contributions you make are **greatly appreciated**!
+
+### 1. Fork or Create a Branch
+- Begin by forking the repository or creating a branch from the [GitHub Repo](https://github.com/EonEnglish/Eon-English-App).  
+
+### 2. Set Up Your Environment
+Ensure you have the following installed:
+- [Set up React Native environment (MacOS)](https://www.youtube.com/watch?v=4U_OQHGhSf0)
+     - [Run our app locally using Xcode/Android Studios](https://youtu.be/nBq75f8JVZg)
+
+- [Set up React Native environment (Windows)](https://www.youtube.com/watch?v=f6TXEnHT_Mk)
+     - [Set up Android Studios Windows](https://youtu.be/TAHMNftUSZg)
+
+### 3. Get Access to ENV Keys
+- Join our Discord channel and contact **@Tech_Manager**.  
+- Share your GitHub email to gain access to the application's secrets.  
+
+After cloning the repository from [Github Repo](https://github.com/EonEnglish/Eon-English-App), initialize the Git submodules with:  
+
+```bash  
+git submodule update --init --recursive  
+```  
+
+To ensure your `.env` keys stay updated, use:  
+
+```bash  
+git submodule update --remote --recursive  
+```  
+
+[Not working? Find the secret keys here...](https://github.com/EonEnglish/Eon-English-App-Secrets)
+
+### 4. Pick a Task
+- Visit the **[Planning Tab](https://github.com/orgs/EonEnglish/projects/3/views/1)** on GitHub.  
+- Assign a task to yourself or [create one](https://github.com/EonEnglish/Eon-English-App/issues/new) and assign it to yourself.  
+- Once assigned, start working on your task.
+
+### 5. Submit a Pull Request
+- Once your task is completed, commit and push your changes to your branch.
+- Go to the repository and create a Pull Request (PR) with a detailed description of the changes.
+- Mention the issue or task you were working on (if applicable). Wait for the code review.
+- If changes are requested, make the updates and push them to the same branch.
+- Once approved, your PR will be merged into the main branch.
+
+### 6. Team Meetings
+- We hold team meetings **biweekly on Sundays**.  
+- The meeting link can be found on Discord.  
+
+Feel free to reach out on Discord if you have any questions or need guidance. Happy contributing!
 
 <!-- Links -->
 
