@@ -6,7 +6,9 @@
 [![Discord-Server][discord-shield]][discord-url]
 
 <div style="display: flex;">
-  <img src="https://github.com/user-attachments/assets/559dc3d4-1327-4311-83cf-920b38af6e4a">
+  <a href="https://discord.gg/CAzC5bMqzg">
+    <img src="https://github.com/user-attachments/assets/559dc3d4-1327-4311-83cf-920b38af6e4a">
+  </a>
 </div>
 
 <br />
@@ -28,7 +30,6 @@
 ## About The Project
 The Eon English App serves as a bridge between classroom learning and practical application, empowering students to achieve their educational goals with ease.
 
-
 The app is designed to support Eon students in their learning journey by providing a seamless way to access and complete their homework. This app complements the concepts taught during tutor sessions, enabling students to practice and reinforce their learning.
 
 Key Features:
@@ -36,6 +37,8 @@ Key Features:
 - A vast collection of short questions and interactive quizzes to help students retain knowledge effectively.
 - A user-friendly interface to make homework submission and progress tracking effortless.
 - Tools to ensure students apply what they learn, fostering better understanding and retention.
+
+<br />
 
 ### Built With
 
@@ -131,9 +134,11 @@ git submodule update --remote --recursive
 
 ### 6. Team Meetings
 - We hold team meetings **biweekly on Sundays**.  
-- The meeting link can be found on Discord.  
+- The meeting link can be found on [Discord](https://discord.gg/CAzC5bMqzg).  
 
-Feel free to reach out on Discord if you have any questions or need guidance. Happy contributing!
+<br />
+
+Feel free to reach out on [Discord](https://discord.gg/CAzC5bMqzg) if you have any questions or need guidance. Happy contributing!
 
 <!-- Links -->
 [contributors-shield]: https://img.shields.io/github/contributors/EonEnglish/Eon-English-App?style=for-the-badge&logo=github&logoColor=white&labelColor=black&color=6e5494&label=contributors
