@@ -1,4 +1,4 @@
-# Eon-English-App
+# Eon English App
 
 [![App-Store][appStore-shield]][appStore-url]
 [![Play-Store][playStore-shield]][playStore-url]
