@@ -6,7 +6,7 @@
 [![Discord-Server][discord-shield]][discord-url]
 
 <div style="display: flex;">
-  <img src="https://github.com/user-attachments/assets/b91e63a7-fd5c-4f80-aa98-4e39f3b23a4c">
+  <img src="https://github.com/user-attachments/assets/559dc3d4-1327-4311-83cf-920b38af6e4a">
 </div>
 
 <br />
@@ -127,8 +127,8 @@ Feel free to reach out on Discord if you have any questions or need guidance. Ha
 
 [contributors-shield]: https://img.shields.io/github/contributors/EonEnglish/Eon-English-App?style=for-the-badge&logo=github&logoColor=white&labelColor=black&color=6e5494&label=contributors
 [contributors-url]: https://github.com/EonEnglish/Eon-English-App/graphs/contributors
-[discord-shield]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscord.com%2Fapi%2Finvites%2FgwV356qNSj%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&style=for-the-badge&logo=Discord&logoColor=white&labelColor=black&label=Discord%20Members&color=%235864f4
-[discord-url]: https://discord.gg/ScAhewnwdn
+[discord-shield]: https://img.shields.io/badge/Discord-Join%20Community-5865f4?style=for-the-badge&logo=Discord&logoColor=white&labelColor=black
+[discord-url]: https://discord.gg/CAzC5bMqzg
 [appStore-shield]: https://img.shields.io/badge/download-app%20store-%23007AFF?style=for-the-badge&logo=apple&logoColor=white&labelColor=black
 [appStore-url]: https://apps.apple.com/us/app/eon-english-learning/id6535652983
 [playStore-shield]: https://img.shields.io/badge/download-play%20store-%2334A853?style=for-the-badge&logo=android&logoColor=white&labelColor=black
