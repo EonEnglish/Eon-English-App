@@ -22,7 +22,7 @@
   - [ Built with](#built-with)
 - [ Instructions](#instructions)
   - [ Courses and Tools](#courses-and-tools)
-  - [ How to Access our Figma Design](#how-to-access-our-figma-design)
+  - [ Access our Figma Design](#access-our-figma-design)
 - [ How to Contribute](#how-to-contribute)
 
 <br>
@@ -67,7 +67,7 @@ The project uses React Native and requires some knowledge of JavaScript. Therefo
 
 <br>
 
-## How to Access our Figma Design
+## Access our Figma Design
 You will have permission to view the document. If you would like to make direct changes, contact a team manager for `write` permissions.
 - [Figma Design](https://www.figma.com/design/QEKUmbK9a6TUb1IQa4Xxyq/EON-ENGLISH-APP?node-id=0-1&t=TOuX2P7soMWlf3g5-1)
 
