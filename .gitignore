@@ -9,6 +9,9 @@ dist/
 web-build/
 eon-english-app-android-3a18a43c3491.json
 
+# Firebase
+serviceAccountKey.json
+
 # Native
 *.orig.*
 *.jks
