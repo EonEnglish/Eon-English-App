@@ -69,9 +69,8 @@ export const VocabMatchPhotoScreen = ({ navigation, route }) => {
             collection(doc.ref, "Collection"),
           );
           for (const subDoc of subCollection.docs) {
-            const imageUrl = subDoc.data().image;
-            const downloadUrl = await getImageDownloadUrl(imageUrl);
-            imageUrls.push(downloadUrl);
+            const imageUrl = subDoc.data().devImageURL;
+            imageUrls.push(imageUrl);
           }
         }
 
