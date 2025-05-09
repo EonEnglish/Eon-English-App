@@ -23,6 +23,7 @@ export const FillInTheBlankScreen = ({ navigation, route }) => {
   const [score, setScore] = useState(0);
   const [totalScore, setTotalScore] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
+  const [alertTitle, setAlertTitle] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const [scoreUpdated, setScoreUpdated] = useState(false);
   const { data } = route.params;
@@ -106,11 +107,15 @@ export const FillInTheBlankScreen = ({ navigation, route }) => {
               if (options[index] === sentenceList[currentWordIndex].answer) {
                 setScore(score + 1);
                 setTotalScore(totalScore + 1);
-                setAlertMessage("Your answer is correct!");
+                setAlertTitle("Correct!");
+                setAlertMessage("Keep up the good work!");
                 setDropAreaEntered(false);
               } else {
                 setTotalScore(totalScore + 1);
-                setAlertMessage("Your answer is incorrect!");
+                setAlertTitle("Incorrect");
+                setAlertMessage(
+                  `The correct answer was ${sentenceList[currentWordIndex].answer}.`,
+                );
                 setDropAreaEntered(false);
               }
               setShowAlert(true);
@@ -212,7 +217,7 @@ export const FillInTheBlankScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     if (showAlert) {
-      Alert.alert("Result", alertMessage, [
+      Alert.alert(alertTitle, alertMessage, [
         {
           text: "OK",
           onPress: () => {

@@ -51,8 +51,10 @@ export const VocabMatchScreen = ({ navigation, route }) => {
     setScore((prev) => (isCorrect ? prev + 1 : prev));
     setTotalScore((prev) => prev + 1);
     Alert.alert(
-      "Result",
-      isCorrect ? "Your answer is correct!" : "Your answer is incorrect!",
+      isCorrect ? "Correct!" : "Incorrect",
+      isCorrect
+        ? "Keep up the good work!"
+        : `The correct answer was ${currentWord.word}.`,
       [{ text: "OK", onPress: nextWord }],
     );
   };

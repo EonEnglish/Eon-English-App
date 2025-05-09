@@ -1,6 +1,5 @@
 import { collection, doc, getDoc, getDocs, setDoc } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import {
@@ -25,6 +24,7 @@ export const VocabMatchPhotoScreen = ({ navigation, route }) => {
   const [score, setScore] = useState(0);
   const [totalScore, setTotalScore] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
+  const [alertTitle, setAlertTitle] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [options, setOptions] = useState([]);
@@ -69,8 +69,10 @@ export const VocabMatchPhotoScreen = ({ navigation, route }) => {
             collection(doc.ref, "Collection"),
           );
           for (const subDoc of subCollection.docs) {
-            const imageUrl = subDoc.data().devImageURL;
-            imageUrls.push(imageUrl);
+            const imageUrl = subDoc.data().image;
+            const encodedPath = encodeURIComponent(imageUrl);
+            const publicUrl = `https://storage.googleapis.com/eon-english-app.appspot.com${encodedPath}`;
+            imageUrls.push(publicUrl);
           }
         }
 
@@ -90,17 +92,6 @@ export const VocabMatchPhotoScreen = ({ navigation, route }) => {
     }
   }, [vocabList, currentWordIndex]);
 
-  const getImageDownloadUrl = async (imageUrl) => {
-    try {
-      const storage = getStorage();
-      const storageRef = ref(storage, imageUrl);
-      return await getDownloadURL(storageRef);
-    } catch (error) {
-      console.error("Error getting download URL:", error);
-      return "";
-    }
-  };
-
   const generateOptions = (correctWord) => {
     const options = [correctWord];
     while (options.length < 4) {
@@ -118,8 +109,11 @@ export const VocabMatchPhotoScreen = ({ navigation, route }) => {
     const isCorrect = selectedOption === currentWord.word;
     setScore(score + (isCorrect ? 1 : 0));
     setTotalScore(totalScore + 1);
+    setAlertTitle(isCorrect ? "Correct!" : "Incorrect");
     setAlertMessage(
-      isCorrect ? "Your answer is correct!" : "Your answer is incorrect!",
+      isCorrect
+        ? "Keep up the good work!"
+        : `The correct answer was ${currentWord.word}.`,
     );
     setShowAlert(true);
   };
@@ -179,7 +173,7 @@ export const VocabMatchPhotoScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     if (showAlert) {
-      Alert.alert("Result", alertMessage, [
+      Alert.alert(alertTitle, alertMessage, [
         {
           text: "OK",
           onPress: () => {
